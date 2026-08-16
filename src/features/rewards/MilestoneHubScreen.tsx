@@ -175,14 +175,13 @@ export const MilestoneHubScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* Scrollable Category Chips */}
+        {/* Category Chips */}
         <div
           style={{
             display: 'flex',
+            flexWrap: 'wrap',
             gap: 'var(--space-2)',
-            overflowX: 'auto',
-            paddingBottom: 'var(--space-2)',
-            scrollbarWidth: 'none',
+            paddingBottom: 'var(--space-1)',
           }}
           role="tablist"
         >

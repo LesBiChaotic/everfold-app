@@ -230,14 +230,13 @@ export const CosmeticInventoryScreen: React.FC = () => {
           ))}
         </div>
 
-        {/* Category Horizontal Scroll Chips */}
+        {/* Category Wrap Chips */}
         <div
           style={{
             display: 'flex',
+            flexWrap: 'wrap',
             gap: 'var(--space-2)',
-            overflowX: 'auto',
-            paddingBottom: 'var(--space-2)',
-            scrollbarWidth: 'none',
+            paddingBottom: 'var(--space-1)',
           }}
           role="tablist"
         >
@@ -258,14 +257,12 @@ export const CosmeticInventoryScreen: React.FC = () => {
                   cursor: 'pointer',
                   borderRadius: 'var(--radius-full)',
                   whiteSpace: 'nowrap',
-                  flexShrink: 0,
                 }}
               >
                 {tab.label}
               </button>
             );
           })}
-          <div style={{ width: 'var(--space-4)', flexShrink: 0 }} />
         </div>
       </div>
 
