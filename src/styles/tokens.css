@@ -1,0 +1,221 @@
+:root {
+  /* ==========================================================================
+     EVERFOLD DESIGN TOKENS — VISUAL MASTER SPEC v0.3 (BOX-FIRST EDITION)
+     ========================================================================== */
+
+  /* Light Theme Canvas — "Warm Editorial Magazine on a Cream Desk" */
+  --bg-app: #faf7f2;
+  --bg-surface: #ffffff;
+  --bg-surface-subtle: #f5f0e8;
+  --bg-surface-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #fcfbf9;
+  --bg-overlay: rgba(35, 23, 34, 0.48);
+
+  /* Borders & Dividers */
+  --border-subtle: #e8e1d7;
+  --border-default: #dcd3c7;
+  --border-strong: #b5a899;
+  --border-focus: #6b2848;
+
+  /* Typography Colors — Deep Brown-Plum & Warm Editorial Tones */
+  --text-primary: #231722;
+  --text-secondary: #544451;
+  --text-muted: #7e6e7c;
+  --text-subtle: #a698a4;
+  --text-inverse: #ffffff;
+
+  /* Brand Accents — Mature Wine-Plum, Dusty Rose, Muted Lilac, Soft Clay, Quiet Indigo */
+  --accent-primary: #6b2848;
+  --accent-hover: #551e38;
+  --accent-surface: #f7eef3;
+  --accent-border: #ebd5e1;
+  --accent-text: #6b2848;
+
+  --accent-plum: #6b2848;
+  --accent-rose: #c9899f;
+  --accent-rose-subtle: #faeff2;
+  --accent-lilac: #9585a2;
+  --accent-lilac-subtle: #f3f0f6;
+  --accent-clay: #b47b6d;
+  --accent-clay-subtle: #f9f2f0;
+  --accent-indigo: #4c5372;
+  --accent-indigo-subtle: #eef1f7;
+  --accent-olive: #687455;
+
+  /* Semantic Intent Tokens */
+  --color-success: #2d7a4f;
+  --color-success-bg: #eef7f2;
+  --color-warning: #a15822;
+  --color-warning-bg: #fdf5ec;
+  --color-danger: #a82e3b;
+  --color-danger-bg: #faeaec;
+  --color-info: #356794;
+  --color-info-bg: #eef5fb;
+
+  /* ARG Anomaly Tokens — Subtle, Clinical & Uneasy */
+  --arg-anomaly-surface: #f6f3f0;
+  --arg-anomaly-border: #d4cac0;
+  --arg-anomaly-tag: #544451;
+  --arg-anomaly-tag-bg: #ece5dc;
+
+  /* Typography Families */
+  --font-family-base: 'Manrope', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-serif: 'Newsreader', 'Georgia', 'Times New Roman', serif;
+  --font-family-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Fluid Typography Scale */
+  --font-size-2xs: 0.6875rem;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.84375rem;
+  --font-size-base: 0.9375rem;
+  --font-size-md: 1.0625rem;
+  --font-size-lg: 1.1875rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.625rem;
+  --font-size-3xl: 2.125rem;
+  --font-size-hero: 2.75rem;
+
+  /* Consistent Spacing Scale */
+  --space-0-5: 0.125rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Box-First Radii */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;      /* 8px */
+  --radius-md: 0.75rem;     /* 12px */
+  --radius-lg: 1rem;        /* 16px — standard box default */
+  --radius-xl: 1.25rem;     /* 20px — featured card */
+  --radius-hero: 1.5rem;    /* 24px — hero module */
+  --radius-full: 9999px;
+
+  /* Restrained Layered Shadows */
+  --shadow-sm: 0 1px 2px rgba(35, 23, 34, 0.04);
+  --shadow-md: 0 2px 6px -1px rgba(35, 23, 34, 0.06), 0 1px 3px rgba(35, 23, 34, 0.03);
+  --shadow-lg: 0 8px 20px -3px rgba(35, 23, 34, 0.08), 0 3px 6px -2px rgba(35, 23, 34, 0.04);
+  --shadow-xl: 0 16px 32px -4px rgba(35, 23, 34, 0.12), 0 6px 12px -3px rgba(35, 23, 34, 0.06);
+  --shadow-lift: 0 6px 16px -2px rgba(35, 23, 34, 0.09), 0 2px 5px rgba(35, 23, 34, 0.04);
+
+  /* Layout Dimensions */
+  --sidebar-expanded-width: 260px;
+  --sidebar-collapsed-width: 76px;
+  --header-height: 60px;
+  --bottom-nav-height: 64px;
+  --min-touch-target: 44px;
+
+  /* Transitions */
+  --transition-fast: 140ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-normal: 220ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-slow: 350ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ==========================================================================
+   DARK THEME — "Dim Modern Lounge" (Charcoal, Aubergine, Smoked Plum, Warm Black)
+   ========================================================================== */
+[data-theme='dark'] {
+  --bg-app: #131215;
+  --bg-surface: #1a171d;
+  --bg-surface-subtle: #221d25;
+  --bg-surface-elevated: #28232c;
+  --bg-card: #1b181e;
+  --bg-card-subtle: #201c24;
+  --bg-overlay: rgba(8, 7, 10, 0.78);
+
+  --border-subtle: #2d2633;
+  --border-default: #3c3344;
+  --border-strong: #54475e;
+  --border-focus: #d992ad;
+
+  --text-primary: #eee6e4;
+  --text-secondary: #b8acb5;
+  --text-muted: #8b7d88;
+  --text-subtle: #635760;
+  --text-inverse: #131215;
+
+  --accent-primary: #d992ad;
+  --accent-hover: #e5a7be;
+  --accent-surface: #2b2029;
+  --accent-border: #4a3444;
+  --accent-text: #f0b5cb;
+
+  --accent-plum: #d992ad;
+  --accent-rose: #e2a4b8;
+  --accent-rose-subtle: #291b22;
+  --accent-lilac: #b3a4c0;
+  --accent-lilac-subtle: #231e2a;
+  --accent-clay: #cca094;
+  --accent-clay-subtle: #291e1c;
+  --accent-indigo: #8e97bd;
+  --accent-indigo-subtle: #1c202c;
+  --accent-olive: #9fae88;
+
+  --color-success: #52ba7d;
+  --color-success-bg: rgba(45, 122, 79, 0.18);
+  --color-warning: #e0924e;
+  --color-warning-bg: rgba(161, 88, 34, 0.18);
+  --color-danger: #e2616f;
+  --color-danger-bg: rgba(168, 46, 59, 0.18);
+  --color-info: #5d9dd4;
+  --color-info-bg: rgba(53, 103, 148, 0.18);
+
+  --arg-anomaly-surface: #1e1a22;
+  --arg-anomaly-border: #443a4c;
+  --arg-anomaly-tag: #d4c7d2;
+  --arg-anomaly-tag-bg: #2d2534;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.55);
+  --shadow-xl: 0 18px 36px rgba(0, 0, 0, 0.65);
+  --shadow-lift: 0 8px 22px rgba(0, 0, 0, 0.5);
+}
+
+/* Device Font Setting Override */
+[data-font='device'] {
+  --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-serif: Georgia, 'Times New Roman', serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* High Contrast Mode */
+[data-contrast='high'] {
+  --border-subtle: #231722;
+  --border-default: #231722;
+  --border-strong: #231722;
+  --text-secondary: var(--text-primary);
+  --text-muted: var(--text-primary);
+}
+[data-theme='dark'][data-contrast='high'] {
+  --border-subtle: #eee6e4;
+  --border-default: #eee6e4;
+  --border-strong: #eee6e4;
+  --text-secondary: var(--text-primary);
+  --text-muted: var(--text-primary);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
+[data-reduced-motion='true'] *, [data-reduced-motion='true'] *::before, [data-reduced-motion='true'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+  transform: none !important;
+}
