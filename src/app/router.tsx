@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom';
+import { createHashRouter, Navigate, useLocation } from 'react-router-dom';
 import { AppLayout } from '../components/layout/AppLayout';
 import { HomeScreen } from '../features/home/HomeScreen';
 import { OnboardingFlow } from '../features/onboarding/OnboardingFlow';
@@ -116,7 +116,7 @@ export const RouteTitleSync: React.FC<{ children: React.ReactNode }> = ({ childr
   return <>{children}</>;
 };
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/onboarding',
     element: <OnboardingFlow />
