@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import { Sidebar } from '../navigation/Sidebar';
 import { MobileHeader } from '../navigation/MobileHeader';
 import { MobileBottomNav } from '../navigation/MobileBottomNav';
@@ -7,11 +7,17 @@ import { MobileDrawer } from '../navigation/MobileDrawer';
 import { CommandPalette } from '../search/CommandPalette';
 import { NotificationDrawer } from '../notifications/NotificationDrawer';
 import { DebugDrawer } from '../common/DebugDrawer';
+import { useProfileStore } from '../../store/profileStore';
 
 export const AppLayout: React.FC = () => {
+  const { isOnboardingCompleted } = useProfileStore();
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = useState(false);
+
+  if (!isOnboardingCompleted) {
+    return <Navigate to="/onboarding" replace />;
+  }
 
   return (
     <div

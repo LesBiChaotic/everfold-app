@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Edit3, MapPin, Sparkles, User, Settings, Bookmark, Heart, Eye, CheckCircle, Info, X } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Edit3, MapPin, Sparkles, User, Settings, Bookmark, Heart, Eye, CheckCircle, Info, X, UserPlus } from 'lucide-react';
 import { useProfileStore } from '../../store/profileStore';
 import { useAppStore } from '../../store/appStore';
 import { AvatarRenderer } from '../../components/avatar/AvatarRenderer';
@@ -8,7 +8,8 @@ import { ProfilePreviewModal } from '../../components/profile/ProfilePreviewModa
 import { Foldmark } from '../../components/brand/Foldmark';
 
 export const ProfileScreen: React.FC = () => {
-  const { visitorProfile, savedUserIds, isFirstRevisitNoticeDismissed, dismissFirstRevisitNotice } = useProfileStore();
+  const navigate = useNavigate();
+  const { visitorProfile, savedUserIds, isFirstRevisitNoticeDismissed, dismissFirstRevisitNotice, setOnboardingCompleted } = useProfileStore();
   const { matches = [] } = useAppStore();
   const [showPreviewModal, setShowPreviewModal] = useState(false);
 
@@ -251,6 +252,21 @@ export const ProfileScreen: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Account Switcher / Create New Profile Entrance */}
+      <div style={{ display: 'flex', justifyContent: 'center', margin: 'var(--space-2) 0' }}>
+        <button
+          type="button"
+          className="btn btn-ghost btn-sm"
+          onClick={() => {
+            setOnboardingCompleted(false);
+            navigate('/onboarding');
+          }}
+          style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', gap: '6px' }}
+        >
+          <UserPlus size={14} /> Create a New Profile / Re-run Onboarding
+        </button>
       </div>
 
       {/* Profile Preview Modal */}
