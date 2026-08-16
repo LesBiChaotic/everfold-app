@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowLeft, HelpCircle, Send, CheckCircle, Clock } from 'lucide-react';
 import { useAdviceStore } from '../../store/adviceStore';
+import { renderMarkdownText } from '../../utils/markdownUtils';
 
 export const AskEverfoldScreen: React.FC = () => {
   const { askSubmissions, submitAskEverfold } = useAdviceStore();
@@ -105,7 +106,7 @@ export const AskEverfoldScreen: React.FC = () => {
                 </div>
               </div>
 
-              <p style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, margin: 0 }}>“{sub.question}”</p>
+              <p style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, margin: 0 }}>“{renderMarkdownText(sub.question)}”</p>
 
               {sub.status === 'answered' && sub.scriptedAnswer && (
                 <div style={{ padding: 'var(--space-3)', backgroundColor: 'var(--bg-surface-subtle)', borderRadius: 'var(--radius-md)', borderLeft: '3px solid var(--accent-primary)' }}>
@@ -113,7 +114,7 @@ export const AskEverfoldScreen: React.FC = () => {
                     Response from {sub.scriptedAnswer.author} ({sub.scriptedAnswer.role}):
                   </div>
                   <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.5, margin: 0 }}>
-                    {sub.scriptedAnswer.body}
+                    {renderMarkdownText(sub.scriptedAnswer.body)}
                   </p>
                 </div>
               )}

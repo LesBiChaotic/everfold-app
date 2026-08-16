@@ -147,6 +147,7 @@ button:disabled {
   border: 1px solid transparent;
   white-space: nowrap;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .btn-sm {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { ArrowLeft, BookOpen, Clock, ArrowRight } from 'lucide-react';
 import { useMagazinePodcastStore } from '../../store/magazinePodcastStore';
-import { renderMarkdownText } from '../../utils/markdownUtils';
+import { renderMarkdownText, MarkdownRenderer } from '../../utils/markdownUtils';
 
 export const MagazineIssueScreen: React.FC = () => {
   const { issueId } = useParams<{ issueId: string }>();
@@ -41,12 +41,7 @@ export const MagazineIssueScreen: React.FC = () => {
             </div>
 
             <article style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.7, color: 'var(--text-primary)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-3)' }}>
-              {art.contentMarkdown.split('\n\n').map((p, idx) => {
-                if (p.startsWith('### ')) {
-                  return <h3 key={idx} style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, margin: 'var(--space-2) 0 4px' }}>{renderMarkdownText(p.replace('### ', ''))}</h3>;
-                }
-                return <p key={idx} style={{ margin: '0 0 8px' }}>{renderMarkdownText(p)}</p>;
-              })}
+              <MarkdownRenderer content={art.contentMarkdown} />
             </article>
           </div>
         ))}

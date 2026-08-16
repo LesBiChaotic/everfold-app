@@ -5,6 +5,7 @@ import { useCommunityStore } from '../../store/communityStore';
 import { LiveCommentComposer } from '../../components/community/LiveCommentComposer';
 import { LiveCommentFeed } from '../../components/community/LiveCommentFeed';
 import { useProfileStore } from '../../store/profileStore';
+import { renderMarkdownText } from '../../utils/markdownUtils';
 
 export const CommunityRoomScreen: React.FC = () => {
   const { roomId } = useParams<{ roomId: string }>();
@@ -23,9 +24,9 @@ export const CommunityRoomScreen: React.FC = () => {
       {/* Room Header */}
       <div className="card" style={{ borderLeft: '4px solid var(--accent-primary)', backgroundColor: 'var(--bg-surface)' }}>
         <span className="badge badge-subtle" style={{ fontSize: '10px' }}>{room.category}</span>
-        <h1 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, margin: '4px 0' }}>{room.name}</h1>
-        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
-          {room.description}
+        <h1 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, margin: '6px 0 2px' }}>{room.name}</h1>
+        <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-secondary)', margin: 0 }}>
+          {renderMarkdownText(room.description)}
         </p>
         <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: 'var(--space-2)' }}>
           {room.memberCount.toLocaleString()} members • Moderated by {room.moderators.join(', ')}
@@ -43,9 +44,9 @@ export const CommunityRoomScreen: React.FC = () => {
                 <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700 }}>
                   {post.authorName} <span style={{ fontWeight: 400, color: 'var(--text-muted)' }}>@{post.authorHandle}</span>
                 </div>
-                <h3 style={{ fontSize: 'var(--font-size-md)', fontWeight: 700, margin: '2px 0 6px' }}>{post.title}</h3>
+                <h3 style={{ fontSize: 'var(--font-size-md)', fontWeight: 700, margin: '2px 0 6px' }}>{renderMarkdownText(post.title)}</h3>
                 <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.6, color: 'var(--text-secondary)', margin: 0 }}>
-                  {post.body}
+                  {renderMarkdownText(post.body)}
                 </p>
               </div>
 

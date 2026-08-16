@@ -129,13 +129,32 @@ export const QuizHubScreen: React.FC = () => {
       </div>
 
       {/* Category Chips Bar */}
-      <div style={{ display: 'flex', gap: 'var(--space-2)', overflowX: 'auto', paddingBottom: 'var(--space-1)' }} role="tablist">
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--space-2)',
+          overflowX: 'auto',
+          paddingBottom: 'var(--space-2)',
+          scrollbarWidth: 'thin',
+          scrollbarColor: 'var(--border-subtle) transparent',
+          WebkitOverflowScrolling: 'touch',
+        }}
+        role="tablist"
+      >
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
             className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: 'var(--font-size-xs)', whiteSpace: 'nowrap', borderRadius: 'var(--radius-full)' }}
+            style={{
+              fontSize: 'var(--font-size-xs)',
+              whiteSpace: 'nowrap',
+              borderRadius: 'var(--radius-full)',
+              flexShrink: 0,
+              height: '34px',
+              minHeight: '34px',
+              padding: '0 var(--space-4)',
+            }}
             role="tab"
             aria-selected={selectedCategory === cat}
           >

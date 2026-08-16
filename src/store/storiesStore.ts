@@ -4,7 +4,7 @@ import {
   SharedStory,
   SharedStoryComment,
 } from '../types/socialEcosystem';
-import { SEEDED_SHARED_STORIES } from '../data/sharedStoriesData';
+import { SEEDED_SHARED_STORIES, SEEDED_STORY_COMMENTS } from '../data/sharedStoriesData';
 import { soundEngine } from '../audio/soundEngine';
 
 interface StoriesState {
@@ -23,7 +23,7 @@ export const useStoriesStore = create<StoriesState>()(
   persist(
     (set, get) => ({
       stories: SEEDED_SHARED_STORIES,
-      storyComments: {},
+      storyComments: SEEDED_STORY_COMMENTS,
       draftStory: null,
 
       publishStory: (storyData) => {
@@ -83,7 +83,7 @@ export const useStoriesStore = create<StoriesState>()(
       },
     }),
     {
-      name: 'everfold.stories.v1',
+      name: 'everfold.stories.v2',
     }
   )
 );

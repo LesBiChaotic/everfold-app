@@ -10,6 +10,7 @@ import {
   ADVICE_CATEGORIES,
   SEEDED_ADVICE_ARTICLES,
   SEEDED_ADVICE_COMMENTS,
+  SEEDED_ASK_SUBMISSIONS,
 } from '../data/adviceData';
 import { soundEngine } from '../audio/soundEngine';
 import { useSocialSimulationStore } from './socialSimulationStore';
@@ -35,7 +36,7 @@ export const useAdviceStore = create<AdviceState>()(
       articles: SEEDED_ADVICE_ARTICLES,
       comments: SEEDED_ADVICE_COMMENTS,
       savedArticleIds: [],
-      askSubmissions: [],
+      askSubmissions: SEEDED_ASK_SUBMISSIONS,
 
       addComment: (articleId, authorId, authorName, authorHandle, avatarSeed, body) => {
         const newComment: AdviceComment = {
@@ -131,12 +132,12 @@ export const useAdviceStore = create<AdviceState>()(
           articles: SEEDED_ADVICE_ARTICLES,
           comments: SEEDED_ADVICE_COMMENTS,
           savedArticleIds: [],
-          askSubmissions: [],
+          askSubmissions: SEEDED_ASK_SUBMISSIONS,
         });
       },
     }),
     {
-      name: 'everfold.advice.v1',
+      name: 'everfold.advice.v2',
     }
   )
 );

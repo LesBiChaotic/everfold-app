@@ -195,7 +195,7 @@ export const useQuizStore = create<QuizState>()(
       },
     }),
     {
-      name: 'everfold.quizzes.v1',
+      name: 'everfold.quizzes.v2',
     }
   )
 );

@@ -13,7 +13,7 @@ import {
 import { useAdviceStore } from '../../store/adviceStore';
 import { useProfileStore } from '../../store/profileStore';
 import { useSocialSimulationStore } from '../../store/socialSimulationStore';
-import { renderMarkdownText } from '../../utils/markdownUtils';
+import { renderMarkdownText, MarkdownRenderer } from '../../utils/markdownUtils';
 
 export const AdviceArticleScreen: React.FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
@@ -88,21 +88,9 @@ export const AdviceArticleScreen: React.FC = () => {
           fontSize: 'var(--font-size-sm)',
           lineHeight: 1.8,
           color: 'var(--text-primary)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--space-4)',
         }}
       >
-        {article.contentMarkdown.split('\n\n').map((para, i) => {
-          if (para.startsWith('### ')) {
-            return (
-              <h2 key={i} style={{ fontSize: 'var(--font-size-md)', fontWeight: 700, margin: 'var(--space-2) 0 0' }}>
-                {renderMarkdownText(para.replace('### ', ''))}
-              </h2>
-            );
-          }
-          return <p key={i} style={{ margin: 0 }}>{renderMarkdownText(para)}</p>;
-        })}
+        <MarkdownRenderer content={article.contentMarkdown} />
       </article>
 
       {/* Comments Section */}

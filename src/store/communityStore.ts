@@ -205,7 +205,7 @@ export const useCommunityStore = create<CommunityState>()(
       },
     }),
     {
-      name: 'everfold.community.v1',
+      name: 'everfold.community.v2',
     }
   )
 );

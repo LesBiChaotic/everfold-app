@@ -3,7 +3,7 @@ import { useParams, NavLink } from 'react-router-dom';
 import { ArrowLeft, Users, MessageSquare, Send, Heart, Calendar } from 'lucide-react';
 import { useStoriesStore } from '../../store/storiesStore';
 import { useProfileStore } from '../../store/profileStore';
-import { renderMarkdownText } from '../../utils/markdownUtils';
+import { renderMarkdownText, MarkdownRenderer } from '../../utils/markdownUtils';
 
 export const SharedStoryDetailScreen: React.FC = () => {
   const { storyId } = useParams<{ storyId: string }>();
@@ -34,31 +34,47 @@ export const SharedStoryDetailScreen: React.FC = () => {
   const activeChapter = story.chapters[activeChapterIndex] || story.chapters[0];
 
   return (
-    <div className="shared-story-detail" style={{ maxWidth: '780px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <div className="shared-story-detail-screen" style={{ maxWidth: '780px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       <NavLink to="/stories" className="btn btn-ghost" style={{ alignSelf: 'flex-start', gap: 'var(--space-1)', fontSize: 'var(--font-size-xs)' }}>
         <ArrowLeft size={15} /> All Stories
       </NavLink>
 
-      {/* Header */}
-      <div className="card" style={{ borderLeft: '4px solid var(--accent-primary)', backgroundColor: 'var(--bg-surface)' }}>
-        <span className="badge badge-subtle" style={{ fontSize: '10px' }}>{story.storyType}</span>
-        <h1 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, margin: '6px 0 4px' }}>{story.title}</h1>
-        <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--accent-primary)', marginBottom: 'var(--space-2)' }}>
-          By {story.participantNames.join(' & ')}
+      {/* Story Header */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+        <span className="badge badge-subtle" style={{ fontSize: '10px', alignSelf: 'flex-start' }}>{story.storyType}</span>
+        <h1 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, margin: '4px 0' }}>{story.title}</h1>
+        <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)' }}>
+          By <strong>{story.participantNames.join(' & ')}</strong>
         </div>
-        <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
-          {renderMarkdownText(story.summary)}
-        </p>
       </div>
 
-      {/* Chapter Selector Chips */}
-      <div style={{ display: 'flex', gap: 'var(--space-2)', overflowX: 'auto', paddingBottom: 'var(--space-1)' }} role="tablist">
+      {/* Chapter Tabs */}
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--space-2)',
+          overflowX: 'auto',
+          paddingBottom: 'var(--space-2)',
+          scrollbarWidth: 'thin',
+          scrollbarColor: 'var(--border-subtle) transparent',
+          WebkitOverflowScrolling: 'touch',
+        }}
+        role="tablist"
+      >
         {story.chapters.map((ch, idx) => (
           <button
             key={ch.id}
             onClick={() => setActiveChapterIndex(idx)}
             className={`btn ${activeChapterIndex === idx ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: 'var(--font-size-xs)', whiteSpace: 'nowrap', borderRadius: 'var(--radius-full)' }}
+            style={{
+              fontSize: 'var(--font-size-xs)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              height: '38px',
+              minHeight: '38px',
+              padding: '0 var(--space-4)',
+              borderRadius: 'var(--radius-full)',
+            }}
             role="tab"
             aria-selected={activeChapterIndex === idx}
           >
@@ -76,9 +92,9 @@ export const SharedStoryDetailScreen: React.FC = () => {
           </div>
         </div>
 
-        <p style={{ fontSize: 'var(--font-size-sm)', lineHeight: 1.8, color: 'var(--text-primary)', margin: 0 }}>
-          {renderMarkdownText(activeChapter.body)}
-        </p>
+        <div style={{ fontSize: 'var(--font-size-sm)', lineHeight: 1.8, color: 'var(--text-primary)' }}>
+          <MarkdownRenderer content={activeChapter.body} />
+        </div>
       </div>
 
       {/* Where Are They Now Section if updates exist */}
@@ -92,7 +108,9 @@ export const SharedStoryDetailScreen: React.FC = () => {
                   <span className="badge" style={{ fontSize: '10px' }}>{upd.year}</span>
                   <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700 }}>{upd.status}</span>
                 </div>
-                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', margin: '4px 0 0' }}>{renderMarkdownText(upd.body)}</p>
+                <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', margin: '4px 0 0' }}>
+                  <MarkdownRenderer content={upd.body} />
+                </div>
               </div>
             ))}
           </div>

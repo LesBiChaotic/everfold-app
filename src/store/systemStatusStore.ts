@@ -41,7 +41,7 @@ export const useSystemStatusStore = create<SystemStatusState>()(
       },
     }),
     {
-      name: 'everfold.systemStatus.v1',
+      name: 'everfold.systemStatus.v2',
     }
   )
 );

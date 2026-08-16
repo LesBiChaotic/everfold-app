@@ -149,7 +149,7 @@ export const useSupportStore = create<SupportState>()(
       },
     }),
     {
-      name: 'everfold.support.v1',
+      name: 'everfold.support.v2',
     }
   )
 );

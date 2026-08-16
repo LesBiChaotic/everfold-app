@@ -65,7 +65,7 @@ export const useMagazinePodcastStore = create<MagazinePodcastState>()(
       },
     }),
     {
-      name: 'everfold.magazinePodcast.v1',
+      name: 'everfold.magazinePodcast.v2',
     }
   )
 );

@@ -418,6 +418,7 @@ export interface SupportTicket {
   replies: SupportReply[];
   internalNotes?: SupportInternalNote[];
   reclassifiedToContinuity?: boolean;
+  storyTier?: number;
 }
 
 export interface StaffProfile {

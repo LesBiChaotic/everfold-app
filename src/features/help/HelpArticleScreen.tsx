@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { ArrowLeft, ThumbsUp, ThumbsDown, CheckCircle } from 'lucide-react';
 import { useSupportStore } from '../../store/supportStore';
-import { renderMarkdownText } from '../../utils/markdownUtils';
+import { renderMarkdownText, MarkdownRenderer } from '../../utils/markdownUtils';
 
 export const HelpArticleScreen: React.FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
@@ -25,17 +25,8 @@ export const HelpArticleScreen: React.FC = () => {
       </div>
 
       {/* Markdown Content */}
-      <article style={{ fontSize: 'var(--font-size-sm)', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        {article.contentMarkdown.split('\n\n').map((para, i) => {
-          if (para.startsWith('### ')) {
-            return (
-              <h2 key={i} style={{ fontSize: 'var(--font-size-md)', fontWeight: 700, margin: 'var(--space-2) 0 0' }}>
-                {renderMarkdownText(para.replace('### ', ''))}
-              </h2>
-            );
-          }
-          return <p key={i} style={{ margin: 0 }}>{renderMarkdownText(para)}</p>;
-        })}
+      <article style={{ fontSize: 'var(--font-size-sm)', lineHeight: 1.8 }}>
+        <MarkdownRenderer content={article.contentMarkdown} />
       </article>
 
       {/* Helpful Feedback Box */}

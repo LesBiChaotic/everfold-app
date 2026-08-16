@@ -12,41 +12,68 @@ export const SEEDED_MAGAZINE_ISSUES: MagazineIssue[] = [
       {
         id: 'mag_art_06_1',
         issueNumber: 6,
-        title: 'The Familiarity of Strangers',
-        dek: 'An essay on somatic recognition, sensory memory, and the feeling of having known someone before.',
+        title: 'The Familiarity of Strangers: On Somatic Pre-Memory',
+        dek: 'An essay on cadence synchronization, sensory memory, and the startling feeling of resuming a conversation begun decades ago.',
         category: 'Essay',
         author: 'Janelle Wu',
-        readTimeMinutes: 7,
+        readTimeMinutes: 8,
         contentMarkdown: `### The Somatic Pre-Memory
-Have you ever met someone on a rainy street corner and felt an immediate, startling drop in your resting pulse? Not the frantic excitement of a crush, but the heavy, settled calm of returning to a house whose floorboards you have walked ten thousand times.
+Have you ever met someone on a rain-slicked street corner and felt an immediate, startling drop in your resting heart rate? Not the frantic, adrenaline-laced flutter of a crush, but the heavy, settled calm of returning to a house whose floorboards you have walked ten thousand times.
 
-We often describe this as "chemistry," but behavioral linguists call it *cadence synchronization*. When two people share identical micro-pauses in their sentences, their nervous systems enter a state of reciprocal ease.
+We often describe this phenomenon as "chemistry," but behavioral linguists call it *cadence synchronization*. When two people share identical micro-pauses in their sentences, their autonomic nervous systems enter a state of reciprocal co-regulation. You are not performing; you are resting in each other’s acoustic frequency.
 
-In this issue, we explore what it means when an encounter feels less like an introduction and more like a resumption.`,
+### The Archive of Shared Phrases
+In our archival research at Everfold, we frequently observe recurring linguistic motifs across long-separated couples: the exact same metaphor used to describe evening light, an identical preference for tea steeped in cast-iron kettles, or a shared habit of pausing before crossing a threshold.
+
+Whether one understands this as statistical resonance, shared cultural memory, or something more enigmatic, the experience remains singular: an encounter that feels less like an introduction and more like a gentle resumption.`,
       },
       {
         id: 'mag_art_06_2',
         issueNumber: 6,
-        title: 'Mending What Was Broken in 1904',
-        dek: 'A master bookbinder in Boston reflects on wheat paste, peacock endpapers, and second chances.',
+        title: 'Mending What Was Broken in 1904: An Interview with Leah Vance',
+        dek: 'A master book conservator in Boston reflects on Japanese kozo paper, reversible wheat starch paste, and second love after grief.',
         category: 'Interview',
-        author: 'Leah Morgan',
-        readTimeMinutes: 5,
-        contentMarkdown: `### The Craft of Repair
-In paper conservation, you never attempt to make a torn leaf look brand new. You use Japanese kozo paper and reversible wheat starch paste so that the repair is structurally sound but honest about having survived.
+        author: 'Janelle Wu',
+        readTimeMinutes: 7,
+        contentMarkdown: `### The Interview
 
-Love after forty operates on the exact same principle. You do not pretend the prior twenty years of grief and joy never happened. You honor the repair.`,
+**Janelle Wu**: Leah, in paper conservation, what is the golden rule of repairing a torn manuscript?
+
+**Leah Vance**: The first rule is reversibility. You never use permanent synthetic glues that can never be undone. You use pure wheat starch paste and lightweight Japanese kozo mulberry fibers. The repair must be structurally sound, but completely honest about having survived damage. If someone inspects the leaf under raking light a century from now, they should see the repair clearly and understand that the book was loved enough to be mended.
+
+**Janelle Wu**: How does that craft inform how you approached dating after losing Samuel?
+
+**Leah Vance**: When you experience profound bereavement, people often expect you to present yourself as a clean, unblemished page. They want you to pretend the grief never happened. But with Rafael, we treated our pasts like historical bindings. We did not try to erase our previous chapters; we laid down reversible paste and let the joints settle.
+
+**Janelle Wu**: What is one small detail from your daily routine with Rafael that represents that repair?
+
+**Leah Vance**: Our drafting desks sit back-to-back under the north skylight. We can work for four hours in absolute silence, hearing only the whisper of bone folders and pencils. True intimacy is not having to entertain someone to prove you value their presence.`,
       },
       {
         id: 'mag_art_06_3',
         issueNumber: 6,
-        title: 'The Cartography of Quiet Courtyards',
-        dek: 'How urban architecture preserves spaces for unhurried thought.',
+        title: 'The Cartography of Quiet Courtyards: A Decibel Survey of Boston',
+        dek: 'How urban architecture preserves acoustic sanctuaries for unhurried thought and deep conversation.',
         category: 'Architecture',
         author: 'Rafael Alvarez',
         readTimeMinutes: 6,
         contentMarkdown: `### The Threshold of the Archway
-When you step off a bustling avenue through a narrow stone archway into a residential courtyard, ambient decibels drop by nearly twenty units within five paces. This architectural decompression mirrors the emotional boundary needed before entering deep conversation.`,
+When you step off a bustling commercial avenue through a narrow brick archway into a residential courtyard, ambient decibels drop by nearly twenty-two units within five paces. 
+
+This acoustic decompression mirrors the emotional threshold required before genuine conversation can occur. In this survey, we map nine public courtyards, cloistered gardens, and hidden library atriums in Boston and Cambridge where ambient noise levels consistently stay below 52 dB.`,
+      },
+      {
+        id: 'mag_art_06_4',
+        issueNumber: 6,
+        title: 'Data Insight: The 90-Day Resonance Curve',
+        dek: 'Everfold behavioral research reveals why matches who exchange fewer than three messages per day report 40% higher long-term satisfaction.',
+        category: 'Data Science',
+        author: 'Dr. Celia Moreno',
+        readTimeMinutes: 5,
+        contentMarkdown: `### The Velocity Inversion
+Our analysis of 14,000 completed relationship lifecycles reveals a counter-intuitive principle: **high message velocity in week one correlates negatively with relationship durability at month six**.
+
+Pairs who engage in "burst correspondence" (one or two thoughtful paragraphs every 24 hours) demonstrate significantly higher emotional stability, lower cognitive fatigue, and a 40% higher rate of transitioning into durable partnership or chosen friendship.`,
       },
     ],
   },
@@ -55,19 +82,32 @@ When you step off a bustling avenue through a narrow stone archway into a reside
     number: 5,
     title: 'The Low-Acoustic City',
     publishedMonth: 'January 2026',
-    theme: 'Designing urban dating rituals for quiet minds.',
+    theme: 'Designing urban dating rituals for quiet minds and sensitive nervous systems.',
     coverGradient: 'linear-gradient(135deg, #0f172a, #1e3a5f)',
     articles: [
       {
         id: 'mag_art_05_1',
         issueNumber: 5,
         title: 'Ten Places in London Where You Can Hear Each Other Breathe',
-        dek: 'From hidden crypt tea rooms to quiet canal benches in Little Venice.',
+        dek: 'From hidden crypt tearooms in Holborn to quiet canal benches in Little Venice.',
         category: 'Date Blueprint',
         author: 'Camille Moreno',
         readTimeMinutes: 6,
         contentMarkdown: `### A Blueprint for Acoustic Sanctuary
-When we mapped the ambient decibel levels of 120 central London cafes and bars, over 85% exceeded 78 dB during evening peak hours. Here is our curated list of 10 low-stimulus sanctuaries where you never have to strain your ears to hear what someone loves.`,
+When our editorial team mapped the ambient sound levels of 120 central London cafes and cocktail lounges, over 85% exceeded 78 dB during evening peak hours. 
+
+Here is our curated guide to 10 low-stimulus sanctuaries where you never have to strain your vocal cords to hear what someone loves.`,
+      },
+      {
+        id: 'mag_art_05_2',
+        issueNumber: 5,
+        title: 'The Sensory Geography of First Dates',
+        dek: 'How room temperature, seating angle, and lighting influence autonomic safety.',
+        category: 'Data Science',
+        author: 'Jonah Feld',
+        readTimeMinutes: 5,
+        contentMarkdown: `### Seating Geometry and Cortisol
+Sitting directly opposite someone across a narrow table triggers predatory focus in the visual cortex. Angling chairs at 90 degrees or sitting side-by-side on a banquette reduces ocular tension by 35%, allowing both participants to look into open space while speaking.`,
       },
     ],
   },
@@ -79,7 +119,19 @@ When we mapped the ambient decibel levels of 120 central London cafes and bars, 
     theme: 'Words left in drafts, envelopes never sealed, and quiet catharsis.',
     coverGradient: 'linear-gradient(135deg, #27272a, #3f3f46)',
     articles: [
-      { id: 'mag_art_04_1', issueNumber: 4, title: 'Drafts That Saved Our Dignity', dek: 'Why writing without sending is a crucial emotional tool.', category: 'Essay', author: 'Janelle Wu', readTimeMinutes: 5, contentMarkdown: 'Catharsis is the true recipient of private writing.' },
+      {
+        id: 'mag_art_04_1',
+        issueNumber: 4,
+        title: 'Drafts That Saved Our Dignity: The Value of Unsent Correspondence',
+        dek: 'Why writing down everything you feel without pressing send is a crucial emotional tool.',
+        category: 'Essay',
+        author: 'Janelle Wu',
+        readTimeMinutes: 5,
+        contentMarkdown: `### The Catharsis of the Draft
+The human impulse to send an emotional essay at 2 AM is driven by the desire to expel pain from the chest. But the true recipient of that writing is not the other person—it is yourself. 
+
+Writing the unsent letter externalizes the grief, clarifies the boundary, and preserves your dignity.`,
+      },
     ],
   },
   {
@@ -90,7 +142,17 @@ When we mapped the ambient decibel levels of 120 central London cafes and bars, 
     theme: 'The physical nervous system in modern romance.',
     coverGradient: 'linear-gradient(135deg, #1c1917, #292524)',
     articles: [
-      { id: 'mag_art_03_1', issueNumber: 3, title: 'Why Eye Contact Is Optional', dek: 'Walking side by side lowers defensive cortisol.', category: 'Science', author: 'Dr. Celia Moreno', readTimeMinutes: 6, contentMarkdown: 'Parallel walking is evolutionary co-regulation.' },
+      {
+        id: 'mag_art_03_1',
+        issueNumber: 3,
+        title: 'Why Eye Contact Is Optional: Walking Side by Side',
+        dek: 'Walking side by side lowers defensive cortisol and promotes unhurried reflection.',
+        category: 'Science',
+        author: 'Dr. Celia Moreno',
+        readTimeMinutes: 6,
+        contentMarkdown: `### Evolutionary Co-Regulation
+When humans walk together in the same direction, the brain registers mutual forward momentum. Vision shifts to panoramic mode, reducing focal stress and allowing emotional truths to be spoken without defensive guarding.`,
+      },
     ],
   },
   {
@@ -98,21 +160,41 @@ When we mapped the ambient decibel levels of 120 central London cafes and bars, 
     number: 2,
     title: 'Chosen Family & Expansive Kinship',
     publishedMonth: 'April 2025',
-    theme: 'Queer relationship models for the 21st century.',
-    coverGradient: 'linear-gradient(135deg, #18181b, #27272a)',
+    theme: 'Platonic co-housing, chosen elders, and expansive relational security.',
+    coverGradient: 'linear-gradient(135deg, #1e1b4b, #312e81)',
     articles: [
-      { id: 'mag_art_02_1', issueNumber: 2, title: 'The Potluck as Sanctuary', dek: 'Building lifelong circles of mutual care.', category: 'Community', author: 'Tessa Ibrahim', readTimeMinutes: 4, contentMarkdown: 'Soup, sourdough, and radical emotional safety.' },
+      {
+        id: 'mag_art_02_1',
+        issueNumber: 2,
+        title: 'The Web of Support: Lessons from Queer Domestic History',
+        dek: 'Why resilient lives are anchored in distributed networks of care.',
+        category: 'Essay',
+        author: 'Tessa Ibrahim',
+        readTimeMinutes: 6,
+        contentMarkdown: `### Distributed Security
+When romantic love is woven into a wider tapestry of deep chosen friendships, breakups lose their catastrophic isolation, and partnerships thrive without the impossible pressure to be everything.`,
+      },
     ],
   },
   {
     id: 'mag_issue_01',
     number: 1,
-    title: 'The Manifesto for Slow Dating',
+    title: 'Timing, Synchrony & Second Chances',
     publishedMonth: 'January 2025',
-    theme: 'Why speed is the enemy of depth in human connection.',
-    coverGradient: 'linear-gradient(135deg, #09090b, #18181b)',
+    theme: 'The inaugural issue on unhurried romance and the philosophy of Everfold.',
+    coverGradient: 'linear-gradient(135deg, #18181b, #27272a)',
     articles: [
-      { id: 'mag_art_01_1', issueNumber: 1, title: 'Returning to Unhurried Time', dek: 'The founding editorial of Everfold Magazine.', category: 'Manifesto', author: 'Janelle Wu', readTimeMinutes: 6, contentMarkdown: 'We refuse the casino mechanics of infinite swiping.' },
+      {
+        id: 'mag_art_01_1',
+        issueNumber: 1,
+        title: 'The Manifesto for Slow Dating',
+        dek: 'Why we built an app that actively discourages endless swiping and instant gratification.',
+        category: 'Manifesto',
+        author: 'Dr. Celia Moreno',
+        readTimeMinutes: 7,
+        contentMarkdown: `### Speed Is the Enemy of Depth
+When human beings are reduced to rapid trading cards, empathy is the first casualty. Everfold was created to restore the human pace of discovery: deliberate matching, sensory comfort, and respect for memory.`,
+      },
     ],
   },
 ];
@@ -121,8 +203,8 @@ export const SEEDED_PODCAST_EPISODES: PodcastEpisode[] = [
   {
     id: 'pod_ep_10',
     number: 10,
-    title: 'Episode 10: The Invariant Meeting',
-    subtitle: 'Can two people be mathematically predisposed to find each other in every generation?',
+    title: 'Episode 10: The Invariant Meeting & Algorithmic Recurrence',
+    subtitle: 'Can two people be mathematically predisposed to find each other across different generations?',
     guest: 'Dr. Nia Banerjee, Former Ethics Advisory Chair',
     durationText: '42 min',
     publishedDate: '2026-03-24',
@@ -133,30 +215,45 @@ export const SEEDED_PODCAST_EPISODES: PodcastEpisode[] = [
       {
         speaker: 'Janelle Wu',
         timestamp: '00:01',
-        text: 'Welcome to The Space Between, the Everfold podcast. Today we are speaking with Dr. Nia Banerjee about the philosophy of recurrence.',
+        text: 'Welcome to The Space Between, the official Everfold podcast. I am your host, Janelle Wu. Today we are joined by Dr. Nia Banerjee, who served as the chair of our Ethics Advisory Committee during the platform migration from Fold in 2017. Nia, welcome.',
       },
       {
         speaker: 'Dr. Nia Banerjee',
-        timestamp: '02:15',
-        text: 'Back in 2017, when we were reviewing the transition from Fold to Everfold, there was a fierce debate. The models were showing that certain relationship vectors were persisting across completely different account registrations.',
+        timestamp: '01:15',
+        text: 'Thank you, Janelle. It is always slightly uncanny returning to these archives.',
       },
       {
         speaker: 'Janelle Wu',
-        timestamp: '04:30',
-        text: 'Persisting in what sense? Like similar personality archetypes?',
+        timestamp: '02:00',
+        text: 'Let us dive straight into what you documented in the 2017 Internal Ethics Audit. You noted that certain relational telemetry vectors seemed to persist across completely independent account registrations. What did that look like in practice?',
       },
       {
         speaker: 'Dr. Nia Banerjee',
-        timestamp: '05:12',
-        text: 'No, not just archetypes. The specific linguistic phrasing, the exact dates of planned meetings, the specific book titles exchanged. The platform wasn’t just matching them; it was re-instantiating an invariant container.',
+        timestamp: '03:45',
+        text: 'In standard statistical modeling, if two people match in 2008 and their connection dissolves, you expect random distribution when one of them registers a new profile years later. But what we observed in the database lineage was not random. We saw identical phrasing in message drafts, identical dates chosen for first meetings, and the exact same third-party venues being selected across decades.',
+      },
+      {
+        speaker: 'Janelle Wu',
+        timestamp: '06:10',
+        text: 'Some engineers argued that this was just behavioral clustering—that people with similar aesthetic tastes naturally choose the same botanical gardens or independent coffee shops.',
+      },
+      {
+        speaker: 'Dr. Nia Banerjee',
+        timestamp: '07:30',
+        text: 'That explains the venue, yes. But it does not explain why an account registered in 2024 would use a phrase like "the joints were allowed to settle before the weight was placed upon them," which was verbatim in a 1999 Pairwise guestbook entry written by a completely different individual. The system wasn’t just matching them; it was maintaining an invariant container.',
+      },
+      {
+        speaker: 'Janelle Wu',
+        timestamp: '11:20',
+        text: 'That leads to the profound question of autonomy: are we choosing our partners, or are we stepping into pre-existing relational architecture?',
       },
     ],
   },
   {
     id: 'pod_ep_09',
     number: 9,
-    title: 'Episode 09: The 25-Minute Voice Letter',
-    subtitle: 'How long-distance couples are abandoning instant messaging in favor of audio correspondence.',
+    title: 'Episode 09: The 25-Minute Voice Letter Ritual',
+    subtitle: 'How long-distance couples are abandoning instant messaging in favor of unhurried audio correspondence.',
     guest: 'Dev & Camille',
     durationText: '34 min',
     publishedDate: '2026-02-12',
@@ -167,22 +264,17 @@ export const SEEDED_PODCAST_EPISODES: PodcastEpisode[] = [
       {
         speaker: 'Janelle Wu',
         timestamp: '00:01',
-        text: 'Today we have Camille from London and Dev from Dublin talking about their Sunday audio correspondence ritual.',
+        text: 'Today on The Space Between, we are joined by Camille in London and Dev in Dublin. They have been together for eighteen months and have an extraordinary rule: zero daily text messaging. Instead, they send one 25-minute voice letter every Sunday. Camille, how did this start?',
       },
       {
         speaker: 'Camille',
-        timestamp: '01:45',
-        text: 'With instant texting, you feel obligated to respond within five minutes, which leads to shallow messages. With voice letters, you record while making tea or walking to the station. You get to hear the rain in the background and the pauses between their thoughts.',
+        timestamp: '01:20',
+        text: 'It started out of pure burnout. We were both working sixty hours a week and our texts were becoming hollow: "Hope work is good", "Heading home", "Tired". It felt like administrative check-ins. So we decided: let us stop texting completely. On Sunday afternoons, I put on my coat, walk along the Regent’s Canal with my earphones, and just talk to Dev for twenty-five minutes about what I saw, what I thought about, and what made me laugh.',
       },
       {
         speaker: 'Dev',
-        timestamp: '04:10',
-        text: 'It completely changed how I think about listening. You can’t skim an audio letter while doing three other tabs.',
-      },
-      {
-        speaker: 'Janelle Wu',
-        timestamp: '06:30',
-        text: 'It demands your full presence, which is the greatest gift in digital life.',
+        timestamp: '04:15',
+        text: 'When I get that file in Dublin on Sunday evening, I make a pot of tea, turn off all screens, and listen. You get to hear the rain in London, the sound of her footsteps, the pauses where she gathers her thoughts. You can’t multitask while listening to someone’s voice letter. It requires your entire presence.',
       },
     ],
   },
@@ -190,72 +282,29 @@ export const SEEDED_PODCAST_EPISODES: PodcastEpisode[] = [
     id: 'pod_ep_08',
     number: 8,
     title: 'Episode 08: Parallel Play & Shared Solitude',
-    subtitle: 'Why sitting in silence together is the ultimate intimacy benchmark.',
+    subtitle: 'Why sitting in silence together is the ultimate intimacy benchmark for introverts.',
     guest: 'Callum Price & Dr. Celia Moreno',
     durationText: '38 min',
     publishedDate: '2026-01-20',
-    summary: 'Investigating sensory co-regulation and quiet companionship.',
+    summary: 'Investigating sensory co-regulation, low-stimulation dating, and quiet companionship.',
     discussionThreadId: 'thread_pod_08',
     storyTier: 0,
     transcript: [
-      { speaker: 'Janelle Wu', timestamp: '00:01', text: 'Welcome to episode 8 on parallel play.' },
-      { speaker: 'Callum Price', timestamp: '02:00', text: 'Silence is proof of safety, not awkwardness.' },
-      { speaker: 'Dr. Celia Moreno', timestamp: '05:20', text: 'The brain stops performing when true trust exists.' },
-      { speaker: 'Janelle Wu', timestamp: '08:00', text: 'A wonderful insight.' },
-    ],
-  },
-  {
-    id: 'pod_ep_07',
-    number: 7,
-    title: 'Episode 07: Loving After Bereavement',
-    subtitle: 'Holding grief and romance in the exact same room.',
-    guest: 'Tessa Ibrahim',
-    durationText: '45 min',
-    publishedDate: '2025-12-05',
-    summary: 'How to build second love without erasing cherished memory.',
-    discussionThreadId: 'thread_pod_07',
-    storyTier: 0,
-    transcript: [
-      { speaker: 'Janelle Wu', timestamp: '00:01', text: 'Welcome Tessa to discuss dating after grief.' },
-      { speaker: 'Tessa Ibrahim', timestamp: '03:10', text: 'You do not compete with memory; you expand the room.' },
-      { speaker: 'Janelle Wu', timestamp: '06:00', text: 'That metaphor resonates deeply.' },
-      { speaker: 'Tessa Ibrahim', timestamp: '09:15', text: 'It frees the new partner from unnecessary insecurity.' },
-    ],
-  },
-  {
-    id: 'pod_ep_06',
-    number: 6,
-    title: 'Episode 06: The 45-Minute First Date Rule',
-    subtitle: 'Why shorter first encounters protect nervous systems.',
-    guest: 'Jonah Feld',
-    durationText: '29 min',
-    publishedDate: '2025-10-18',
-    summary: 'De-escalating first date anxiety with intentional boundary design.',
-    discussionThreadId: 'thread_pod_06',
-    storyTier: 0,
-    transcript: [
-      { speaker: 'Janelle Wu', timestamp: '00:01', text: 'Jonah Feld joins us to discuss date duration.' },
-      { speaker: 'Jonah Feld', timestamp: '02:30', text: '45 minutes gives an easy exit or a clean extension.' },
-      { speaker: 'Janelle Wu', timestamp: '05:00', text: 'It prevents conversational burnout.' },
-      { speaker: 'Jonah Feld', timestamp: '07:30', text: 'Exactly, it leaves you with genuine curiosity.' },
-    ],
-  },
-  {
-    id: 'pod_ep_05',
-    number: 5,
-    title: 'Episode 05: The Geometry of Acoustic Comfort',
-    subtitle: 'Why restaurant noise levels ruin chemistry.',
-    guest: 'Amina & Rafael Alvarez',
-    durationText: '36 min',
-    publishedDate: '2025-08-30',
-    summary: 'Mapping urban noise sanctuaries and bookstore dates.',
-    discussionThreadId: 'thread_pod_05',
-    storyTier: 0,
-    transcript: [
-      { speaker: 'Janelle Wu', timestamp: '00:01', text: 'Today we discuss low-stimulation dating.' },
-      { speaker: 'Rafael Alvarez', timestamp: '02:40', text: 'In quiet courtyards, you can actually hear cadence.' },
-      { speaker: 'Amina', timestamp: '05:10', text: 'No background bass competing with thoughts.' },
-      { speaker: 'Janelle Wu', timestamp: '08:00', text: 'It changes everything.' },
+      {
+        speaker: 'Janelle Wu',
+        timestamp: '00:01',
+        text: 'Welcome back. Today we have Dr. Celia Moreno and product designer Callum Price discussing parallel play—why the best date of your life might involve saying fewer than twenty words.',
+      },
+      {
+        speaker: 'Dr. Celia Moreno',
+        timestamp: '01:10',
+        text: 'When humans are in a high-stress or unfamiliar social dynamic, speech is used defensively to fill voids. True autonomic security is reached when silence is no longer interpreted by the amygdala as disapproval or danger.',
+      },
+      {
+        speaker: 'Callum Price',
+        timestamp: '04:00',
+        text: 'From an accessibility and neurodivergent perspective, parallel play is life-saving. You get the oxytocin and comfort of shared human presence without the exhausting executive load of conversational performance.',
+      },
     ],
   },
 ];

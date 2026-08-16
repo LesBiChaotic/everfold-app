@@ -6,6 +6,8 @@ import { useProfileStore } from '../../store/profileStore';
 import { LiveCommentFeed } from '../../components/community/LiveCommentFeed';
 import { LiveCommentComposer } from '../../components/community/LiveCommentComposer';
 
+import { renderMarkdownText } from '../../utils/markdownUtils';
+
 export const PodcastEpisodeScreen: React.FC = () => {
   const { episodeId } = useParams<{ episodeId: string }>();
   const { podcastEpisodes, podcastComments, addPodcastComment } = useMagazinePodcastStore();
@@ -28,7 +30,7 @@ export const PodcastEpisodeScreen: React.FC = () => {
           Guest: {episode.guest}
         </div>
         <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
-          {episode.summary}
+          {renderMarkdownText(episode.summary)}
         </p>
       </div>
 
@@ -44,7 +46,7 @@ export const PodcastEpisodeScreen: React.FC = () => {
                 <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontFamily: 'var(--font-family-mono)' }}>[{seg.timestamp}]</span>
               </div>
               <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.6, color: 'var(--text-secondary)', margin: 0 }}>
-                {seg.text}
+                {renderMarkdownText(seg.text)}
               </p>
             </div>
           ))}

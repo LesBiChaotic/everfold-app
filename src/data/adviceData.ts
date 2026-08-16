@@ -1,4 +1,4 @@
-import { AdviceArticle, AdviceCategory, AdviceComment } from '../types/socialEcosystem';
+import { AdviceArticle, AdviceCategory, AdviceComment, AskEverfoldSubmission } from '../types/socialEcosystem';
 
 export const ADVICE_CATEGORIES: AdviceCategory[] = [
   { id: 'first_dates', name: 'First Dates', description: 'Low-pressure blueprints, conversational safety, and early boundaries.', iconName: 'Compass' },
@@ -19,32 +19,46 @@ export const SEEDED_ADVICE_ARTICLES: AdviceArticle[] = [
   {
     id: 'art_low_stimulation_dates',
     title: 'The Case for Low-Stimulation First Dates',
-    dek: 'Why noisy cocktail lounges destroy conversational chemistry, and what quiet alternatives can offer.',
+    dek: 'Why noisy cocktail lounges destroy conversational chemistry, and what quiet alternatives can offer nervous systems.',
     categoryId: 'first_dates',
     authorName: 'Dr. Celia Moreno',
     authorRole: 'Head of Relationship Science',
     authorAvatar: 'celia',
     authorType: 'Relationship Science',
     publishedAt: '2026-03-12T10:00:00Z',
-    readingTimeMinutes: 4,
+    readingTimeMinutes: 5,
     commentsCount: 24,
     storyTier: 0,
-    contentMarkdown: `### The Problem with Sensory Overload
-Most modern dating culture defaults to environments designed for high auditory competition: bustling bars with loud background playlists, crowded bistros where you must raise your voice across a small table, or loud social events. For many people—especially introverts or those with sensory sensitivities—this puts the nervous system into low-level fight-or-flight before the first sentence is spoken.
+    contentMarkdown: `### The Problem with Sensory Overload in Modern Romance
+Most contemporary dating advice recommends meeting in high-energy, crowded environments: bustling cocktail lounges with loud background bass, packed bistros where tables are separated by four inches, or active social venues. For many people—especially introverts, neurodivergent individuals, or those with auditory processing sensitivities—this environment immediately triggers low-level sympathetic nervous system activation (fight-or-flight).
 
-### The Power of Parallel Activity
-When you sit side-by-side or walk together (such as wandering through a quiet botanical conservatory, an independent bookstore, or along a quiet river path), eye contact becomes optional rather than mandatory. This physical arrangement lowers cortisol and allows thoughts to emerge organically without the intense pressure of constant interrogation.
+When you must constantly strain your vocal cords to be heard across a small candle, your cognitive bandwidth is consumed by filtering out background noise rather than listening to your companion's emotional nuances. You leave the date feeling drained, tense, and uncertain whether the awkwardness was due to incompatibility or sheer sensory exhaustion.
 
-### Three Low-Stimulation Date Formats
-1. **The Corner Bookstore & Bench**: Browse your favorite sections independently for twenty minutes, then meet on a quiet bench to show each other one page or paragraph that moved you.
-2. **The Quiet Hours Gallery**: Visit a museum during weekday twilight hours when the galleries are empty.
-3. **The Tea Room Ritual**: A quiet room with warm natural wood and ample space between tables.`,
+### The Power of Parallel Activity & Shared Focus
+When two people sit directly opposite each other in a brightly lit or noisy room, eye contact becomes mandatory and continuous. This physical posture mimics an interrogation or an executive performance review.
+
+In contrast, **parallel activity** (walking side-by-side along a quiet canal, wandering through an independent bookstore, or sitting together on a shaded park bench) allows eye contact to be optional rather than enforced. Looking at a shared object—such as a shelf of vintage art books or a row of garden ferns—lowers cortisol levels and creates natural, unpressured pauses where thoughts can assemble themselves at a human pace.
+
+### Three Tested Low-Stimulation Blueprints
+
+1. **The Corner Bookstore & Bench Protocol**:
+   Meet outside an independent bookstore during a weekday evening. Spend twenty minutes browsing separate aisles in quiet independence. Meet back at the central wooden table or nearby outdoor bench and show each other exactly one passage, photograph, or recipe that made you pause.
+
+2. **The Botanical Conservatory Twilight Walk**:
+   Glasshouses and conservatories provide natural humidity, soft acoustic dampening through foliage, and gentle ambient warmth. Walking through green spaces promotes physiological down-regulation, making emotional disclosure feel safe and organic.
+
+3. **The Tea Room Ritual**:
+   Choose a traditional tearoom with wide table spacing and natural wood interiors. The deliberate pacing of steeping tea creates natural physical pauses that prevent frantic conversational rushing.
+
+### Practical Takeaway for Your Next Invitation
+When suggesting your next first date, try this phrasing:
+*"I love thoughtful conversation, but loud bars tend to fry my battery. Would you be open to grabbing a tea and taking a quiet walk through the Public Garden instead?"*`,
     relatedArticleIds: ['art_texting_fatigue', 'art_parallel_play'],
   },
   {
     id: 'art_grief_and_memory',
-    title: 'Loving Again After Profound Loss',
-    dek: 'Why new love does not erase old love, and how to hold space for a partner who is remembered.',
+    title: 'Loving Again After Profound Loss: Expanding the Architecture of the Room',
+    dek: 'Why new love does not erase past devotion, and how healthy second partnerships build space for remembrance.',
     categoryId: 'dating_after_grief',
     authorName: 'Tessa Ibrahim',
     authorRole: 'Community Safety & Care Director',
@@ -54,208 +68,270 @@ When you sit side-by-side or walk together (such as wandering through a quiet bo
     readingTimeMinutes: 6,
     commentsCount: 38,
     storyTier: 0,
-    contentMarkdown: `### Expanding the Room
-When someone loses a life partner, their love for that person does not evaporate. It becomes part of the permanent architecture of their room. The mistake many well-meaning new partners make is assuming they must compete with a ghost. You cannot compete with memory, and you should not try.
+    contentMarkdown: `### The Myth of the Clean Slate
+One of the most damaging assumptions in popular culture is the belief that before you can love someone new, your past love must be fully resolved, packed into a sealed box, and forgotten. For those who have lost a partner to illness, accident, or bereavement, this expectation feels not only impossible but profoundly disrespectful to the architecture of their life.
 
-Instead of asking someone to clear their room, healthy second love asks: *May I build a chair beside yours in this expanded room?*
+Love is not a finite liquid that must be poured out of a glass before new water can enter. Love expands the room. When you lose someone significant, their presence becomes part of the load-bearing timber of your emotional home.
 
-### When Uncanny Familiarity Arises
-Several members in our grief support circles describe moments where a new partner's mannerisms, conversational cadences, or domestic habits feel startlingly resonant with someone they lost decades ago. Psychologists understand this as somatic pattern matching: our nervous systems naturally gravitate toward the physical and linguistic frequencies where we once felt profoundly safe.`,
+### The Insecure Competitor vs. The Generous Companion
+The most common friction in dating after grief arises when a new partner attempts to compete with memory. 
+- **The Competitor** asks: *"Do you love them more than you love me? Why do you still keep their framed drawing in the hallway? When will you be completely over it?"*
+- **The Generous Companion** asks: *"What was their favorite soup on freezing winter nights? May I sit beside you while you look at this photo album? How can I support you when the anniversary of their passing arrives?"*
+
+You cannot win a competition against someone who is remembered; the attempt only generates guilt and emotional withdrawal.
+
+### When Somatic Pattern Matching Occurs
+In our grief and bereavement circles on Everfold, many members report moments of intense, disorienting familiarity with new partners: noticing the exact same hand gestures, a shared cadence in vocal pitch, or an identical domestic preference (such as leaving a window cracked during rainstorms).
+
+Behavioral psychology identifies this as **somatic pattern recognition**: our nervous systems naturally gravitate toward the relational frequencies where we previously felt deeply anchored and physically secure. Recognizing these echoes without fear allows new love to flourish alongside cherished memory.`,
     relatedArticleIds: ['art_low_stimulation_dates', 'art_slow_emotional_pacing'],
   },
   {
     id: 'art_texting_fatigue',
-    title: 'Asynchronous Texting Without Guilt',
-    dek: 'How to communicate your reply rhythm early so deliberate silence is never mistaken for disinterest.',
+    title: 'Asynchronous Texting Without Guilt: Escaping the Instant Reply Trap',
+    dek: 'How declaring your communication rhythm on day one transforms frantic messaging into deep digital correspondence.',
     categoryId: 'communication',
     authorName: 'Jonah Feld',
-    authorRole: 'Senior Behavioral Researcher',
+    authorRole: 'Senior Behavioral Research Scientist',
     authorAvatar: 'jonah',
     authorType: 'Relationship Science',
     publishedAt: '2026-01-20T09:30:00Z',
-    readingTimeMinutes: 4,
+    readingTimeMinutes: 5,
     commentsCount: 19,
     storyTier: 0,
-    contentMarkdown: `### The Ping-Pong Trap
-Real-time instant messaging creates an unspoken obligation of immediate responsiveness. When someone text-messages you, your brain registers an open loop. If you are in the middle of deep work or emotional decompression, you are forced to choose between sending a shallow, rushed reply or feeling guilty for leaving them on "read."
+    contentMarkdown: `### The Cognitive Weight of the "Open Loop"
+Instant messaging platforms have conditioned us to treat incoming text messages as urgent emergencies requiring immediate responses. When a match sends you a message at 11:30 AM while you are deep in work, your brain registers an unclosed relational loop. 
 
-### Set the Protocol on Day One
-The most effective way to protect your rhythm is to declare it gently on the first day:
-*"I love thoughtful conversation, but I usually check messages twice a day when I have quiet time to give them my full attention. If something is urgent, feel free to call!"*
+If you reply immediately, you sacrifice your concentration and send a rushed, shallow response. If you wait, you suffer the low-grade background guilt of leaving someone on "read." Over weeks, this dynamic produces severe dating fatigue, leading many people to abruptly ghost simply because keeping up with daily ping-pong texting feels like an unpaid second job.
 
-This removes the anxiety of ambiguous delays and sets up deep, letter-style correspondence over frantic ping-pong exchanges.`,
+### The Letter-Writing Protocol
+High-resonance relationships thrive when messaging shifts from **real-time chat** to **asynchronous correspondence**. Instead of twenty fragmented texts throughout the day ("Hey", "How's work?", "Tired lol"), you send one or two substantive paragraphs in the morning or evening when you have the quiet space to genuinely reflect and share.
+
+### Script: Declaring Your Rhythm Early
+Set expectations before misunderstandings take root. Send this during your first 48 hours of matching:
+
+> *"I really enjoy our conversations, but my work schedule is pretty demanding during the day and I try to stay off my phone while working. I usually check Everfold once in the morning and once in the evening with a cup of tea so I can give messages my full attention! If you ever need something time-sensitive, feel free to give me a call."*
+
+Notice what this achieves:
+1. It eliminates anxiety around reply delays.
+2. It signals high intentionality and adult boundaries.
+3. It filters for partners who respect autonomy and personal focus.`,
     relatedArticleIds: ['art_low_stimulation_dates', 'art_slow_emotional_pacing'],
   },
   {
     id: 'art_slow_emotional_pacing',
-    title: 'The Slow Burn: Resisting Algorithmic Urgency',
-    dek: 'Why emotional intimacy takes three seasons to reveal its true shape.',
+    title: 'The Slow Burn: Why True Relational Alignment Takes Three Seasons',
+    dek: 'Resisting algorithmic urgency and discovering the durable peace of unhurried emotional development.',
     categoryId: 'relationship_pace',
     authorName: 'Janelle Wu',
-    authorRole: 'Editorial Director',
+    authorRole: 'Editorial Director, Everfold Magazine',
     authorAvatar: 'janelle',
     authorType: 'Editorial',
     publishedAt: '2026-02-04T11:00:00Z',
-    readingTimeMinutes: 5,
+    readingTimeMinutes: 6,
     commentsCount: 31,
     storyTier: 0,
-    contentMarkdown: `### The Three-Season Rule
-You do not truly know how a relationship functions until you have seen each other under three different conditions:
-1. **Low Stakes**: How you share quiet Tuesdays when nothing exciting is happening.
-2. **Stress / Fatigue**: How you treat each other when someone is sick, exhausted, or running late.
-3. **Disappointment**: How you handle a cancelled plan or an unmet expectation.
+    contentMarkdown: `### The Mirage of Instant Intensity
+Modern romance culture often confuses rapid intensity with genuine intimacy. When two people match and immediately spend six hours texting every day, declaring soulmate status by week two, and merging their entire lives within a month, they are usually experiencing **limerence**—a neurochemical state fueled by projected fantasy and dopamine surges.
 
-Rushing to define everything in the first three weeks prevents these natural seasons from unfolding. Take your time. Everfold was designed to encourage unhurried discovery.`,
-    relatedArticleIds: ['art_texting_fatigue', 'art_low_stimulation_dates'],
+The danger of rapid intensity is that it leaves no room to observe how someone behaves across different life conditions:
+- How do they respond when they are overtired and miss a flight?
+- How do they navigate a disagreement when both of you are stressed?
+- How do they treat service staff during a holiday rush?
+- How do they speak about people they no longer like?
+
+### The Three-Season Rule
+In traditional Japanese garden design, a newly planted stone lantern is never evaluated in spring alone. It must be viewed through summer rains, autumn leaf-fall, and winter snow before its true placement in the landscape can be judged.
+
+Relational alignment operates on the same principle. You need to see a partner across:
+1. **A Season of Ease**: When work is light, health is good, and social energy is abundant.
+2. **A Season of Strain**: When family obligations press in, career deadlines loom, or physical energy drops.
+3. **A Season of Transition**: Moving homes, changing roles, or navigating unexpected disruption.
+
+If a connection is built to last twenty years, taking ninety days to build the foundation is not a delay—it is wisdom.`,
+    relatedArticleIds: ['art_low_stimulation_dates', 'art_grief_and_memory'],
   },
   {
-    id: 'art_parallel_play',
-    title: 'Parallel Play: The Quiet Peak of Companionship',
-    dek: 'Why sharing a room without speaking is the most underrated milestone in any partnership.',
-    categoryId: 'introverts',
-    authorName: 'Callum Price',
-    authorRole: 'Product Accessibility Lead',
-    authorAvatar: 'callum',
-    authorType: 'Editorial',
-    publishedAt: '2026-03-01T15:00:00Z',
-    readingTimeMinutes: 4,
-    commentsCount: 42,
-    storyTier: 0,
-    contentMarkdown: `### Coexisting in Solitude
-In early dating, there is a constant demand for performance: telling stories, finding wit, demonstrating engagement. But true long-term ease arrives the first time you can sit in the same living room for three hours—one person reading a book, the other mending a coat—without feeling a single second of awkward tension.
-
-Silence is not the absence of connection; it is the proof of trust.`,
-    relatedArticleIds: ['art_low_stimulation_dates', 'art_slow_emotional_pacing'],
-  },
-  {
-    id: 'art_boundaries_early',
-    title: 'Kind Boundaries in Early Dating',
-    dek: 'Setting limits without sounding defensive or cold.',
-    categoryId: 'boundaries',
+    id: 'art_queer_kinship_networks',
+    title: 'Beyond the Nuclear Default: The Beauty of Expansive Queer Kinship',
+    dek: 'Why chosen family networks and platonic co-housing offer richer models of lifelong relational security.',
+    categoryId: 'queer_dating',
     authorName: 'Tessa Ibrahim',
     authorRole: 'Community Safety & Care Director',
     authorAvatar: 'tessa',
     authorType: 'Trust & Safety',
-    publishedAt: '2026-02-10T10:00:00Z',
-    readingTimeMinutes: 4,
-    commentsCount: 14,
+    publishedAt: '2026-02-28T10:00:00Z',
+    readingTimeMinutes: 5,
+    commentsCount: 22,
     storyTier: 0,
-    contentMarkdown: `### The Direct and Gentle Formula\nBoundaries are invitations into how to love and respect you well. Saying "I prefer not to drink on first dates" or "I need to be home by 9 PM" is a clarity gift.`,
+    contentMarkdown: `### The Isolation of the Romantic Monolith
+For generations, Western social architecture has placed an unsustainable burden upon a single romantic partnership. One human being is expected to be your passionate lover, best friend, co-parent, financial partner, travel buddy, career counselor, and exclusive emotional confidant.
+
+Queer community history offers a healthier, more resilient alternative: **distributed kinship networks**. In chosen family structures, emotional security is anchored not in a single fragile thread, but in a wide, supportive web of deep friendships, former partners who became family, mutual-aid circles, and chosen elders.
+
+### Integrating Dating into Existing Networks
+When you date someone with strong chosen family ties:
+- Do not view their close friends or ex-turned-confidants as threats to your status.
+- Recognize that their capacity for long-term loyalty is demonstrated by the health of their friendships.
+- Allow your relationship to find its natural place within the ecosystem rather than demanding they abandon their web to prove devotion.`,
+    relatedArticleIds: ['art_slow_emotional_pacing'],
   },
   {
-    id: 'art_queer_kinship',
-    title: 'Chosen Family and Expansive Kinship',
-    dek: 'Why queer dating models offer blueprints for everyone.',
-    categoryId: 'queer_dating',
+    id: 'art_introvert_parallel_play',
+    title: 'Parallel Play: The Highest Benchmark of Introvert Intimacy',
+    dek: 'Why existing quietly in the same room without performing conversation is the deepest form of relational comfort.',
+    categoryId: 'introverts',
     authorName: 'Dr. Celia Moreno',
     authorRole: 'Head of Relationship Science',
     authorAvatar: 'celia',
     authorType: 'Relationship Science',
-    publishedAt: '2026-01-15T11:00:00Z',
-    readingTimeMinutes: 5,
-    commentsCount: 22,
-    storyTier: 0,
-    contentMarkdown: `### Beyond the Nuclear Monolith\nQueer communities have long practiced relational models where friends are primary anchors and exes become trusted chosen family.`,
-  },
-  {
-    id: 'art_long_distance_rituals',
-    title: 'Postal Intimacy: Long Distance Letters',
-    dek: 'How handwritten letters create physical anchors across oceans.',
-    categoryId: 'long_distance',
-    authorName: 'Janelle Wu',
-    authorRole: 'Editorial Director',
-    authorAvatar: 'janelle',
-    authorType: 'Editorial',
-    publishedAt: '2026-02-28T09:00:00Z',
+    publishedAt: '2026-01-14T09:00:00Z',
     readingTimeMinutes: 4,
-    commentsCount: 16,
+    commentsCount: 28,
     storyTier: 0,
-    contentMarkdown: `### The Weight of Paper\nA physical letter holds time and intent. When reading ink on paper, you occupy the same quiet pace as the sender.`,
+    contentMarkdown: `### The Performance Tax of Dating
+For introverted individuals, early dating involves a heavy "performance tax": smiling continuously, asking engaging follow-up questions, monitoring body language, and suppressing the natural urge to withdraw and recharge.
+
+The transition from "dating performance" to "real intimacy" occurs the first time you can spend three hours in the same room with someone in absolute silence without a single flicker of anxiety. One person reads a novel on the rug; the other solders a circuit board or repairs a sweater at the desk.
+
+### Establishing the Parallel Play Protocol
+Try proposing this for your third or fourth date:
+*"I have about two hours of reading/sketching to catch up on this Sunday. Would you want to bring whatever quiet project you're working on and share my dining table with some tea? Zero obligation to entertain each other."*
+
+Those who understand the relief of this offer will become your most enduring companions.`,
+    relatedArticleIds: ['art_low_stimulation_dates', 'art_slow_emotional_pacing'],
   },
   {
     id: 'art_shift_work_dating',
-    title: 'Dating on Opposite Clocks',
-    dek: 'Navigating intimacy when one person works nights.',
+    title: 'Dating the Clock: Love Between Night Shifts and Early Rises',
+    dek: 'Practical strategies for healthcare workers, pilots, and creatives whose biological clocks never sync.',
     categoryId: 'different_schedules',
-    authorName: 'Callum Price',
-    authorRole: 'Product Accessibility Lead',
-    authorAvatar: 'callum',
-    authorType: 'Editorial',
-    publishedAt: '2026-03-05T12:00:00Z',
-    readingTimeMinutes: 4,
-    commentsCount: 11,
-    storyTier: 0,
-    contentMarkdown: `### Breakfast as Dinner\nWhen your schedules are flipped, 7:00 AM diner breakfasts become your romantic peak. Celebrate the asymmetry.`,
-  },
-  {
-    id: 'art_domestic_territory',
-    title: 'Moving In: The Sacred Solitude Corner',
-    dek: 'Why cohabitation requires guaranteed private space.',
-    categoryId: 'moving_in',
     authorName: 'Jonah Feld',
     authorRole: 'Senior Behavioral Researcher',
     authorAvatar: 'jonah',
     authorType: 'Relationship Science',
-    publishedAt: '2026-01-25T14:00:00Z',
+    publishedAt: '2026-02-15T10:00:00Z',
     readingTimeMinutes: 5,
-    commentsCount: 28,
+    commentsCount: 20,
     storyTier: 0,
-    contentMarkdown: `### The One Chair Rule\nEvery person in a shared home needs at least one chair, desk, or corner where they can sit without being spoken to.`,
+    contentMarkdown: `### The Mismatched Biological Clock
+When one partner works 7 PM to 7 AM in a hospital emergency room while the other works 8 AM to 4 PM in a classroom, standard dating rituals (such as 7:30 PM Friday dinners) become physical impossibilities. Attempting to force standard schedules leads to sleep deprivation and burnout.
+
+### The Three Golden Rules for Shift-Work Couples
+1. **The Asynchronous Physical Note**: Leave handwritten index cards on the bathroom mirror or under the coffee tin. Reading physical ink when waking up creates a somatic anchor of care.
+2. **The 6:30 AM Breakfast Date**: Meet when the night shift ends and the day shift begins. Breakfast food is comforting, diner booths are quiet, and both partners are completely unguarded.
+3. **Guilt-Free Sleep Boundaries**: Blackout curtains, earplugs, and silent phone modes must be treated as medical necessities, never as personal rejection.`,
+    relatedArticleIds: ['art_texting_fatigue'],
   },
   {
     id: 'art_kind_breakups',
-    title: 'Dignity in Departure: The Kind Ending',
-    dek: 'How to part ways with gratitude and clean closure.',
+    title: 'The Art of the Kind Ending: Parting with Dignity and Gratitude',
+    dek: 'How to conclude a relationship with tenderness, clarity, and zero cruelty when life visions diverge.',
     categoryId: 'breakups',
     authorName: 'Tessa Ibrahim',
     authorRole: 'Community Safety & Care Director',
     authorAvatar: 'tessa',
     authorType: 'Trust & Safety',
-    publishedAt: '2026-02-14T16:00:00Z',
+    publishedAt: '2026-03-01T10:00:00Z',
     readingTimeMinutes: 5,
-    commentsCount: 35,
+    commentsCount: 25,
     storyTier: 0,
-    contentMarkdown: `### Honoring the Bridge\nAn ending is not a failure of character. It is the respectful recognition that two paths have diverged.`,
+    contentMarkdown: `### Reframing Completion vs. Failure
+A relationship that lasted two years, provided mutual safety, taught both people profound lessons, and ended when their life goals diverged is not a "failed relationship." It was a successful two-year relationship that has now reached its natural completion.
+
+### Rules for an Honorable Ending
+- **Choose Neutral, Low-Stimulus Ground**: Walk in a quiet park or talk in a private living space with ample time for tears and silence.
+- **Own Your Reasons with "I" Statements**: Focus on fundamental incompatibilities in values, geography, or life rhythm rather than compiling a laundry list of the other person's flaws.
+- **Honor the Shared History**: Express genuine gratitude for the specific ways they enriched your life. Ending with respect creates the possibility of future chosen friendship.`,
+    relatedArticleIds: ['art_slow_emotional_pacing'],
   },
   {
-    id: 'art_reconnecting_timing',
-    title: 'Second Chances: When the Timing Changes',
-    dek: 'Returning to someone years later with mature self-knowledge.',
+    id: 'art_shared_space_boundaries',
+    title: 'The First 90 Days of Living Together: Territorial Peace and Quiet Zones',
+    dek: 'Navigating closet division, kitchen habits, and the sacred necessity of solitary territory under one roof.',
+    categoryId: 'moving_in',
+    authorName: 'Callum Price',
+    authorRole: 'Product Accessibility Lead',
+    authorAvatar: 'callum',
+    authorType: 'Editorial',
+    publishedAt: '2026-02-19T10:00:00Z',
+    readingTimeMinutes: 5,
+    commentsCount: 19,
+    storyTier: 0,
+    contentMarkdown: `### The Myth of Seamless Cohabitation
+Moving in together is not just a romantic milestone; it is a major logistical merger of two distinct nervous systems and their deeply ingrained domestic habits. Even deeply compatible couples experience friction around dish sponges, heating thermostat settings, and morning noise levels.
+
+### The Single Chair Sanctuary Rule
+Every person living in a shared space requires at least one physical territory that belongs exclusively to them—even if it is just a specific armchair, a single desk drawer, or one side of a porch bench. When someone sits in their sanctuary, the household agreement is that they are currently "offline" and not available for household logistics.`,
+    relatedArticleIds: ['art_introvert_parallel_play'],
+  },
+  {
+    id: 'art_second_chances_timing',
+    title: 'Reconnection: When the Person Was Right but the Year Was Wrong',
+    dek: 'How to navigate second chances with grounded discernment rather than romantic nostalgia.',
     categoryId: 'reconnecting',
     authorName: 'Dr. Celia Moreno',
     authorRole: 'Head of Relationship Science',
     authorAvatar: 'celia',
     authorType: 'Relationship Science',
-    publishedAt: '2026-03-08T10:00:00Z',
-    readingTimeMinutes: 6,
-    commentsCount: 29,
+    publishedAt: '2026-02-23T10:00:00Z',
+    readingTimeMinutes: 5,
+    commentsCount: 22,
     storyTier: 0,
-    contentMarkdown: `### The Spiral of Return\nWe rarely return as the exact same people. A second chance is not resuming an old draft; it is writing a new chapter with shared vocabulary.`,
+    contentMarkdown: `### The Distinction Between Growth and Nostalgia
+When an old match or previous connection reappears in your life, the human brain tends to highlight romantic memories while editing out the original friction. 
+
+Before leaping back in, ask:
+1. **What has structurally changed?** Are both careers more stable? Is emotional maturity genuinely higher? Has geographic distance been resolved?
+2. **Are we responding to the person who is standing in front of us today, or the fantasy of who we wish they had been in 2022?**
+
+Second chances succeed when both individuals treat each other as new acquaintances who happen to share a warm prologue.`,
+    relatedArticleIds: ['art_slow_emotional_pacing'],
   },
-  // Additional 23 articles across all categories
-  { id: 'art_13', title: 'Why Voice Notes Build Trust Faster Than Texting', dek: 'The acoustic warmth of inflection and pacing.', categoryId: 'communication', authorName: 'Janelle Wu', authorRole: 'Editorial Director', authorAvatar: 'janelle', authorType: 'Editorial', publishedAt: '2026-02-01T10:00:00Z', readingTimeMinutes: 4, commentsCount: 15, storyTier: 0, contentMarkdown: 'Voice notes capture nuances that text loses.' },
-  { id: 'art_14', title: 'The Post-Date Decompression Ritual', dek: 'Why you should wait 24 hours before analyzing a date.', categoryId: 'first_dates', authorName: 'Jonah Feld', authorRole: 'Senior Behavioral Researcher', authorAvatar: 'jonah', authorType: 'Relationship Science', publishedAt: '2026-02-03T10:00:00Z', readingTimeMinutes: 3, commentsCount: 12, storyTier: 0, contentMarkdown: 'Let somatic feelings settle before intellectualizing.' },
-  { id: 'art_15', title: 'Navigating Financial Disparities with Grace', dek: 'Setting budget-neutral dates without awkwardness.', categoryId: 'boundaries', authorName: 'Tessa Ibrahim', authorRole: 'Community Safety & Care Director', authorAvatar: 'tessa', authorType: 'Trust & Safety', publishedAt: '2026-02-05T10:00:00Z', readingTimeMinutes: 4, commentsCount: 18, storyTier: 0, contentMarkdown: 'Defaulting to free or low-cost activities equalizes the dynamic.' },
-  { id: 'art_16', title: 'Late Bloomers: Starting Over in Your Thirties and Forties', dek: 'Why dating later in life is an advantage.', categoryId: 'queer_dating', authorName: 'Dr. Celia Moreno', authorRole: 'Head of Relationship Science', authorAvatar: 'celia', authorType: 'Relationship Science', publishedAt: '2026-02-07T10:00:00Z', readingTimeMinutes: 5, commentsCount: 25, storyTier: 0, contentMarkdown: 'Maturity brings clarity on non-negotiable values.' },
-  { id: 'art_17', title: 'Memorializing Accounts and Preserving Dignity', dek: 'How Everfold handles digital bereavement.', categoryId: 'dating_after_grief', authorName: 'Tessa Ibrahim', authorRole: 'Community Safety & Care Director', authorAvatar: 'tessa', authorType: 'Trust & Safety', publishedAt: '2026-02-09T10:00:00Z', readingTimeMinutes: 4, commentsCount: 14, storyTier: 0, contentMarkdown: 'Preserving relational history without commercial exploitation.' },
-  { id: 'art_18', title: 'Time Zone Romance: The Shared Morning Podcast', dek: 'Creating simultaneous experiences across continents.', categoryId: 'long_distance', authorName: 'Callum Price', authorRole: 'Product Accessibility Lead', authorAvatar: 'callum', authorType: 'Editorial', publishedAt: '2026-02-11T10:00:00Z', readingTimeMinutes: 3, commentsCount: 8, storyTier: 0, contentMarkdown: 'Pressing play at the exact same moment across oceans.' },
-  { id: 'art_19', title: 'The Quiet Walk Home: De-escalating Date Anxiety', dek: 'Walking together after dinner to digest the conversation.', categoryId: 'introverts', authorName: 'Janelle Wu', authorRole: 'Editorial Director', authorAvatar: 'janelle', authorType: 'Editorial', publishedAt: '2026-02-13T10:00:00Z', readingTimeMinutes: 4, commentsCount: 17, storyTier: 0, contentMarkdown: 'A 15-minute night stroll softens goodbyes.' },
-  { id: 'art_20', title: 'Emergency Room Shifts and Sunday Mornings', dek: 'Real stories of healthcare workers dating.', categoryId: 'different_schedules', authorName: 'Jonah Feld', authorRole: 'Senior Behavioral Researcher', authorAvatar: 'jonah', authorType: 'Relationship Science', publishedAt: '2026-02-15T10:00:00Z', readingTimeMinutes: 4, commentsCount: 20, storyTier: 0, contentMarkdown: 'Finding pocket rituals in unconventional hours.' },
-  { id: 'art_21', title: 'The 90-Day Relational Check-In Protocol', dek: 'How to ask "How are we doing?" without panic.', categoryId: 'relationship_pace', authorName: 'Dr. Celia Moreno', authorRole: 'Head of Relationship Science', authorAvatar: 'celia', authorType: 'Relationship Science', publishedAt: '2026-02-17T10:00:00Z', readingTimeMinutes: 5, commentsCount: 33, storyTier: 0, contentMarkdown: 'Scheduled quarterly alignment keeps misunderstandings small.' },
-  { id: 'art_22', title: 'Merging Two Book Collections Without Tears', dek: 'The philosophy of shared bookshelves.', categoryId: 'moving_in', authorName: 'Callum Price', authorRole: 'Product Accessibility Lead', authorAvatar: 'callum', authorType: 'Editorial', publishedAt: '2026-02-19T10:00:00Z', readingTimeMinutes: 3, commentsCount: 19, storyTier: 0, contentMarkdown: 'Duplicate copies are monuments of shared interest.' },
-  { id: 'art_23', title: 'The Post-Breakup Letter You Do Not Send', dek: 'Why writing down everything brings clarity.', categoryId: 'breakups', authorName: 'Janelle Wu', authorRole: 'Editorial Director', authorAvatar: 'janelle', authorType: 'Editorial', publishedAt: '2026-02-21T10:00:00Z', readingTimeMinutes: 4, commentsCount: 27, storyTier: 0, contentMarkdown: 'Catharsis lives in the writing, not the sending.' },
-  { id: 'art_24', title: 'Recognizing Unresolved Patterns in New Partners', dek: 'How to distinguish genuine affinity from repetition.', categoryId: 'reconnecting', authorName: 'Dr. Celia Moreno', authorRole: 'Head of Relationship Science', authorAvatar: 'celia', authorType: 'Relationship Science', publishedAt: '2026-02-23T10:00:00Z', readingTimeMinutes: 5, commentsCount: 22, storyTier: 0, contentMarkdown: 'Look for how they handle conflict, not just charm.' },
-  { id: 'art_25', title: 'Museum Etiquette for First Dates', dek: 'How to browse art together without lecturing.', categoryId: 'first_dates', authorName: 'Callum Price', authorRole: 'Product Accessibility Lead', authorAvatar: 'callum', authorType: 'Editorial', publishedAt: '2026-02-25T10:00:00Z', readingTimeMinutes: 4, commentsCount: 15, storyTier: 0, contentMarkdown: 'Pick three paintings each and share why they moved you.' },
-  { id: 'art_26', title: 'The 24-Hour Cooling Rule in Disagreements', dek: 'Taking a breath before sending emotional text essays.', categoryId: 'communication', authorName: 'Tessa Ibrahim', authorRole: 'Community Safety & Care Director', authorAvatar: 'tessa', authorType: 'Trust & Safety', publishedAt: '2026-02-27T10:00:00Z', readingTimeMinutes: 4, commentsCount: 21, storyTier: 0, contentMarkdown: 'Sleep resets the emotional amygdala.' },
-  { id: 'art_27', title: 'Protecting Physical Boundaries on Evening Walks', dek: 'Clear body language and explicit check-ins.', categoryId: 'boundaries', authorName: 'Tessa Ibrahim', authorRole: 'Community Safety & Care Director', authorAvatar: 'tessa', authorType: 'Trust & Safety', publishedAt: '2026-03-01T10:00:00Z', readingTimeMinutes: 3, commentsCount: 13, storyTier: 0, contentMarkdown: 'Consent is an ongoing, continuous conversation.' },
-  { id: 'art_28', title: 'Navigating Non-Monogamy with Honest Pacing', dek: 'Why transparency requires unhurried communication.', categoryId: 'queer_dating', authorName: 'Dr. Celia Moreno', authorRole: 'Head of Relationship Science', authorAvatar: 'celia', authorType: 'Relationship Science', publishedAt: '2026-03-03T10:00:00Z', readingTimeMinutes: 6, commentsCount: 30, storyTier: 0, contentMarkdown: 'Clear agreements prevent ambiguous heartache.' },
-  { id: 'art_29', title: 'The Anniversary of a Loss While in New Love', dek: 'Holding grief and romance on the exact same day.', categoryId: 'dating_after_grief', authorName: 'Tessa Ibrahim', authorRole: 'Community Safety & Care Director', authorAvatar: 'tessa', authorType: 'Trust & Safety', publishedAt: '2026-03-05T10:00:00Z', readingTimeMinutes: 5, commentsCount: 34, storyTier: 0, contentMarkdown: 'A secure partner can hold your hand while you weep for another.' },
-  { id: 'art_30', title: 'Synchronized Cooking Dates Over Video', dek: 'Cooking the exact same pasta recipe 3,000 miles apart.', categoryId: 'long_distance', authorName: 'Janelle Wu', authorRole: 'Editorial Director', authorAvatar: 'janelle', authorType: 'Editorial', publishedAt: '2026-03-07T10:00:00Z', readingTimeMinutes: 4, commentsCount: 16, storyTier: 0, contentMarkdown: 'Shared aroma and taste across distance.' },
-  { id: 'art_31', title: 'The Comfort of Silence in Coffee Corners', dek: 'Why not talking is sometimes the deepest conversation.', categoryId: 'introverts', authorName: 'Callum Price', authorRole: 'Product Accessibility Lead', authorAvatar: 'callum', authorType: 'Editorial', publishedAt: '2026-03-09T10:00:00Z', readingTimeMinutes: 3, commentsCount: 26, storyTier: 0, contentMarkdown: 'Resting in each other presence.' },
-  { id: 'art_32', title: 'Weekend Shifts and Tuesday Date Nights', dek: 'Making Tuesday feel like a sacred Saturday.', categoryId: 'different_schedules', authorName: 'Jonah Feld', authorRole: 'Senior Behavioral Researcher', authorAvatar: 'jonah', authorType: 'Relationship Science', publishedAt: '2026-03-10T10:00:00Z', readingTimeMinutes: 4, commentsCount: 12, storyTier: 0, contentMarkdown: 'The city is quieter on weeknights anyway.' },
-  { id: 'art_33', title: 'Building Unhurried Trust in Fast Times', dek: 'A manifesto for slow dating.', categoryId: 'relationship_pace', authorName: 'Dr. Celia Moreno', authorRole: 'Head of Relationship Science', authorAvatar: 'celia', authorType: 'Relationship Science', publishedAt: '2026-03-11T10:00:00Z', readingTimeMinutes: 5, commentsCount: 45, storyTier: 0, contentMarkdown: 'Speed is the enemy of depth.' },
-  { id: 'art_34', title: 'Morning Routines in a Shared Apartment', dek: 'Protecting solitary mornings under one roof.', categoryId: 'moving_in', authorName: 'Callum Price', authorRole: 'Product Accessibility Lead', authorAvatar: 'callum', authorType: 'Editorial', publishedAt: '2026-03-12T10:00:00Z', readingTimeMinutes: 4, commentsCount: 19, storyTier: 0, contentMarkdown: 'Do not demand conversation before the first cup of coffee.' },
-  { id: 'art_35', title: 'Returning to Shared Spaces After a Kind Ending', dek: 'Walking into your favorite cafe without bitterness.', categoryId: 'breakups', authorName: 'Janelle Wu', authorRole: 'Editorial Director', authorAvatar: 'janelle', authorType: 'Editorial', publishedAt: '2026-03-13T10:00:00Z', readingTimeMinutes: 4, commentsCount: 23, storyTier: 0, contentMarkdown: 'Reclaiming physical spaces with gratitude.' },
+  {
+    id: 'art_difficult_conversations',
+    title: 'The 24-Hour Cooling Rule for Difficult Conversations',
+    dek: 'Why sleeping on a disagreement prevents catastrophic text essays and resets emotional regulation.',
+    categoryId: 'communication',
+    authorName: 'Tessa Ibrahim',
+    authorRole: 'Community Safety & Care Director',
+    authorAvatar: 'tessa',
+    authorType: 'Trust & Safety',
+    publishedAt: '2026-02-27T10:00:00Z',
+    readingTimeMinutes: 4,
+    commentsCount: 21,
+    storyTier: 0,
+    contentMarkdown: `### The Amygdala Highjack in Text Messages
+When you feel misunderstood or slighted by a partner, your heart rate spikes and your brain enters defensive triage. Typing a 600-word paragraph on your phone while in this state is almost guaranteed to introduce sharpness, sarcasm, or unhelpful absolutes ("You always do this").
+
+### The Agreement:
+*"I care about this conversation too much to rush it while I am upset. Let's both sleep on this tonight, and talk gently over tea tomorrow at 5 PM."*
+
+A night of REM sleep naturally processes acute emotional spikes, allowing you to address the core issue with clarity and tenderness.`,
+    relatedArticleIds: ['art_texting_fatigue'],
+  },
+  {
+    id: 'art_early_physical_boundaries',
+    title: 'Asserting Early Physical Boundaries with Warmth and Clarity',
+    dek: 'How clear touch pacing builds trust and eliminates ambiguous discomfort on first and second dates.',
+    categoryId: 'boundaries',
+    authorName: 'Tessa Ibrahim',
+    authorRole: 'Community Safety & Care Director',
+    authorAvatar: 'tessa',
+    authorType: 'Trust & Safety',
+    publishedAt: '2026-03-01T10:00:00Z',
+    readingTimeMinutes: 4,
+    commentsCount: 13,
+    storyTier: 0,
+    contentMarkdown: `### The Power of Gentle Assertions
+Many people hesitate to declare physical boundaries because they fear appearing cold, prudish, or rejecting. In reality, clear boundaries are an act of generosity: they remove guesswork and create a transparent safety container.
+
+### Script:
+*"I am really enjoying getting to know you! Just so you know my style, I like to move very slowly with physical touch until I feel strong emotional trust. A warm hug goodbye is my sweet spot for today."*
+
+A secure, high-integrity partner will smile and respect this immediately. Anyone who pouts or pushes back has given you valuable data about their respect for your autonomy.`,
+    relatedArticleIds: ['art_low_stimulation_dates'],
+  },
 ];
 
 export const SEEDED_ADVICE_COMMENTS: Record<string, AdviceComment[]> = {
@@ -290,8 +366,8 @@ export const SEEDED_ADVICE_COMMENTS: Record<string, AdviceComment[]> = {
       id: 'adv_c3',
       articleId: 'art_grief_and_memory',
       authorId: 'usr_leah',
-      authorName: 'Leah Morgan',
-      authorHandle: 'leah_morgan',
+      authorName: 'Leah Vance',
+      authorHandle: 'leah_vance',
       avatarSeed: 'leah',
       body: '“May I build a chair beside yours in this expanded room?” — This brought tears to my eyes. It took me seven years after Samuel passed to understand that my memories were not betrayal.',
       publishedAt: '2026-02-18T16:00:00Z',
@@ -313,3 +389,76 @@ export const SEEDED_ADVICE_COMMENTS: Record<string, AdviceComment[]> = {
     },
   ],
 };
+
+export const SEEDED_ASK_SUBMISSIONS: AskEverfoldSubmission[] = [
+  {
+    id: 'ask_01',
+    category: 'Relationship Science',
+    question: 'My match and I have amazing conversations over text, but when we meet in person, we both freeze up and become stiff. Is our text chemistry a lie?',
+    privacy: 'public',
+    submittedAt: '2026-03-10T14:20:00Z',
+    status: 'answered',
+    scriptedAnswer: {
+      author: 'Dr. Celia Moreno',
+      role: 'Chief Science Officer',
+      answeredAt: '2026-03-11T09:15:00Z',
+      body: 'Not at all! Text chemistry proves that your linguistic and intellectual frequencies are deeply aligned. In-person stiffness is simply nervous system hyper-vigilance caused by the sudden shift to physical presence and direct eye contact. Switch your next date to a side-by-side walk in a botanical garden or a quiet bookstore where you both look at objects together rather than staring across a table.',
+    },
+  },
+  {
+    id: 'ask_02',
+    category: 'Trust & Safety',
+    question: 'How do I tell someone I don’t want to exchange social media handles or phone numbers until after our second in-person date without sounding paranoid?',
+    privacy: 'public',
+    submittedAt: '2026-03-08T11:00:00Z',
+    status: 'answered',
+    scriptedAnswer: {
+      author: 'Tessa Ibrahim',
+      role: 'Director of Community Safety & Care',
+      answeredAt: '2026-03-08T16:30:00Z',
+      body: 'Frame it as an intentional habit rather than an accusation: "I keep all my early dating conversations inside Everfold until we have met in person and felt real comfort. It helps me stay present without cluttering my work phone!" A grounded match will respect this immediately.',
+    },
+  },
+  {
+    id: 'ask_03',
+    category: 'Date Planning',
+    question: 'What is the ideal date format for two people who both experience social battery depletion by 7 PM on weekdays?',
+    privacy: 'public',
+    submittedAt: '2026-03-05T18:00:00Z',
+    status: 'answered',
+    scriptedAnswer: {
+      author: 'Callum Price',
+      role: 'Product Accessibility Lead',
+      answeredAt: '2026-03-06T10:00:00Z',
+      body: 'Do not do weekday evening dates! Shift your meeting to a Saturday morning 9:30 AM coffee and pastry walk. Morning light provides gentle alertness, crowds are minimal, and you both enter the date with fresh energy before the day’s demands deplete your reserves.',
+    },
+  },
+  {
+    id: 'ask_04',
+    category: 'Community',
+    question: 'How do I handle meeting my partner’s tight-knit group of queer chosen family when I am newly out and feel self-conscious about my lack of queer history?',
+    privacy: 'public',
+    submittedAt: '2026-03-01T15:45:00Z',
+    status: 'answered',
+    scriptedAnswer: {
+      author: 'Janelle Wu',
+      role: 'Editorial Director',
+      answeredAt: '2026-03-02T11:20:00Z',
+      body: 'Chosen family networks love people who are sincere, curious, and respectful of their partner. You do not need an encyclopedia of queer cultural references to be welcomed. Be honest about being a late bloomer—you will almost certainly find that half the people around that table also took a winding path to their authentic self.',
+    },
+  },
+  {
+    id: 'ask_05',
+    category: 'Relationship Science',
+    question: 'My partner and I both work from home in a small 1-bedroom flat. We find ourselves bickering by 4 PM every day. How do we protect our connection?',
+    privacy: 'public',
+    submittedAt: '2026-02-25T13:10:00Z',
+    status: 'answered',
+    scriptedAnswer: {
+      author: 'Jonah Feld',
+      role: 'Senior Behavioral Researcher',
+      answeredAt: '2026-02-26T09:00:00Z',
+      body: 'You are suffering from sensory boundary blurring. When work, domestic chores, and romance all occur within the same twenty feet, your brains cannot transition roles. Implement a mandatory "fake commute" at 5 PM: both of you put on jackets, leave the flat in opposite directions for a 15-minute walk around the block, and return as evening romantic partners.',
+    },
+  },
+];
