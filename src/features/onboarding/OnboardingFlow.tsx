@@ -12,8 +12,6 @@ import {
   Smile,
   Shuffle,
   LogIn,
-  Layers,
-  ChevronRight,
   AlertCircle,
   Clock,
   Compass,
@@ -115,7 +113,7 @@ export const OnboardingFlow: React.FC = () => {
   const [validationError, setValidationError] = useState<string | null>(null);
   const [showCelebration, setShowCelebration] = useState(false);
 
-  // Avatar Builder sub-state in Onboarding
+  // Avatar Builder palettes
   const skinTones = ['#f5d0a9', '#e0b59b', '#d4a373', '#c68642', '#a06846', '#8d5524', '#603813', '#4a2c1d'];
   const hairColors = ['#1a110a', '#2b1d14', '#4a3728', '#8a4b27', '#b87333', '#d4a373', '#6e5d53', '#e2e8f0'];
   const backgroundColors = ['#f5ede8', '#f3ebd4', '#e2eee6', '#e4e9f5', '#efe5f0', '#252028'];
@@ -316,7 +314,7 @@ export const OnboardingFlow: React.FC = () => {
 
             <div className="ef-card-subtle" style={{ padding: 'var(--space-3)' }}>
               <Heart size={16} color="var(--accent-plum)" />
-              <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)' }}>
+              <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '4px' }}>
                 Unhurried Letters
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
@@ -326,7 +324,7 @@ export const OnboardingFlow: React.FC = () => {
 
             <div className="ef-card-subtle" style={{ padding: 'var(--space-3)' }}>
               <Shield size={16} color="var(--accent-plum)" />
-              <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)' }}>
+              <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '4px' }}>
                 Private & Grounded
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
