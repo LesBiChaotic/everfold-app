@@ -19,6 +19,7 @@ import { useProfileStore } from '../../store/profileStore';
 import { soundEngine } from '../../audio/soundEngine';
 import { UndoToast } from '../../components/common/UndoToast';
 import { MicroCelebration } from '../../components/common/MicroCelebration';
+import { GLOBAL_COUNTRIES } from '../../data/locations';
 
 const GENDER_SUGGESTIONS = [
   'Nonbinary',
@@ -488,31 +489,90 @@ export const ProfileEditScreen: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-3)' }}>
               <div>
                 <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
-                  City
+                  Country
+                </label>
+                <select
+                  className="input"
+                  value={GLOBAL_COUNTRIES.some(c => c.name === country) ? country : 'Other Country'}
+                  onChange={(e) => {
+                    const selectedCountry = e.target.value;
+                    if (selectedCountry === 'Other Country') {
+                      setCountry('');
+                    } else {
+                      const countryData = GLOBAL_COUNTRIES.find(c => c.name === selectedCountry);
+                      const defaultCity = countryData && countryData.majorCities.length > 0 ? countryData.majorCities[0] : city;
+                      setCountry(selectedCountry);
+                      if (!city) setCity(defaultCity);
+                    }
+                  }}
+                  style={{ width: '100%', minHeight: '42px' }}
+                >
+                  {GLOBAL_COUNTRIES.map((c) => (
+                    <option key={c.code} value={c.name}>{c.name}</option>
+                  ))}
+                </select>
+                {!GLOBAL_COUNTRIES.some(c => c.name === country) && (
+                  <input
+                    type="text"
+                    className="input"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    placeholder="Type your country name..."
+                    style={{ width: '100%', minHeight: '42px', marginTop: '6px' }}
+                  />
+                )}
+              </div>
+
+              <div>
+                <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
+                  City / Area
                 </label>
                 <input
                   type="text"
                   className="input"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  placeholder="e.g. Portland"
-                  style={{ width: '100%', minHeight: '42px' }}
-                />
-              </div>
-              <div>
-                <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
-                  Country
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  placeholder="e.g. USA"
+                  placeholder="e.g. Portland, London, Jakarta..."
                   style={{ width: '100%', minHeight: '42px' }}
                 />
               </div>
             </div>
+
+            {/* Major City Quick Picks */}
+            {(() => {
+              const currentCountryData = GLOBAL_COUNTRIES.find(c => c.name === country);
+              if (currentCountryData && currentCountryData.majorCities.length > 0) {
+                return (
+                  <div>
+                    <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
+                      Suggested cities in {country}:
+                    </span>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
+                      {currentCountryData.majorCities.map((cName) => (
+                        <button
+                          key={cName}
+                          type="button"
+                          onClick={() => setCity(cName)}
+                          className="badge"
+                          style={{
+                            backgroundColor: city === cName ? 'var(--accent-plum)' : 'var(--bg-surface-subtle)',
+                            color: city === cName ? 'var(--text-inverse)' : 'var(--text-secondary)',
+                            border: `1px solid ${city === cName ? 'var(--accent-plum)' : 'var(--border-default)'}`,
+                            padding: '4px 10px',
+                            fontSize: '11px',
+                            cursor: 'pointer',
+                            borderRadius: 'var(--radius-full)',
+                          }}
+                        >
+                          {cName}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              return null;
+            })()}
           </div>
         )}
 

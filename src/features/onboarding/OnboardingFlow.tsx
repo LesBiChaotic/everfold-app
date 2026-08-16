@@ -23,6 +23,7 @@ import { Foldmark } from '../../components/brand/Foldmark';
 import { soundEngine } from '../../audio/soundEngine';
 import { UserAccount, AvatarConfig } from '../../types';
 import { MicroCelebration } from '../../components/common/MicroCelebration';
+import { GLOBAL_COUNTRIES } from '../../data/locations';
 
 const GENDER_OPTIONS = [
   'Nonbinary',
@@ -610,39 +611,97 @@ export const OnboardingFlow: React.FC = () => {
                     Where are you based?
                   </h2>
                   <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    Helps contextualize your timezone and local rhythms.
+                    Select your country and city to contextualize your timezone and regional community.
                   </p>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-3)' }}>
                   <div>
                     <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
-                      City
+                      Country
+                    </label>
+                    <select
+                      className="input"
+                      value={GLOBAL_COUNTRIES.some(c => c.name === formData.country) ? formData.country : 'Other Country'}
+                      onChange={(e) => {
+                        const selectedCountry = e.target.value;
+                        if (selectedCountry === 'Other Country') {
+                          setFormData({ ...formData, country: '' });
+                        } else {
+                          const countryData = GLOBAL_COUNTRIES.find(c => c.name === selectedCountry);
+                          const defaultCity = countryData && countryData.majorCities.length > 0 ? countryData.majorCities[0] : formData.city;
+                          setFormData({ ...formData, country: selectedCountry, city: defaultCity });
+                        }
+                      }}
+                      style={{ width: '100%', minHeight: '44px' }}
+                    >
+                      {GLOBAL_COUNTRIES.map((c) => (
+                        <option key={c.code} value={c.name}>{c.name}</option>
+                      ))}
+                    </select>
+
+                    {!GLOBAL_COUNTRIES.some(c => c.name === formData.country) && (
+                      <input
+                        type="text"
+                        className="input"
+                        value={formData.country}
+                        onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                        placeholder="Type your country name..."
+                        style={{ width: '100%', minHeight: '42px', marginTop: '6px' }}
+                      />
+                    )}
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
+                      City / Area
                     </label>
                     <input
                       type="text"
                       className="input"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      placeholder="e.g. Portland"
-                      autoFocus
-                      style={{ width: '100%', minHeight: '44px' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
-                      Country
-                    </label>
-                    <input
-                      type="text"
-                      className="input"
-                      value={formData.country}
-                      onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      placeholder="e.g. USA"
+                      placeholder="e.g. Portland, London, Jakarta..."
                       style={{ width: '100%', minHeight: '44px' }}
                     />
                   </div>
                 </div>
+
+                {/* Major City Quick Picks */}
+                {(() => {
+                  const currentCountryData = GLOBAL_COUNTRIES.find(c => c.name === formData.country);
+                  if (currentCountryData && currentCountryData.majorCities.length > 0) {
+                    return (
+                      <div>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
+                          Suggested cities in {formData.country}:
+                        </span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
+                          {currentCountryData.majorCities.map((city) => (
+                            <button
+                              key={city}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, city })}
+                              className="badge"
+                              style={{
+                                backgroundColor: formData.city === city ? 'var(--accent-plum)' : 'var(--bg-surface-subtle)',
+                                color: formData.city === city ? 'var(--text-inverse)' : 'var(--text-secondary)',
+                                border: `1px solid ${formData.city === city ? 'var(--accent-plum)' : 'var(--border-default)'}`,
+                                padding: '4px 10px',
+                                fontSize: '11px',
+                                cursor: 'pointer',
+                                borderRadius: 'var(--radius-full)',
+                              }}
+                            >
+                              {city}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
 
                 <div>
                   <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
