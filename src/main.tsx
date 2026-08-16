@@ -11,3 +11,18 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </ErrorBoundary>
   </React.StrictMode>
 );
+
+// Register Everfold PWA Service Worker in production/supporting browsers
+if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./sw.js')
+      .then((reg) => {
+        console.log('Everfold PWA Service Worker registered:', reg.scope);
+      })
+      .catch((err) => {
+        console.warn('Everfold PWA Service Worker registration failed:', err);
+      });
+  });
+}
+

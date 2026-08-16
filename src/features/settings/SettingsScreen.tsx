@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   Settings,
@@ -17,6 +17,7 @@ import {
   Unlock,
   ChevronRight,
   AlertTriangle,
+  Smartphone,
 } from 'lucide-react';
 import { useSettingsStore } from '../../store/settingsStore';
 import { useProfileStore } from '../../store/profileStore';
@@ -56,6 +57,32 @@ export const SettingsScreen: React.FC = () => {
   const { mode } = useStoryAccessStore();
 
   const [exportDownloaded, setExportDownloaded] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsInstalled(true);
+    }
+
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      setIsInstalled(true);
+      setDeferredPrompt(null);
+    }
+  };
 
   const handleExportData = () => {
     soundEngine.playCue('ui.save');
@@ -364,6 +391,67 @@ export const SettingsScreen: React.FC = () => {
               onChange={(e) => useSettingsStore.getState().setMicroCelebrations(e.target.checked)}
             />
           </label>
+        </div>
+      </div>
+
+      {/* Progressive Web App (PWA) Installation */}
+      <div className="ef-card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--bg-surface-subtle)',
+                border: '1px solid var(--border-subtle)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--accent-plum)',
+              }}
+            >
+              <Smartphone size={20} />
+            </div>
+            <div>
+              <div style={{ fontWeight: 800, fontSize: 'var(--font-size-sm)', color: 'var(--text-primary)' }}>
+                Progressive Web App (PWA)
+              </div>
+              <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)' }}>
+                {isInstalled
+                  ? 'Everfold is installed in standalone desktop/mobile mode.'
+                  : 'Install Everfold as a native-like app on your Home Screen or Desktop.'}
+              </div>
+            </div>
+          </div>
+
+          {deferredPrompt && (
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={handleInstallClick}
+            >
+              <Smartphone size={14} /> Install Everfold App
+            </button>
+          )}
+        </div>
+
+        <div
+          style={{
+            padding: 'var(--space-3)',
+            backgroundColor: 'var(--bg-surface-subtle)',
+            borderRadius: 'var(--radius-md)',
+            fontSize: '11px',
+            color: 'var(--text-secondary)',
+            lineHeight: 1.5,
+          }}
+        >
+          <strong>How to install on your device:</strong>
+          <ul style={{ paddingLeft: 'var(--space-4)', marginTop: '4px', margin: 0 }}>
+            <li><strong>iPhone / iPad (Safari):</strong> Tap the <em>Share</em> button (box with arrow) and choose <em>Add to Home Screen</em>.</li>
+            <li><strong>Android (Chrome):</strong> Tap the three-dot menu and select <em>Install app</em> or <em>Add to Home Screen</em>.</li>
+            <li><strong>Desktop (Chrome / Edge / Brave):</strong> Click the install icon in the URL address bar or select <em>Install Everfold</em>.</li>
+          </ul>
         </div>
       </div>
 
