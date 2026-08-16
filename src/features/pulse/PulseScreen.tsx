@@ -161,11 +161,11 @@ export const PulseScreen: React.FC = () => {
             >
               {/* Post Header */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexShrink: 0 }}>
                   {author ? (
                     <AvatarRenderer config={author.avatarConfig} size={42} />
                   ) : (
-                    <div style={{ width: 42, height: 42, borderRadius: 'var(--radius-full)', backgroundColor: 'var(--bg-surface-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ width: 42, height: 42, borderRadius: 'var(--radius-full)', backgroundColor: 'var(--bg-surface-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Foldmark size={20} color="var(--accent-plum)" />
                     </div>
                   )}
@@ -179,7 +179,7 @@ export const PulseScreen: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '4px' }}>
+                <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                   {post.tags.map((t) => (
                     <span key={t} className="badge badge-plum" style={{ fontSize: '0.65rem' }}>
                       #{t}

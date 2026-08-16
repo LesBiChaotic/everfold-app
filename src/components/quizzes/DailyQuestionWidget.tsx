@@ -46,14 +46,24 @@ export const DailyQuestionWidget: React.FC = () => {
       ) : (
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           {currentQ.suggestedAnswers && currentQ.suggestedAnswers.length > 0 && (
-            <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
               {currentQ.suggestedAnswers.map((sug) => (
                 <button
                   key={sug}
                   type="button"
                   onClick={() => setInputText(sug)}
                   className="btn btn-ghost btn-xs"
-                  style={{ fontSize: '11px', backgroundColor: 'var(--bg-surface-subtle)', borderRadius: 'var(--radius-sm)' }}
+                  style={{ 
+                    fontSize: '11px', 
+                    backgroundColor: 'var(--bg-surface-subtle)', 
+                    borderRadius: 'var(--radius-sm)',
+                    whiteSpace: 'normal',
+                    height: 'auto',
+                    minHeight: '34px',
+                    padding: 'var(--space-2) var(--space-3)',
+                    textAlign: 'left',
+                    lineHeight: 1.4
+                  }}
                 >
                   {sug}
                 </button>
