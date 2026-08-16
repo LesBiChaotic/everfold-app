@@ -258,12 +258,14 @@ export const CosmeticInventoryScreen: React.FC = () => {
                   cursor: 'pointer',
                   borderRadius: 'var(--radius-full)',
                   whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
               >
                 {tab.label}
               </button>
             );
           })}
+          <div style={{ width: 'var(--space-4)', flexShrink: 0 }} />
         </div>
       </div>
 

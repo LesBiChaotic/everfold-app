@@ -110,7 +110,7 @@ export const MilestoneHubScreen: React.FC = () => {
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginLeft: 'var(--space-2)' }}>
             <div
               style={{
                 padding: 'var(--space-3)',
@@ -134,7 +134,7 @@ export const MilestoneHubScreen: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ textAlign: 'right' }}>
+          <div style={{ textAlign: 'right', marginRight: 'var(--space-2)' }}>
             <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--text-primary)' }}>
               {unlockedCount} of {totalCount}
             </div>

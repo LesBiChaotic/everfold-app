@@ -102,7 +102,7 @@ export const EverfoldPlusScreen: React.FC = () => {
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginLeft: 'var(--space-2)' }}>
             <div
               style={{
                 padding: 'var(--space-3)',
@@ -133,13 +133,14 @@ export const EverfoldPlusScreen: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             gap: 'var(--space-3)',
+            margin: '0 var(--space-2)',
           }}
         >
-          <div className="ef-card-subtle" style={{ padding: 'var(--space-3)' }}>
+          <div className="ef-card-subtle" style={{ padding: 'var(--space-4)' }}>
             <Gift size={16} color="var(--accent-plum)" />
-            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '4px' }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '6px' }}>
               12 Monthly Postcards
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
@@ -147,9 +148,9 @@ export const EverfoldPlusScreen: React.FC = () => {
             </div>
           </div>
 
-          <div className="ef-card-subtle" style={{ padding: 'var(--space-3)' }}>
+          <div className="ef-card-subtle" style={{ padding: 'var(--space-4)' }}>
             <Sparkles size={16} color="var(--accent-plum)" />
-            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '4px' }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '6px' }}>
               Anniversary Keepsakes
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
@@ -157,9 +158,9 @@ export const EverfoldPlusScreen: React.FC = () => {
             </div>
           </div>
 
-          <div className="ef-card-subtle" style={{ padding: 'var(--space-3)' }}>
+          <div className="ef-card-subtle" style={{ padding: 'var(--space-4)' }}>
             <Heart size={16} color="var(--accent-plum)" />
-            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '4px' }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-xs)', color: 'var(--text-primary)', marginTop: '6px' }}>
               Zero Pay-to-Win
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
