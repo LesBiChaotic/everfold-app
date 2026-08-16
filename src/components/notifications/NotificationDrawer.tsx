@@ -11,14 +11,14 @@ interface NotificationDrawerProps {
 
 export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { notifications, markNotificationRead, markAllNotificationsRead } = useAppStore();
+  const { notifications = [], markNotificationRead, markAllNotificationsRead } = useAppStore();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   if (!isOpen) return null;
 
   const categories = ['All', 'Messages', 'Matches', 'Pulse', 'Forecast', 'Dates', 'Safety', 'System'];
 
-  const filteredNotifications = notifications.filter((n) => {
+  const filteredNotifications = (notifications || []).filter((n) => {
     if (selectedCategory === 'All') return true;
     return n.category === selectedCategory;
   });

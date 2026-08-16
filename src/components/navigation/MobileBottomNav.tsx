@@ -6,10 +6,10 @@ import { soundEngine } from '../../audio/soundEngine';
 
 export const MobileBottomNav: React.FC = () => {
   const location = useLocation();
-  const { threads, matches } = useAppStore();
+  const { threads = [], matches = [] } = useAppStore();
 
-  const totalUnreadMessages = threads.reduce((acc, t) => acc + (t.unreadCount || 0), 0);
-  const newMatchesCount = matches.filter((m) => m.status === 'New').length;
+  const totalUnreadMessages = (threads || []).reduce((acc, t) => acc + (t.unreadCount || 0), 0);
+  const newMatchesCount = (matches || []).filter((m) => m.status === 'New').length;
 
   const handleNavClick = () => {
     soundEngine.playCue('ui.navigation');

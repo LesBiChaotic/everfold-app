@@ -16,8 +16,8 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   onOpenSearch,
   onOpenNotifications,
 }) => {
-  const { notifications } = useAppStore();
-  const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const { notifications = [] } = useAppStore();
+  const unreadCount = (notifications || []).filter((n) => !n.isRead).length;
 
   return (
     <header

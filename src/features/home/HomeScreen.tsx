@@ -28,9 +28,9 @@ import { soundEngine } from '../../audio/soundEngine';
 
 export const HomeScreen: React.FC = () => {
   const { visitorProfile } = useProfileStore();
-  const { matches, threads, pulsePosts, datePlans } = useAppStore();
-  const { stage, visitCounts, recordVisit, storyFlags } = useARGStore();
-  const { dailyQuestions } = useQuizStore();
+  const { matches = [], threads = [], pulsePosts = [], datePlans = [] } = useAppStore();
+  const { stage = 0, visitCounts, recordVisit, storyFlags } = useARGStore();
+  const { dailyQuestions = [] } = useQuizStore();
 
   useEffect(() => {
     recordVisit('home');
@@ -43,11 +43,11 @@ export const HomeScreen: React.FC = () => {
     return 'Good evening';
   };
 
-  const newMatches = matches.filter((m) => m.status === 'New' || m.status === 'Talking').slice(0, 3);
-  const unreadThreads = threads.filter((t) => (t.unreadCount || 0) > 0);
-  const nextDate = datePlans.find((d) => d.status === 'Confirmed');
-  const recentPost = pulsePosts[0];
-  const activeDailyQuestion = dailyQuestions[0];
+  const newMatches = (matches || []).filter((m) => m.status === 'New' || m.status === 'Talking').slice(0, 3);
+  const unreadThreads = (threads || []).filter((t) => (t.unreadCount || 0) > 0);
+  const nextDate = (datePlans || []).find((d) => d.status === 'Confirmed');
+  const recentPost = pulsePosts && pulsePosts.length > 0 ? pulsePosts[0] : null;
+  const activeDailyQuestion = dailyQuestions && dailyQuestions.length > 0 ? dailyQuestions[0] : null;
 
   return (
     <div
@@ -463,9 +463,9 @@ export const HomeScreen: React.FC = () => {
                   {recentPost.body.substring(0, 90)}...
                 </p>
                 <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-2)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                  <span>{recentPost.replies.length} replies</span>
+                  <span>{(recentPost.replies || []).length} replies</span>
                   <span>•</span>
-                  <span>{Object.values(recentPost.reactions).reduce((a, b) => a + b, 0)} reactions</span>
+                  <span>{recentPost.reactions ? Object.values(recentPost.reactions).reduce((a, b) => a + b, 0) : 0} reactions</span>
                 </div>
               </div>
             )}

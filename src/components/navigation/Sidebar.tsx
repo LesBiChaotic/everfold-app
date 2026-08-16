@@ -35,13 +35,13 @@ import { soundEngine } from '../../audio/soundEngine';
 export const Sidebar: React.FC = () => {
   const location = useLocation();
   const { sidebarCollapsed, toggleSidebar, soundMuted, setSoundMuted, theme, setTheme } = useSettingsStore();
-  const { threads, notifications, matches } = useAppStore();
-  const { stage } = useARGStore();
+  const { threads = [], notifications = [], matches = [] } = useAppStore();
+  const { stage = 0 } = useARGStore();
   const { visitorProfile } = useProfileStore();
   const { mode, revealHiddenRoutes } = useStoryAccessStore();
 
-  const totalUnreadMessages = threads.reduce((acc, t) => acc + (t.unreadCount || 0), 0);
-  const newMatchesCount = matches.filter((m) => m.status === 'New').length;
+  const totalUnreadMessages = (threads || []).reduce((acc, t) => acc + (t.unreadCount || 0), 0);
+  const newMatchesCount = (matches || []).filter((m) => m.status === 'New').length;
 
   const handleNavClick = () => {
     soundEngine.playCue('ui.navigation');
