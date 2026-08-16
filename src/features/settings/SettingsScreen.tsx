@@ -246,25 +246,123 @@ export const SettingsScreen: React.FC = () => {
         </div>
 
         {!soundMuted && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-3)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-size-xs)' }}>
-              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Master UI Volume:</span>
-              <span style={{ fontWeight: 700, color: 'var(--accent-plum)' }}>{Math.round(uiVolume * 100)}%</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-3)' }}>
+            {/* UI Volume Slider */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-size-xs)' }}>
+                <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Master UI Volume:</span>
+                <span style={{ fontWeight: 700, color: 'var(--accent-plum)' }}>{Math.round(uiVolume * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={uiVolume}
+                onChange={(e) => {
+                  const v = parseFloat(e.target.value);
+                  setUiVolume(v);
+                  soundEngine.setVolumes(v, ambientVolume);
+                }}
+              />
             </div>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              value={uiVolume}
-              onChange={(e) => {
-                const v = parseFloat(e.target.value);
-                setUiVolume(v);
-                soundEngine.setVolumes(v, ambientVolume);
-              }}
-            />
+
+            {/* Sound Palette / Theme */}
+            <div>
+              <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
+                Sound Palette
+              </label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 'var(--space-2)' }}>
+                {[
+                  { id: 'soft', label: 'Soft Wood / Sine' },
+                  { id: 'paper', label: 'Paper & Tactile' },
+                  { id: 'glass', label: 'Glass Resonant' },
+                  { id: 'minimal', label: 'Minimal Ticks' },
+                ].map((st) => (
+                  <button
+                    key={st.id}
+                    type="button"
+                    className={`btn ${useSettingsStore.getState().soundTheme === st.id ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+                    onClick={() => {
+                      soundEngine.playCue('ui.save');
+                      useSettingsStore.getState().setSoundTheme(st.id as any);
+                    }}
+                  >
+                    {st.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Ambient Soundscapes */}
+            <div>
+              <label style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
+                Ambient Soundscape
+              </label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 'var(--space-2)' }}>
+                {[
+                  { id: 'rain_window', label: 'Rain on Window' },
+                  { id: 'quiet_office', label: 'Quiet Room Tone' },
+                  { id: 'evening_lounge', label: 'Evening Lounge' },
+                  { id: 'archive_room', label: 'Archive Vault' },
+                ].map((amb) => (
+                  <button
+                    key={amb.id}
+                    type="button"
+                    className={`btn ${useSettingsStore.getState().ambientTheme === amb.id ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+                    onClick={() => {
+                      soundEngine.playCue('ui.save');
+                      useSettingsStore.getState().setAmbientTheme(amb.id as any);
+                    }}
+                  >
+                    {amb.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
+      </div>
+
+      {/* Experience & Delight Controls */}
+      <div className="ef-card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+        <h3 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Player Experience & Immersion
+        </h3>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
+            <div>
+              <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-primary)' }}>
+                Avatar Idle Life
+              </div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                Subtle natural eye blinks and breathing on prominent profile avatars.
+              </div>
+            </div>
+            <input
+              type="checkbox"
+              checked={useSettingsStore.getState().avatarIdleAnimation}
+              onChange={(e) => useSettingsStore.getState().setAvatarIdleAnimation(e.target.checked)}
+            />
+          </label>
+
+          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-3)' }}>
+            <div>
+              <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-primary)' }}>
+                Micro-Celebrations
+              </div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                Restrained two-tone Foldmark particle glow on saves, milestones, and matches.
+              </div>
+            </div>
+            <input
+              type="checkbox"
+              checked={useSettingsStore.getState().microCelebrations}
+              onChange={(e) => useSettingsStore.getState().setMicroCelebrations(e.target.checked)}
+            />
+          </label>
+        </div>
       </div>
 
       {/* 4. Privacy & Data Sovereignty */}

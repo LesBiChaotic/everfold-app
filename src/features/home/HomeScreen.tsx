@@ -118,6 +118,87 @@ export const HomeScreen: React.FC = () => {
         </div>
       </section>
 
+      {/* Continue Where You Left Off (Compact 1-3 Items Module) */}
+      <section
+        className="ef-card"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--space-3)',
+          padding: 'var(--space-4)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Sparkles size={15} color="var(--accent-plum)" />
+            <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Continue Where You Left Off
+            </span>
+          </div>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Recent in-app activity</span>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-3)' }}>
+          {unreadThreads.length > 0 ? (
+            <NavLink
+              to={`/messages/${unreadThreads[0].id}`}
+              className="ef-card-subtle flex items-center justify-between"
+              style={{ padding: 'var(--space-3)', textDecoration: 'none' }}
+            >
+              <div>
+                <div style={{ fontSize: '11px', color: 'var(--accent-plum)', fontWeight: 700 }}>UNREAD LETTER</div>
+                <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2px' }}>
+                  {unreadThreads[0].lastMessage?.body ? `“${unreadThreads[0].lastMessage.body.slice(0, 36)}...”` : 'Conversation waiting'}
+                </div>
+              </div>
+              <ChevronRight size={15} color="var(--text-muted)" />
+            </NavLink>
+          ) : (
+            <NavLink
+              to="/messages"
+              className="ef-card-subtle flex items-center justify-between"
+              style={{ padding: 'var(--space-3)', textDecoration: 'none' }}
+            >
+              <div>
+                <div style={{ fontSize: '11px', color: 'var(--accent-plum)', fontWeight: 700 }}>LETTERS & THREADS</div>
+                <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2px' }}>
+                  Unhurried exchanges & reflections
+                </div>
+              </div>
+              <ChevronRight size={15} color="var(--text-muted)" />
+            </NavLink>
+          )}
+
+          <NavLink
+            to="/quizzes"
+            className="ef-card-subtle flex items-center justify-between"
+            style={{ padding: 'var(--space-3)', textDecoration: 'none' }}
+          >
+            <div>
+              <div style={{ fontSize: '11px', color: 'var(--color-info, #0284c7)', fontWeight: 700 }}>RELATIONAL ALIGNMENT</div>
+              <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2px' }}>
+                Daily reflection & 2-person quizzes
+              </div>
+            </div>
+            <ChevronRight size={15} color="var(--text-muted)" />
+          </NavLink>
+
+          <NavLink
+            to="/journal"
+            className="ef-card-subtle flex items-center justify-between"
+            style={{ padding: 'var(--space-3)', textDecoration: 'none' }}
+          >
+            <div>
+              <div style={{ fontSize: '11px', color: 'var(--color-success)', fontWeight: 700 }}>PRIVATE JOURNAL</div>
+              <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2px' }}>
+                Record your relational pace & notes
+              </div>
+            </div>
+            <ChevronRight size={15} color="var(--text-muted)" />
+          </NavLink>
+        </div>
+      </section>
+
       {/* 2. Narrative/ARG Clinical Alerts (If Triggered) */}
       {visitCounts.archive >= 2 && !storyFlags.includes('foundLegacyArchive') && (
         <section

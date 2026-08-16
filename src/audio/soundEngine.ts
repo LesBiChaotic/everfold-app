@@ -34,6 +34,12 @@ class SoundEngine {
     }
   }
 
+  private soundTheme: 'soft' | 'paper' | 'glass' | 'minimal' = 'soft';
+
+  public setSoundTheme(theme: 'soft' | 'paper' | 'glass' | 'minimal') {
+    this.soundTheme = theme;
+  }
+
   public setVolumes(uiVol: number, ambVol: number) {
     this.uiVolume = Math.max(0, Math.min(1, uiVol));
     this.ambientVolume = Math.max(0, Math.min(1, ambVol));
@@ -71,8 +77,8 @@ class SoundEngine {
         // Rounded warm pluck
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(320, t);
+        osc.type = this.soundTheme === 'glass' ? 'sine' : this.soundTheme === 'paper' ? 'sawtooth' : 'triangle';
+        osc.frequency.setValueAtTime(this.soundTheme === 'glass' ? 520 : 320, t);
         osc.frequency.exponentialRampToValueAtTime(160, t + 0.15);
         gain.gain.setValueAtTime(0.4, t);
         gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
@@ -80,6 +86,73 @@ class SoundEngine {
         gain.connect(masterGain);
         osc.start(t);
         osc.stop(t + 0.16);
+        break;
+      }
+
+      case 'ui.celebration': {
+        // Two-tone harmonic micro-celebration
+        [440.0, 554.37, 659.25].forEach((freq, idx) => {
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t + idx * 0.09);
+          gain.gain.setValueAtTime(0, t + idx * 0.09);
+          gain.gain.linearRampToValueAtTime(0.3, t + idx * 0.09 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.09 + 0.28);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(t + idx * 0.09);
+          osc.stop(t + idx * 0.09 + 0.3);
+        });
+        break;
+      }
+
+      case 'ui.undo': {
+        // Soft reverse pluck
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(200, t);
+        osc.frequency.linearRampToValueAtTime(360, t + 0.12);
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.13);
+        break;
+      }
+
+      case 'ui.tick': {
+        // Very subtle answer tick
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(600, t);
+        osc.frequency.exponentialRampToValueAtTime(300, t + 0.03);
+        gain.gain.setValueAtTime(0.18, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.03);
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.04);
+        break;
+      }
+
+      case 'ui.capsule': {
+        // Warm folded paper note
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(300, t);
+        osc.frequency.exponentialRampToValueAtTime(450, t + 0.18);
+        gain.gain.setValueAtTime(0.25, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.2);
         break;
       }
 
@@ -538,7 +611,7 @@ class SoundEngine {
 
     const nodesToStop: { stop: (time?: number) => void }[] = [];
 
-    if (mode === 'home') {
+    if (mode === 'home' || mode === 'evening_lounge') {
       // Subtle warm room tone: 55Hz sine + soft brown noise filter
       const osc = this.ctx.createOscillator();
       osc.type = 'sine';
@@ -549,7 +622,33 @@ class SoundEngine {
       gain.connect(ambGain);
       osc.start(t);
       nodesToStop.push(osc);
-    } else if (mode === 'archive') {
+    } else if (mode === 'rain_window') {
+      // Gentle filtered pink noise simulation
+      const osc = this.ctx.createOscillator();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(80, t);
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(240, t);
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0.12, t);
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(ambGain);
+      osc.start(t);
+      nodesToStop.push(osc);
+    } else if (mode === 'quiet_office') {
+      // Very soft white room tone
+      const osc = this.ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(65, t);
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0.1, t);
+      osc.connect(gain);
+      gain.connect(ambGain);
+      osc.start(t);
+      nodesToStop.push(osc);
+    } else if (mode === 'archive' || mode === 'archive_room') {
       // HVAC + distant filtered noise
       const osc1 = this.ctx.createOscillator();
       osc1.type = 'triangle';

@@ -108,6 +108,30 @@ export interface UserAccount {
   bio?: string;
   verified?: boolean;
   locationArea?: string;
+  genderIdentity?: string | null; // Additive field as per Addendum v1.0
+}
+
+export interface VisitorProfileEcho {
+  echoId: string;
+  visitorAccountId: string;
+  sourcePlatform: string;
+  apparentDate: string;
+  displaySnapshot: Partial<UserAccount>;
+  avatarEcho?: Partial<AvatarConfig>;
+  promptFragments?: string[];
+  relationshipId?: string;
+  provenance: string;
+  confidence: number;
+  storyTier: number;
+}
+
+export interface ExperienceSettings {
+  experienceIntensity: 'calm' | 'standard' | 'rich';
+  soundTheme: 'soft' | 'paper' | 'glass' | 'minimal';
+  ambientTheme: 'rain_window' | 'quiet_office' | 'evening_lounge' | 'archive_room';
+  avatarIdleAnimation: boolean;
+  microCelebrations: boolean;
+  profileEffects: boolean;
 }
 
 export interface Relationship {

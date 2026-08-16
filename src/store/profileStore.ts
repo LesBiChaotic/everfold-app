@@ -3,17 +3,28 @@ import { persist } from 'zustand/middleware';
 import { AvatarConfig, UserAccount } from '../types';
 import { defaultAvatarConfig } from '../components/avatar/AvatarRenderer';
 
+export interface AvatarPreset {
+  id: string;
+  name: string;
+  config: AvatarConfig;
+}
+
 interface ProfileState {
+  profileSchemaVersion: number;
   isOnboardingCompleted: boolean;
   visitorProfile: UserAccount;
   savedUserIds: string[];
   skippedUserIds: string[];
   interestedUserIds: string[];
   reportedUserIds: string[];
-  avatarPresets: { id: string; name: string; config: AvatarConfig }[];
+  avatarPresets: AvatarPreset[];
+  lastEditSnapshot: Partial<UserAccount> | null;
+  isFirstRevisitNoticeDismissed: boolean;
 
   setOnboardingCompleted: (completed: boolean) => void;
   updateVisitorProfile: (updates: Partial<UserAccount>) => void;
+  patchVisitorProfile: (updates: Partial<UserAccount>) => void;
+  undoProfileEdit: () => boolean;
   updateVisitorAvatar: (avatarUpdates: Partial<AvatarConfig>) => void;
   saveUserProfile: (userId: string) => void;
   unsaveUserProfile: (userId: string) => void;
@@ -22,8 +33,18 @@ interface ProfileState {
   reportUserProfile: (userId: string) => void;
   saveAvatarPreset: (name: string, config: AvatarConfig) => void;
   deleteAvatarPreset: (id: string) => void;
+  applyAvatarPreset: (id: string) => void;
+  dismissFirstRevisitNotice: () => void;
   resetProfileStore: () => void;
 }
+
+export const defaultAvatarPresets: AvatarPreset[] = [
+  { id: 'preset_everyday', name: 'Everyday', config: { ...defaultAvatarConfig } },
+  { id: 'preset_night_out', name: 'Night Out', config: { ...defaultAvatarConfig, backgroundColor: '#252028', top: 'collared_shirt', glasses: 'wire_round' } },
+  { id: 'preset_rainy_day', name: 'Rainy Day', config: { ...defaultAvatarConfig, backgroundColor: '#e4e9f5', top: 'hoodie', outerwear: 'denim_jacket' } },
+  { id: 'preset_museum', name: 'Museum', config: { ...defaultAvatarConfig, backgroundColor: '#f3ebd4', top: 'turtleneck', glasses: 'thick_square' } },
+  { id: 'preset_workday', name: 'Workday', config: { ...defaultAvatarConfig, backgroundColor: '#e2eee6', top: 'collared_shirt' } },
+];
 
 export const initialVisitorProfile: UserAccount = {
   id: 'visitor_user',
@@ -32,6 +53,7 @@ export const initialVisitorProfile: UserAccount = {
   age: 32,
   pronouns: 'they/them',
   orientation: 'Open-minded / Queer',
+  genderIdentity: null, // Additive field as per Addendum v1.0
   city: 'Portland',
   country: 'USA',
   occupation: 'Architectural Conservator',
@@ -62,16 +84,16 @@ export const initialVisitorProfile: UserAccount = {
 export const useProfileStore = create<ProfileState>()(
   persist(
     (set, get) => ({
+      profileSchemaVersion: 2,
       isOnboardingCompleted: true, // Defaults to completed so app is immediately testable/explorable
       visitorProfile: { ...initialVisitorProfile },
       savedUserIds: ['usr_naomi_serrano', 'usr_hana_prasetyo'],
       skippedUserIds: [],
       interestedUserIds: ['usr_mina_okafor', 'usr_dev_malik'],
       reportedUserIds: [],
-      avatarPresets: [
-        { id: 'preset_default', name: 'Original', config: { ...defaultAvatarConfig } },
-        { id: 'preset_warm', name: 'Warm Evening', config: { ...defaultAvatarConfig, backgroundColor: '#fed7aa', top: 'hoodie', glasses: 'wire_round' } }
-      ],
+      avatarPresets: [...defaultAvatarPresets],
+      lastEditSnapshot: null,
+      isFirstRevisitNoticeDismissed: false,
 
       setOnboardingCompleted: (completed) => set({ isOnboardingCompleted: completed }),
 
@@ -79,6 +101,30 @@ export const useProfileStore = create<ProfileState>()(
         set((state) => ({
           visitorProfile: { ...state.visitorProfile, ...updates }
         })),
+
+      patchVisitorProfile: (updates) =>
+        set((state) => {
+          // Take snapshot of changed fields for safe undo
+          const snapshot: Partial<UserAccount> = {};
+          (Object.keys(updates) as (keyof UserAccount)[]).forEach((key) => {
+            snapshot[key] = state.visitorProfile[key] as any;
+          });
+
+          return {
+            lastEditSnapshot: snapshot,
+            visitorProfile: { ...state.visitorProfile, ...updates }
+          };
+        }),
+
+      undoProfileEdit: () => {
+        const { lastEditSnapshot, visitorProfile } = get();
+        if (!lastEditSnapshot) return false;
+        set({
+          visitorProfile: { ...visitorProfile, ...lastEditSnapshot },
+          lastEditSnapshot: null
+        });
+        return true;
+      },
 
       updateVisitorAvatar: (avatarUpdates) =>
         set((state) => ({
@@ -134,6 +180,15 @@ export const useProfileStore = create<ProfileState>()(
           avatarPresets: state.avatarPresets.filter((p) => p.id !== id)
         })),
 
+      applyAvatarPreset: (id) => {
+        const preset = get().avatarPresets.find((p) => p.id === id);
+        if (preset) {
+          get().updateVisitorAvatar(preset.config);
+        }
+      },
+
+      dismissFirstRevisitNotice: () => set({ isFirstRevisitNoticeDismissed: true }),
+
       resetProfileStore: () =>
         set({
           isOnboardingCompleted: false,
@@ -141,11 +196,33 @@ export const useProfileStore = create<ProfileState>()(
           savedUserIds: [],
           skippedUserIds: [],
           interestedUserIds: [],
-          reportedUserIds: []
+          reportedUserIds: [],
+          avatarPresets: [...defaultAvatarPresets],
+          lastEditSnapshot: null,
+          isFirstRevisitNoticeDismissed: false
         })
     }),
     {
-      name: 'everfold_profile_v1'
+      name: 'everfold_profile_v1',
+      version: 2,
+      migrate: (persistedState: any, version: number) => {
+        if (!persistedState) return persistedState;
+        if (version < 2) {
+          return {
+            ...persistedState,
+            profileSchemaVersion: 2,
+            visitorProfile: {
+              ...initialVisitorProfile,
+              ...(persistedState.visitorProfile || {}),
+              genderIdentity: persistedState?.visitorProfile?.genderIdentity ?? null,
+            },
+            avatarPresets: persistedState.avatarPresets?.length ? persistedState.avatarPresets : defaultAvatarPresets,
+            lastEditSnapshot: null,
+            isFirstRevisitNoticeDismissed: persistedState.isFirstRevisitNoticeDismissed ?? false,
+          };
+        }
+        return persistedState;
+      }
     }
   )
 );

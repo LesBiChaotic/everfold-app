@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { AvatarConfig } from '../../types';
+import { useSettingsStore } from '../../store/settingsStore';
 
 interface AvatarRendererProps {
   config: Partial<AvatarConfig>;
   size?: number;
   className?: string;
   renderMode?: 'normal' | '1999_dither' | '2003_pixel' | '2008_web2' | '2015_flat';
+  reaction?: 'celebrate' | 'soft_smile' | 'curious' | 'neutral';
+  enableIdle?: boolean;
 }
 
 export const defaultAvatarConfig: AvatarConfig = {
@@ -44,17 +47,53 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
   size = 120,
   className = '',
   renderMode: overrideRenderMode,
+  reaction,
+  enableIdle = true,
 }) => {
   const config = { ...defaultAvatarConfig, ...userConfig };
   const mode = overrideRenderMode || config.renderMode || 'normal';
+  const { avatarIdleAnimation, reducedMotion } = useSettingsStore();
+
+  const [isBlinking, setIsBlinking] = useState(false);
+
+  // Subtle natural eye blink idle life when enabled and size >= 70
+  useEffect(() => {
+    if (!enableIdle || !avatarIdleAnimation || reducedMotion || size < 70) return;
+
+    let timeoutId: NodeJS.Timeout;
+    const scheduleNextBlink = () => {
+      const delay = 3500 + Math.random() * 4000; // Blink every 3.5 - 7.5s
+      timeoutId = setTimeout(() => {
+        setIsBlinking(true);
+        setTimeout(() => {
+          setIsBlinking(false);
+          scheduleNextBlink();
+        }, 160);
+      }, delay);
+    };
+
+    scheduleNextBlink();
+    return () => clearTimeout(timeoutId);
+  }, [enableIdle, avatarIdleAnimation, reducedMotion, size]);
 
   // Skin tone palette
   const skin = config.skinTone || '#e0b59b';
   const shadowSkin = '#c29278';
-  const blush = 'rgba(219, 112, 147, 0.18)';
 
   // Unique filter IDs to prevent SVG DOM collisions
   const filterId = `avatar-dither-${Math.random().toString(36).substring(2, 7)}`;
+
+  // Determine effective mouth & eye styling based on mood/reaction
+  const effectiveMood = reaction === 'celebrate' ? 'joyful' : reaction === 'soft_smile' ? 'warm' : reaction === 'curious' ? 'curious' : config.moodExpression || 'warm';
+
+  const borderRadius =
+    config.frame === 'circle'
+      ? '50%'
+      : config.frame === 'rounded_rect'
+      ? '20%'
+      : config.frame === 'arch'
+      ? '50% 50% 12% 12%'
+      : '8px';
 
   return (
     <div
@@ -62,15 +101,21 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
       style={{
         width: size,
         height: size,
-        borderRadius: config.frame === 'circle' ? '50%' : config.frame === 'rounded_rect' ? '18%' : '8px',
+        borderRadius,
         overflow: 'hidden',
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: config.backgroundColor || '#e8ecef',
         position: 'relative',
-        boxShadow: mode === '2008_web2' ? '0 4px 10px rgba(0,0,0,0.15)' : 'none',
+        boxShadow:
+          mode === '2008_web2'
+            ? '0 4px 10px rgba(0,0,0,0.15)'
+            : config.accentPack !== 'none'
+            ? '0 0 0 2px var(--accent-plum), var(--shadow-sm)'
+            : 'none',
         imageRendering: mode === '1999_dither' || mode === '2003_pixel' ? 'pixelated' : 'auto',
+        transition: reducedMotion ? 'none' : 'transform 0.25s ease, box-shadow 0.25s ease',
       }}
       role="img"
       aria-label="Modular illustrated user avatar"
@@ -128,7 +173,7 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
           {/* Base Torso */}
           <path
             d="M35,200 C35,150 70,140 100,140 C130,140 165,150 165,200 Z"
-            fill={config.top === 'hoodie' ? '#475569' : config.top === 'turtleneck' ? '#1e293b' : '#3b82f6'}
+            fill={config.top === 'hoodie' ? '#475569' : config.top === 'turtleneck' ? '#1e293b' : config.top === 'collared_shirt' ? '#0f766e' : '#6b2848'}
           />
           {/* Neck */}
           <path d="M85,115 L115,115 L118,145 L82,145 Z" fill={shadowSkin} />
@@ -148,54 +193,66 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
 
         {/* Outerwear */}
         {config.outerwear === 'denim_jacket' && (
-          <path d="M30,200 L45,150 L80,155 L75,200 Z M170,200 L155,150 L120,155 L125,200 Z" fill="#2563eb" />
-        )}
-        {config.outerwear === 'cardigan' && (
-          <path d="M30,200 L50,145 L78,160 L70,200 Z M170,200 L150,145 L122,160 L130,200 Z" fill="#78716c" />
+          <path d="M35,170 L65,145 L80,200 L35,200 Z M165,170 L135,145 L120,200 L165,200 Z" fill="#1e40af" />
         )}
 
-        {/* Head / Face */}
+        {/* Head / Jaw Layer */}
         <g id="head">
-          {config.faceShape === 'round' ? (
-            <circle cx="100" cy="95" r="46" fill={skin} />
-          ) : config.faceShape === 'square' ? (
-            <rect x="56" y="52" width="88" height="84" rx="24" fill={skin} />
+          {config.faceShape === 'square' ? (
+            <path
+              d="M62,60 C62,40 138,40 138,60 L138,98 C138,124 125,135 100,135 C75,135 62,124 62,98 Z"
+              fill={skin}
+            />
           ) : config.faceShape === 'heart' ? (
-            <path d="M58,65 C58,45 142,45 142,65 C142,105 115,135 100,138 C85,135 58,105 58,65 Z" fill={skin} />
+            <path
+              d="M60,60 C60,35 140,35 140,60 L138,95 C138,125 118,137 100,137 C82,137 62,125 62,95 Z"
+              fill={skin}
+            />
           ) : (
-            // Oval / Standard
-            <ellipse cx="100" cy="92" rx="43" ry="48" fill={skin} />
+            // Oval / Round standard
+            <ellipse cx="100" cy="88" rx="38" ry="46" fill={skin} />
           )}
 
-          {/* Cheeks Blush */}
-          <ellipse cx="74" cy="98" rx="8" ry="5" fill={blush} />
-          <ellipse cx="126" cy="98" rx="8" ry="5" fill={blush} />
+          {/* Blush */}
+          <ellipse cx="73" cy="94" rx="7" ry="4" fill="rgba(219, 112, 147, 0.22)" />
+          <ellipse cx="127" cy="94" rx="7" ry="4" fill="rgba(219, 112, 147, 0.22)" />
 
-          {/* Freckles / Beauty Marks */}
+          {/* Freckles */}
           {config.freckles && (
-            <g fill="#9c6644" opacity="0.6">
-              <circle cx="76" cy="94" r="1.2" />
-              <circle cx="82" cy="96" r="1" />
-              <circle cx="118" cy="96" r="1" />
-              <circle cx="124" cy="94" r="1.2" />
+            <g fill="#9a5a3a" opacity="0.65">
+              <circle cx="76" cy="92" r="1" />
+              <circle cx="82" cy="94" r="1.2" />
+              <circle cx="88" cy="93" r="0.9" />
+              <circle cx="112" cy="93" r="0.9" />
+              <circle cx="118" cy="94" r="1.2" />
+              <circle cx="124" cy="92" r="1" />
             </g>
           )}
-          {config.beautyMarks && <circle cx="124" cy="106" r="1.6" fill="#4a2c1d" />}
+
+          {/* Beauty Marks */}
+          {config.beautyMarks && (
+            <circle cx="75" cy="105" r="1.5" fill="#5c3822" />
+          )}
 
           {/* Eyebrows */}
-          <g id="brows" stroke={config.hairColor || '#2b1d14'} strokeWidth={config.brows === 'thick' ? '3.5' : '2.5'} strokeLinecap="round" fill="none">
-            {config.brows === 'arched' ? (
+          <g id="brows" stroke={config.hairColor || '#2b1d14'} strokeWidth="2.8" strokeLinecap="round" fill="none">
+            {effectiveMood === 'curious' ? (
               <>
-                <path d="M70,74 Q80,68 90,75" />
-                <path d="M110,75 Q120,68 130,74" />
+                <path d="M68,71 Q78,65 88,72" />
+                <path d="M112,74 Q122,70 132,74" />
+              </>
+            ) : config.brows === 'arched' ? (
+              <>
+                <path d="M68,75 Q78,67 88,74" />
+                <path d="M112,74 Q122,67 132,75" />
               </>
             ) : config.brows === 'straight' ? (
               <>
-                <path d="M70,74 L90,74" />
-                <path d="M110,74 L130,74" />
+                <path d="M68,74 L88,74" />
+                <path d="M112,74 L132,74" />
               </>
             ) : (
-              // Soft
+              // Soft curved
               <>
                 <path d="M70,75 Q80,71 90,74" />
                 <path d="M110,74 Q120,71 130,75" />
@@ -203,17 +260,27 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
             )}
           </g>
 
-          {/* Eyes */}
+          {/* Eyes & Blinking Animation */}
           <g id="eyes">
-            {/* Left Eye */}
-            <ellipse cx="79" cy="84" rx="7" ry={config.eyeShape === 'round' ? '6' : '4.5'} fill="#ffffff" />
-            <circle cx="80" cy="84" r="3.2" fill={config.eyeColor || '#4a3728'} />
-            <circle cx="81.2" cy="82.8" r="1" fill="#ffffff" />
+            {isBlinking ? (
+              // Closed blinking line
+              <g stroke={config.hairColor || '#2b1d14'} strokeWidth="2.5" strokeLinecap="round" fill="none">
+                <path d="M72,85 Q79,88 86,85" />
+                <path d="M114,85 Q121,88 128,85" />
+              </g>
+            ) : (
+              <>
+                {/* Left Eye */}
+                <ellipse cx="79" cy="84" rx="7" ry={config.eyeShape === 'round' ? '6' : '4.5'} fill="#ffffff" />
+                <circle cx="80" cy="84" r="3.2" fill={config.eyeColor || '#4a3728'} />
+                <circle cx="81.2" cy="82.8" r="1" fill="#ffffff" />
 
-            {/* Right Eye */}
-            <ellipse cx="121" cy="84" rx="7" ry={config.eyeShape === 'round' ? '6' : '4.5'} fill="#ffffff" />
-            <circle cx="120" cy="84" r="3.2" fill={config.eyeColor || '#4a3728'} />
-            <circle cx="121.2" cy="82.8" r="1" fill="#ffffff" />
+                {/* Right Eye */}
+                <ellipse cx="121" cy="84" rx="7" ry={config.eyeShape === 'round' ? '6' : '4.5'} fill="#ffffff" />
+                <circle cx="120" cy="84" r="3.2" fill={config.eyeColor || '#4a3728'} />
+                <circle cx="121.2" cy="82.8" r="1" fill="#ffffff" />
+              </>
+            )}
           </g>
 
           {/* Nose */}
@@ -230,8 +297,8 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
 
           {/* Mouth */}
           <g id="mouth">
-            {config.mouth === 'open_smile' ? (
-              <path d="M88,110 Q100,122 112,110 Z" fill={config.lipTone || '#c97870'} />
+            {effectiveMood === 'joyful' || config.mouth === 'open_smile' ? (
+              <path d="M88,108 Q100,123 112,108 Z" fill={config.lipTone || '#c97870'} />
             ) : config.mouth === 'neutral' ? (
               <path d="M90,111 L110,111" stroke={config.lipTone || '#c97870'} strokeWidth="3" strokeLinecap="round" />
             ) : (
@@ -265,6 +332,13 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
             <rect x="66" y="73" width="26" height="22" rx="4" />
             <rect x="108" y="73" width="26" height="22" rx="4" />
             <path d="M92,82 L108,82" />
+          </g>
+        )}
+        {config.glasses === 'aviator' && (
+          <g stroke="#b45309" strokeWidth="2.2" fill="none">
+            <path d="M66,74 L92,74 L90,94 L68,94 Z" />
+            <path d="M108,74 L134,74 L132,94 L110,94 Z" />
+            <path d="M92,76 L108,76" />
           </g>
         )}
 
