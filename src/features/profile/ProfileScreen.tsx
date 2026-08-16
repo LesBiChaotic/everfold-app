@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Edit3, MapPin, Sparkles, User, Settings, Bookmark, Heart, Eye, CheckCircle, Info, X, UserPlus } from 'lucide-react';
+import { Edit3, MapPin, Sparkles, User, Settings, Bookmark, Heart, Eye, CheckCircle, Info, X, UserPlus, Trophy, Gift, Compass, Layers } from 'lucide-react';
 import { useProfileStore } from '../../store/profileStore';
 import { useAppStore } from '../../store/appStore';
+import { useRewardStore } from '../../store/rewardStore';
 import { AvatarRenderer } from '../../components/avatar/AvatarRenderer';
 import { ProfilePreviewModal } from '../../components/profile/ProfilePreviewModal';
 import { Foldmark } from '../../components/brand/Foldmark';
@@ -11,6 +12,7 @@ export const ProfileScreen: React.FC = () => {
   const navigate = useNavigate();
   const { visitorProfile, savedUserIds, isFirstRevisitNoticeDismissed, dismissFirstRevisitNotice, setOnboardingCompleted } = useProfileStore();
   const { matches = [] } = useAppStore();
+  const { foldScore, currentTier, milestoneIdsUnlocked, cosmeticItemIdsOwned } = useRewardStore();
   const [showPreviewModal, setShowPreviewModal] = useState(false);
 
   return (
@@ -159,6 +161,58 @@ export const ProfileScreen: React.FC = () => {
           <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>
             {visitorProfile.profilePromptAnswers.length} prompts shared · Sexuality: {visitorProfile.orientation}
           </span>
+        </div>
+      </div>
+
+      {/* Your Everfold Progression & Rewards Hub */}
+      <div
+        className="ef-card"
+        style={{
+          padding: 'var(--space-4) var(--space-5)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 'var(--space-3)',
+          borderRadius: 'var(--radius-xl)',
+          background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-subtle) 100%)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+          <div
+            style={{
+              padding: '6px',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: 'rgba(107, 50, 72, 0.1)',
+              color: 'var(--accent-plum)',
+              display: 'inline-flex',
+            }}
+          >
+            <Trophy size={18} />
+          </div>
+          <div>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+              {currentTier} Tier • {foldScore} Fold Score
+            </div>
+            <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--text-primary)' }}>
+              {milestoneIdsUnlocked.length} Milestones Reached • {cosmeticItemIdsOwned.length} Cosmetics
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
+          <NavLink to="/profile/milestones" className="btn btn-secondary btn-xs">
+            <Trophy size={13} /> Milestones Hub
+          </NavLink>
+          <NavLink to="/profile/cosmetics" className="btn btn-secondary btn-xs">
+            <Sparkles size={13} /> Wardrobe
+          </NavLink>
+          <NavLink to="/profile/activity" className="btn btn-secondary btn-xs">
+            <Compass size={13} /> Firsts & Activity
+          </NavLink>
+          <NavLink to="/plus" className="btn btn-primary btn-xs">
+            <Gift size={13} /> Everfold Plus
+          </NavLink>
         </div>
       </div>
 

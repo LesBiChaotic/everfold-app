@@ -13,6 +13,10 @@ import {
   HelpCircle,
   Key,
   Heart,
+  Trophy,
+  Sparkles,
+  Gift,
+  Compass,
 } from 'lucide-react';
 import { useARGStore } from '../../store/argStore';
 import { useStoryAccessStore } from '../../store/storyAccessStore';
@@ -45,6 +49,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose }) =
   };
 
   const drawerItems = [
+    { to: '/profile/milestones', label: 'Milestones Hub', icon: Trophy },
+    { to: '/profile/cosmetics', label: 'Cosmetics Wardrobe', icon: Sparkles },
+    { to: '/profile/activity', label: 'Your Everfold & Firsts', icon: Compass },
+    { to: '/plus', label: 'Everfold Plus (Fictional)', icon: Gift },
     { to: '/quizzes', label: 'Quizzes & Alignment', icon: HelpCircle },
     { to: '/community', label: 'Community Hub', icon: Network },
     { to: '/advice', label: 'Advice Library', icon: BookOpen },

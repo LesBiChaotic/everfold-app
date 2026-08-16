@@ -23,10 +23,12 @@ import { useProfileStore } from '../../store/profileStore';
 import { useAppStore } from '../../store/appStore';
 import { useARGStore } from '../../store/argStore';
 import { useStoryAccessStore } from '../../store/storyAccessStore';
+import { useRewardStore } from '../../store/rewardStore';
 import { Foldmark } from '../../components/brand/Foldmark';
 import { soundEngine } from '../../audio/soundEngine';
 
 export const SettingsScreen: React.FC = () => {
+  const { resetRewardProgress, foldScore, milestoneIdsUnlocked } = useRewardStore();
   const {
     theme,
     setTheme,
@@ -416,6 +418,34 @@ export const SettingsScreen: React.FC = () => {
             <CheckCircle size={14} /> Full telemetry export generated and downloaded to your device.
           </div>
         )}
+      </div>
+
+      {/* Optional: Reset Reward Progress */}
+      <div className="ef-card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', border: '1px dashed var(--border-default)' }}>
+        <h3 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Rewards & Progression Management
+        </h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-sm)', color: 'var(--text-primary)' }}>
+              Reset Reward Progress
+            </div>
+            <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', marginTop: '2px' }}>
+              This clears Fold Score ({foldScore}), unlocked milestones ({milestoneIdsUnlocked.length}), and cosmetic unlocks. It does <strong>not</strong> delete your profile, messages, Journal, matches, stories, or ARG progress.
+            </div>
+          </div>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={() => {
+              if (window.confirm('Reset all Fold Score and cosmetic unlocks? Your messages and profile will NOT be affected.')) {
+                resetRewardProgress();
+              }
+            }}
+            style={{ flexShrink: 0 }}
+          >
+            <RotateCcw size={15} /> Reset Rewards
+          </button>
+        </div>
       </div>
     </div>
   );

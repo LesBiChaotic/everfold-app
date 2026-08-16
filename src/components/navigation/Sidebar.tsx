@@ -22,6 +22,8 @@ import {
   Feather,
   Headphones,
   Sparkles,
+  Trophy,
+  Gift,
 } from 'lucide-react';
 import { useSettingsStore } from '../../store/settingsStore';
 import { useAppStore } from '../../store/appStore';
@@ -75,6 +77,10 @@ export const Sidebar: React.FC = () => {
 
     { to: '/archive', label: 'Archive', icon: Archive, group: 'archive' },
     { to: '/safety', label: 'Safety', icon: Shield, group: 'archive' },
+
+    { to: '/profile/milestones', label: 'Milestones', icon: Trophy, group: 'system' },
+    { to: '/profile/cosmetics', label: 'Cosmetics', icon: Sparkles, group: 'system' },
+    { to: '/plus', label: 'Everfold Plus', icon: Gift, group: 'system' },
     { to: '/help', label: 'Help Center', icon: HelpCircle, group: 'system' },
     { to: '/status', label: 'Status', icon: Radio, group: 'system' },
     { to: '/profile', label: 'Profile', icon: User, group: 'system' },

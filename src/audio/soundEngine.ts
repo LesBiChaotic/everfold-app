@@ -175,6 +175,95 @@ class SoundEngine {
         break;
       }
 
+      case 'milestone.small': {
+        // Soft two-note marimba pluck (e.g. C5 -> E5)
+        [523.25, 659.25].forEach((freq, idx) => {
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t + idx * 0.08);
+          gain.gain.setValueAtTime(0, t + idx * 0.08);
+          gain.gain.linearRampToValueAtTime(0.25, t + idx * 0.08 + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.08 + 0.22);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(t + idx * 0.08);
+          osc.stop(t + idx * 0.08 + 0.24);
+        });
+        break;
+      }
+
+      case 'milestone.major': {
+        // Gentle three-note ascending chord (e.g. C5 -> E5 -> G5)
+        [523.25, 659.25, 783.99].forEach((freq, idx) => {
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, t + idx * 0.09);
+          gain.gain.setValueAtTime(0, t + idx * 0.09);
+          gain.gain.linearRampToValueAtTime(0.3, t + idx * 0.09 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.09 + 0.32);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(t + idx * 0.09);
+          osc.stop(t + idx * 0.09 + 0.35);
+        });
+        break;
+      }
+
+      case 'gift.ready': {
+        // Soft muted bell / glass chime
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, t);
+        osc.frequency.exponentialRampToValueAtTime(440, t + 0.3);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.32);
+        break;
+      }
+
+      case 'gift.open': {
+        // Warm layered chime (C4 -> G4 -> C5 -> E5)
+        [261.63, 392.0, 523.25, 659.25].forEach((freq, idx) => {
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t + idx * 0.07);
+          gain.gain.setValueAtTime(0, t + idx * 0.07);
+          gain.gain.linearRampToValueAtTime(0.28, t + idx * 0.07 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.07 + 0.4);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(t + idx * 0.07);
+          osc.stop(t + idx * 0.07 + 0.42);
+        });
+        break;
+      }
+
+      case 'cosmetic.equip': {
+        // Tiny delicate click/pluck
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(740, t);
+        osc.frequency.exponentialRampToValueAtTime(400, t + 0.04);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(t);
+        osc.stop(t + 0.05);
+        break;
+      }
+
       case 'arg.previouslyMatched': {
         // Match motif one octave lower with slow detune (F3 -> A3)
         [174.61, 220.0].forEach((freq, idx) => {

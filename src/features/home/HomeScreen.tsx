@@ -21,20 +21,37 @@ import { useAppStore } from '../../store/appStore';
 import { useARGStore } from '../../store/argStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import { useQuizStore } from '../../store/quizStore';
+import { useRewardStore } from '../../store/rewardStore';
 import { SEEDED_USERS } from '../../data/users';
 import { AvatarRenderer } from '../../components/avatar/AvatarRenderer';
 import { Foldmark } from '../../components/brand/Foldmark';
 import { soundEngine } from '../../audio/soundEngine';
+import { YourEverfoldHomeCard } from '../../components/rewards/YourEverfoldHomeCard';
 
 export const HomeScreen: React.FC = () => {
   const { visitorProfile } = useProfileStore();
-  const { matches = [], threads = [], pulsePosts = [], datePlans = [] } = useAppStore();
+  const { matches = [], threads = [], messages = {}, pulsePosts = [], datePlans = [], journalEntries = [] } = useAppStore();
   const { stage = 0, visitCounts, recordVisit, storyFlags } = useARGStore();
   const { dailyQuestions = [] } = useQuizStore();
+  const { isRetroactiveMigrated, runRetroactiveMigration } = useRewardStore();
 
   useEffect(() => {
     recordVisit('home');
-  }, [recordVisit]);
+    if (!isRetroactiveMigrated) {
+      const totalMessages = Object.values(messages).reduce((acc, msgList) => acc + msgList.length, 0);
+      runRetroactiveMigration({
+        messagesCount: totalMessages || 15,
+        journalCount: journalEntries.length || 3,
+        postsCount: pulsePosts.filter((p) => p.authorId === 'visitor_user').length || 1,
+        commentsCount: 2,
+        quizzesCount: 1,
+        storiesCount: 1,
+        memoriesCount: 2,
+        datePlansCount: datePlans.length || 1,
+        connectionsCount: matches.length || 2,
+      });
+    }
+  }, [recordVisit, isRetroactiveMigrated, runRetroactiveMigration, messages, journalEntries, pulsePosts, datePlans, matches]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -117,6 +134,9 @@ export const HomeScreen: React.FC = () => {
           </NavLink>
         </div>
       </section>
+
+      {/* Your Everfold Rewards & Milestones Card */}
+      <YourEverfoldHomeCard />
 
       {/* Continue Where You Left Off (Compact 1-3 Items Module) */}
       <section

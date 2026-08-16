@@ -21,6 +21,10 @@ import { SafetyScreen } from '../features/safety/SafetyScreen';
 import { ProfileScreen } from '../features/profile/ProfileScreen';
 import { ProfileEditScreen } from '../features/profile/ProfileEditScreen';
 import { AvatarBuilderScreen } from '../features/avatar/AvatarBuilderScreen';
+import { MilestoneHubScreen } from '../features/rewards/MilestoneHubScreen';
+import { CosmeticInventoryScreen } from '../features/rewards/CosmeticInventoryScreen';
+import { EverfoldPlusScreen } from '../features/rewards/EverfoldPlusScreen';
+import { YourEverfoldScreen } from '../features/rewards/YourEverfoldScreen';
 import { SettingsScreen } from '../features/settings/SettingsScreen';
 import { EvidenceBoardScreen } from '../features/evidence/EvidenceBoardScreen';
 import { PreviouslyMatchedScreen } from '../features/member/PreviouslyMatchedScreen';
@@ -222,6 +226,11 @@ export const router = createHashRouter([
       { path: 'safety', element: <SafetyScreen /> },
       { path: 'profile', element: <ProfileScreen /> },
       { path: 'profile/edit', element: <ProfileEditScreen /> },
+      { path: 'profile/milestones', element: <MilestoneHubScreen /> },
+      { path: 'profile/cosmetics', element: <CosmeticInventoryScreen /> },
+      { path: 'profile/activity', element: <YourEverfoldScreen /> },
+      { path: 'profile/plus', element: <EverfoldPlusScreen /> },
+      { path: 'plus', element: <EverfoldPlusScreen /> },
       { path: 'avatar', element: <AvatarBuilderScreen /> },
       { path: 'settings', element: <SettingsScreen /> },
       { path: 'settings/story-access', element: <StoryAccessSettings /> },
