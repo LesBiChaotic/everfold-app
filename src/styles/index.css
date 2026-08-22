@@ -587,10 +587,26 @@ button:disabled {
 }
 .avatar-container svg { overflow: visible; }
 
+.avatar-studio-category-tabs {
+  flex-wrap: wrap;
+  overflow-x: visible !important;
+}
+
 @media (max-width: 767px) {
   .avatar-studio-preview { position: relative !important; top: auto !important; }
   .avatar-studio-preview .avatar-container { width: min(210px, 62vw) !important; height: min(210px, 62vw) !important; }
   .onboarding-avatar-stage .avatar-container { width: min(180px, 58vw) !important; height: min(180px, 58vw) !important; }
+  .avatar-studio-category-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto !important;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-3);
+    padding-right: var(--space-4);
+  }
+  .avatar-studio-category-tabs::after {
+    content: "";
+    flex: 0 0 var(--space-2);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

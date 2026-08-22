@@ -197,6 +197,7 @@ export const AvatarBuilderScreen: React.FC = () => {
         <div className="ef-card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
           {/* Category Chips Bar */}
           <div
+            className="avatar-studio-category-tabs"
             style={{
               display: 'flex',
               gap: 'var(--space-1)',
