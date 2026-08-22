@@ -562,6 +562,35 @@ button:disabled {
 :root[data-cosmetic-comment-flair-id="flair_archive_eye"] .equipped-comment-flair::before { content: "◉"; }
 :root[data-cosmetic-comment-flair-id="flair_moon"] .equipped-comment-flair::before { content: "☾"; }
 
+.quiz-question-navigator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+}
+.quiz-question-navigator button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-default);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.quiz-question-navigator button.is-answered {
+  color: var(--accent-plum);
+  border-color: var(--accent-border);
+  background: var(--accent-surface);
+}
+.quiz-question-navigator button.is-current {
+  color: var(--text-inverse);
+  border-color: var(--accent-plum);
+  background: var(--accent-plum);
+  box-shadow: 0 0 0 3px var(--accent-surface);
+}
+
 /* Illustrated profile creation */
 .avatar-studio-preview,
 .onboarding-avatar-stage {

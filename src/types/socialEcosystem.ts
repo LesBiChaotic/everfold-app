@@ -28,7 +28,20 @@ export interface QuizQuestion {
   type: 'single' | 'multi' | 'scale';
   options: QuizOption[];
   allowSkip?: boolean;
+  minSelections?: number;
+  maxSelections?: number;
+  scaleLabels?: { low: string; high: string };
   storyFlags?: string[];
+}
+
+export type QuizAnswerValue = string | string[];
+export type QuizAnswerMap = Record<string, QuizAnswerValue>;
+
+export interface QuizOutcomeDefinition {
+  key: string;
+  label: string;
+  summary: string;
+  recommendations: string[];
 }
 
 export interface QuizResultProfileEffect {
@@ -51,6 +64,7 @@ export interface Quiz {
   storyTier: number; // 0 normal to 7 ARG
   unlockRequirements?: string[];
   profileEffects?: QuizResultProfileEffect[];
+  outcomes?: QuizOutcomeDefinition[];
 }
 
 export interface QuizResult {
@@ -59,9 +73,15 @@ export interface QuizResult {
   visitorId: string;
   completedAt: string;
   scores: Record<string, number>;
+  dimensionPercentages?: Record<string, number>;
   primaryResult: string;
+  secondaryResults?: string[];
   summary: string;
   recommendations: string[];
+  answers?: QuizAnswerMap;
+  retakeNumber?: number;
+  profileVisibility?: 'private' | 'matches' | 'public';
+  useForRecommendations?: boolean;
   appliedEffects?: QuizResultProfileEffect[];
 }
 
@@ -71,8 +91,8 @@ export interface SharedQuizSession {
   relationshipId: string;
   partnerUserId: string;
   participantAnswers: {
-    visitor: Record<string, string>;
-    partner: Record<string, string>;
+    visitor: QuizAnswerMap;
+    partner: QuizAnswerMap;
   };
   completionState: 'waiting_partner' | 'ready_to_reveal' | 'revealed';
   sharedResult?: {

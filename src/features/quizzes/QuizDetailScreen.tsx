@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { useQuizStore } from '../../store/quizStore';
 import { useProfileStore } from '../../store/profileStore';
 import { soundEngine } from '../../audio/soundEngine';
+import { QuizAnswerMap } from '../../types/socialEcosystem';
 
 export const QuizDetailScreen: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();
   const navigate = useNavigate();
-  const { soloQuizzes, submitSoloQuiz } = useQuizStore();
+  const { soloQuizzes, submitSoloQuiz, activeDrafts, saveQuizDraft } = useQuizStore();
   const { visitorProfile } = useProfileStore();
 
   const quiz = soloQuizzes.find((q) => q.id === quizId);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<QuizAnswerMap>(() => ({ ...(quizId ? activeDrafts[quizId] : {}) }));
 
   if (!quiz) {
     return (
@@ -28,19 +29,40 @@ export const QuizDetailScreen: React.FC = () => {
 
   const currentQuestion = quiz.questions[currentStepIndex];
   const progressPercent = Math.round(((currentStepIndex + 1) / quiz.questions.length) * 100);
+  const isAnswered = (question: typeof currentQuestion) => {
+    const answer = selectedAnswers[question.id];
+    const count = Array.isArray(answer) ? answer.length : answer ? 1 : 0;
+    return question.allowSkip || count >= (question.minSelections || 1);
+  };
+  const unansweredRequiredCount = quiz.questions.filter((question) => !isAnswered(question)).length;
 
   const handleSelectOption = (optId: string) => {
     soundEngine.playCue('ui.navigation');
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: optId,
-    }));
+    setSelectedAnswers((prev) => {
+      let value: string | string[] = optId;
+      if (currentQuestion.type === 'multi') {
+        const current = Array.isArray(prev[currentQuestion.id]) ? prev[currentQuestion.id] as string[] : [];
+        value = current.includes(optId)
+          ? current.filter((id) => id !== optId)
+          : current.length < (currentQuestion.maxSelections || currentQuestion.options.length)
+            ? [...current, optId]
+            : current;
+      }
+      const next = { ...prev, [currentQuestion.id]: value };
+      saveQuizDraft(quiz.id, next);
+      return next;
+    });
   };
 
   const handleNext = () => {
     if (currentStepIndex < quiz.questions.length - 1) {
       setCurrentStepIndex((prev) => prev + 1);
     } else {
+      const firstUnansweredIndex = quiz.questions.findIndex((question) => !isAnswered(question));
+      if (firstUnansweredIndex >= 0) {
+        setCurrentStepIndex(firstUnansweredIndex);
+        return;
+      }
       // Complete quiz
       const result = submitSoloQuiz(quiz.id, visitorProfile.id, selectedAnswers);
       navigate(`/quizzes/results/${result.id}`);
@@ -55,7 +77,9 @@ export const QuizDetailScreen: React.FC = () => {
     }
   };
 
-  const isCurrentAnswered = !!selectedAnswers[currentQuestion.id];
+  const currentAnswer = selectedAnswers[currentQuestion.id];
+  const currentSelectionCount = Array.isArray(currentAnswer) ? currentAnswer.length : currentAnswer ? 1 : 0;
+  const isCurrentAnswered = currentSelectionCount >= (currentQuestion.minSelections || 1);
 
   return (
     <div className="quiz-detail-screen" style={{ maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
@@ -81,6 +105,27 @@ export const QuizDetailScreen: React.FC = () => {
         />
       </div>
 
+      {quiz.questions.length > 3 && (
+        <div className="quiz-question-navigator" aria-label="Quiz question navigator">
+          {quiz.questions.map((question, index) => {
+            const answer = selectedAnswers[question.id];
+            const answered = Array.isArray(answer) ? answer.length > 0 : !!answer;
+            return (
+              <button
+                key={question.id}
+                type="button"
+                onClick={() => setCurrentStepIndex(index)}
+                className={index === currentStepIndex ? 'is-current' : answered ? 'is-answered' : ''}
+                aria-label={`Question ${index + 1}${answered ? ', answered' : ''}`}
+                aria-current={index === currentStepIndex ? 'step' : undefined}
+              >
+                {index + 1}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Question Card */}
       <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', backgroundColor: 'var(--bg-surface)' }}>
         <div>
@@ -93,22 +138,38 @@ export const QuizDetailScreen: React.FC = () => {
               {currentQuestion.subtitle}
             </p>
           )}
+          {currentQuestion.type === 'multi' && (
+            <p style={{ fontSize: '11px', color: 'var(--accent-primary)', margin: '6px 0 0', fontWeight: 600 }}>
+              Choose {currentQuestion.minSelections || 1}{currentQuestion.maxSelections ? `–${currentQuestion.maxSelections}` : ' or more'} options
+            </p>
+          )}
+          {currentQuestion.type === 'scale' && currentQuestion.scaleLabels && (
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-3)', fontSize: '11px', color: 'var(--text-muted)', marginTop: '8px' }}>
+              <span>{currentQuestion.scaleLabels.low}</span><span>{currentQuestion.scaleLabels.high}</span>
+            </div>
+          )}
         </div>
 
         {/* Options List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }} role="radiogroup" aria-label="Question options">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }} role={currentQuestion.type === 'multi' ? 'group' : 'radiogroup'} aria-label="Question options">
           {currentQuestion.options.map((opt) => {
-            const isSelected = selectedAnswers[currentQuestion.id] === opt.id;
+            const answer = selectedAnswers[currentQuestion.id];
+            const isSelected = Array.isArray(answer) ? answer.includes(opt.id) : answer === opt.id;
 
             return (
               <div
                 key={opt.id}
                 onClick={() => handleSelectOption(opt.id)}
                 className="card"
-                role="radio"
+                role={currentQuestion.type === 'multi' ? 'checkbox' : 'radio'}
                 aria-checked={isSelected}
                 tabIndex={0}
-                onKeyDown={(e) => (e.key === ' ' || e.key === 'Enter') && handleSelectOption(opt.id)}
+                onKeyDown={(e) => {
+                  if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSelectOption(opt.id);
+                  }
+                }}
                 style={{
                   cursor: 'pointer',
                   padding: 'var(--space-3) var(--space-4)',
@@ -137,12 +198,19 @@ export const QuizDetailScreen: React.FC = () => {
           <button
             className="btn btn-primary"
             onClick={handleNext}
-            disabled={!isCurrentAnswered && !currentQuestion.allowSkip}
+            disabled={currentStepIndex === quiz.questions.length - 1
+              ? unansweredRequiredCount > 0
+              : !isCurrentAnswered && !currentQuestion.allowSkip}
             style={{ fontSize: 'var(--font-size-xs)', minWidth: '120px' }}
           >
             {currentStepIndex === quiz.questions.length - 1 ? 'Complete Quiz' : 'Next'} <ArrowRight size={14} />
           </button>
         </div>
+        {currentStepIndex === quiz.questions.length - 1 && unansweredRequiredCount > 0 && (
+          <p style={{ margin: 0, textAlign: 'right', color: 'var(--text-muted)', fontSize: '11px' }}>
+            {unansweredRequiredCount} required {unansweredRequiredCount === 1 ? 'question remains' : 'questions remain'}
+          </p>
+        )}
       </div>
     </div>
   );

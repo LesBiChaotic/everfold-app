@@ -49,6 +49,40 @@ describe('Social Ecosystem & Community Suite (Addendum v0.3)', () => {
       expect(updatedResults[firstQuiz.id]).toBeDefined();
     });
 
+    it('supports multi-select, scales, drafts, retakes, and private result controls', () => {
+      const engineQuiz: any = {
+        id: 'quiz_engine_test', title: 'Engine Test', description: 'Test', category: 'Know Yourself',
+        estimatedMinutes: 1, resultType: 'archetype', storyTier: 0, isRepeatable: true,
+        questions: [
+          { id: 'multi', prompt: 'Choose two', type: 'multi', minSelections: 2, maxSelections: 2, options: [
+            { id: 'm1', label: 'One', scoreWeights: { reflective: 2 } },
+            { id: 'm2', label: 'Two', scoreWeights: { reflective: 1, social: 1 } },
+          ] },
+          { id: 'scale', prompt: 'Scale', type: 'scale', options: [
+            { id: 's1', label: 'Low', scoreWeights: { social: 1 } },
+            { id: 's5', label: 'High', scoreWeights: { social: 5 } },
+          ] },
+        ],
+      };
+      useQuizStore.setState((state) => ({ soloQuizzes: [...state.soloQuizzes, engineQuiz] }));
+
+      const store = useQuizStore.getState();
+      store.saveQuizDraft(engineQuiz.id, { multi: ['m1'] });
+      expect(useQuizStore.getState().activeDrafts[engineQuiz.id]).toBeDefined();
+
+      const first = store.submitSoloQuiz(engineQuiz.id, 'usr_test', { multi: ['m1', 'm2'], scale: 's5' });
+      const second = useQuizStore.getState().submitSoloQuiz(engineQuiz.id, 'usr_test', { multi: ['m1', 'm2'], scale: 's1' });
+      expect(first.dimensionPercentages?.reflective).toBe(100);
+      expect(second.retakeNumber).toBe(2);
+      expect(useQuizStore.getState().resultHistory[engineQuiz.id]).toHaveLength(2);
+      expect(useQuizStore.getState().activeDrafts[engineQuiz.id]).toBeUndefined();
+
+      useQuizStore.getState().setResultPreferences(engineQuiz.id, second.id, { profileVisibility: 'matches', useForRecommendations: false });
+      const updated = useQuizStore.getState().completedResults[engineQuiz.id];
+      expect(updated.profileVisibility).toBe('matches');
+      expect(updated.useForRecommendations).toBe(false);
+    });
+
     it('handles Together Quizzes dual participant flow and agreement calculation', () => {
       const { togetherQuizzes, initiateTogetherQuiz } = useQuizStore.getState();
       expect(togetherQuizzes.length).toBeGreaterThanOrEqual(5);
