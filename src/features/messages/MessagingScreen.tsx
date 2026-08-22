@@ -115,6 +115,7 @@ export const MessagingScreen: React.FC = () => {
     >
       {/* 1. Thread List Pane (Desktop sidebar & Mobile thread selector) */}
       <div
+        className="messaging-thread-list"
         style={{
           width: '300px',
           borderRight: '1px solid var(--border-subtle)',
@@ -364,6 +365,7 @@ export const MessagingScreen: React.FC = () => {
       {/* 3. Docked Context Rail (Section 18) */}
       {showContextRail && partner && (
         <div
+          className="messaging-context-rail"
           style={{
             width: '280px',
             borderLeft: '1px solid var(--border-subtle)',

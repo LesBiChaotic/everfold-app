@@ -58,6 +58,7 @@ export const MobileBottomNav: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               height: '100%',
+              flex: 1,
               minWidth: '56px',
               color: isActive ? 'var(--accent-plum)' : 'var(--text-muted)',
               fontSize: '0.72rem',

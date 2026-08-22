@@ -463,6 +463,73 @@ button:disabled {
   .main-viewport {
     overflow: visible !important;
   }
+
+  .main-viewport main {
+    padding: var(--space-4) !important;
+    padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + var(--space-6)) !important;
+  }
+}
+
+/* Phone layouts are composed for the available content column, not the full
+   viewport.  At 320px that column is only 288px after the shell padding. */
+@media (max-width: 767px) {
+  .mobile-header {
+    height: calc(var(--header-height) + env(safe-area-inset-top)) !important;
+    padding-top: env(safe-area-inset-top) !important;
+  }
+
+  .mobile-bottom-nav {
+    height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom)) !important;
+  }
+
+  .btn,
+  .btn-sm,
+  .input,
+  .textarea,
+  .select {
+    min-height: var(--min-touch-target) !important;
+  }
+
+  .btn,
+  .btn-sm {
+    height: var(--min-touch-target) !important;
+  }
+
+  /* These layouts were authored inline, so regular media queries cannot
+     override them. Stack desktop-sized grids before they can overflow. */
+  .app-layout [style*="minmax(280px"],
+  .app-layout [style*="minmax(300px"],
+  .app-layout [style*="minmax(310px"],
+  .app-layout [style*="minmax(320px"],
+  .app-layout [style*="grid-template-columns: 1fr 1fr"],
+  .app-layout [style*="grid-template-columns: repeat(3, 1fr)"],
+  .app-layout [style*="grid-template-columns: minmax(260px"],
+  .app-layout [style*="grid-template-columns: 220px 1fr"],
+  .app-layout [style*="grid-template-columns: 1fr 1.2fr 1.2fr"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .app-layout [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .messaging-screen {
+    height: calc(100dvh - var(--header-height) - var(--bottom-nav-height) - env(safe-area-inset-bottom) - var(--space-8)) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex-direction: column !important;
+  }
+
+  .messaging-thread-list {
+    width: 100% !important;
+    height: 148px !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+  }
+
+  .messaging-context-rail {
+    display: none !important;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -563,4 +630,3 @@ button:disabled {
     transform: none !important;
   }
 }
-
