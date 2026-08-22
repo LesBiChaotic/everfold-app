@@ -520,6 +520,19 @@ button:disabled {
     flex-direction: column !important;
   }
 
+  /* Every level in the nested flex layout must be allowed to shrink. Without
+     this, the message history keeps its intrinsic height and the composer is
+     clipped below the fixed mobile navigation instead of becoming scrollable. */
+  .messaging-conversation-pane,
+  .messaging-message-list {
+    min-height: 0 !important;
+  }
+
+  .messaging-message-list {
+    touch-action: pan-y;
+    scroll-padding-bottom: var(--space-4);
+  }
+
   .messaging-thread-list {
     width: 100% !important;
     height: 148px !important;

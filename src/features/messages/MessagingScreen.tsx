@@ -207,7 +207,10 @@ export const MessagingScreen: React.FC = () => {
       </div>
 
       {/* 2. Main Chat Conversation Pane */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'var(--bg-app)', minWidth: 0 }}>
+      <div
+        className="messaging-conversation-pane"
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'var(--bg-app)', minWidth: 0, minHeight: 0 }}
+      >
         {/* Chat Top Header */}
         <div
           style={{
@@ -251,9 +254,13 @@ export const MessagingScreen: React.FC = () => {
 
         {/* Chat Messages Body */}
         <div
+          className="messaging-message-list"
           style={{
             flex: 1,
+            minHeight: 0,
             overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            overscrollBehavior: 'contain',
             padding: 'var(--space-4)',
             display: 'flex',
             flexDirection: 'column',
@@ -346,6 +353,7 @@ export const MessagingScreen: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: 'var(--space-2)',
+            flexShrink: 0,
           }}
         >
           <input
