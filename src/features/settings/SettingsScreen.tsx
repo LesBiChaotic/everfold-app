@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Settings,
   Volume2,
@@ -27,8 +27,10 @@ import { useStoryAccessStore } from '../../store/storyAccessStore';
 import { useRewardStore } from '../../store/rewardStore';
 import { Foldmark } from '../../components/brand/Foldmark';
 import { soundEngine } from '../../audio/soundEngine';
+import { resetEverfoldExperience, RestartMode } from '../../utils/resetEverfoldExperience';
 
 export const SettingsScreen: React.FC = () => {
+  const navigate = useNavigate();
   const { resetRewardProgress, foldScore, milestoneIdsUnlocked } = useRewardStore();
   const {
     theme,
@@ -59,6 +61,17 @@ export const SettingsScreen: React.FC = () => {
   const [exportDownloaded, setExportDownloaded] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [restartOpen, setRestartOpen] = useState(false);
+  const [restartMode, setRestartMode] = useState<RestartMode>('restart-onboarding');
+  const [restartConfirmation, setRestartConfirmation] = useState('');
+
+  const handleFullRestart = () => {
+    if (restartConfirmation.trim().toUpperCase() !== 'RESTART') return;
+    resetEverfoldExperience(restartMode);
+    setRestartOpen(false);
+    setRestartConfirmation('');
+    navigate(restartMode === 'restart-onboarding' ? '/onboarding' : '/', { replace: true });
+  };
 
   useEffect(() => {
     const handler = (e: any) => {
@@ -535,6 +548,56 @@ export const SettingsScreen: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Full experience restart */}
+      <div className="ef-card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', border: '1px solid var(--color-danger)' }}>
+        <h3 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--color-danger)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Restart Everfold
+        </h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+          <div style={{ flex: 1, minWidth: '240px' }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--font-size-sm)', color: 'var(--text-primary)' }}>Start the experience over</div>
+            <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', marginTop: '2px' }}>
+              Clears messages, matches, Journal entries, quiz results, story and ARG progress, community activity, rewards, and unlocks. Appearance and accessibility preferences stay on this device.
+            </div>
+          </div>
+          <button className="btn btn-secondary btn-sm" onClick={() => setRestartOpen(true)} style={{ flexShrink: 0, color: 'var(--color-danger)' }}>
+            <AlertTriangle size={15} /> Restart Everything
+          </button>
+        </div>
+      </div>
+
+      {restartOpen && (
+        <div role="dialog" aria-modal="true" aria-labelledby="restart-title" style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(12, 8, 14, 0.72)', display: 'grid', placeItems: 'center', padding: 'var(--space-4)' }}>
+          <div className="ef-card" style={{ width: 'min(520px, 100%)', maxHeight: '90vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', borderTop: '4px solid var(--color-danger)' }}>
+            <div>
+              <h2 id="restart-title" style={{ margin: 0, fontSize: 'var(--font-size-lg)', color: 'var(--text-primary)' }}>How far back should Everfold restart?</h2>
+              <p style={{ margin: '6px 0 0', color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)' }}>This cannot be undone unless you exported your data first.</p>
+            </div>
+
+            <label className="ef-card-subtle" style={{ display: 'flex', gap: 'var(--space-3)', cursor: 'pointer' }}>
+              <input type="radio" name="restart-mode" checked={restartMode === 'restart-onboarding'} onChange={() => setRestartMode('restart-onboarding')} />
+              <span><strong>Restart from onboarding</strong><br /><span style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)' }}>Erase the player profile and avatar too, then return to profile creation.</span></span>
+            </label>
+            <label className="ef-card-subtle" style={{ display: 'flex', gap: 'var(--space-3)', cursor: 'pointer' }}>
+              <input type="radio" name="restart-mode" checked={restartMode === 'keep-profile'} onChange={() => setRestartMode('keep-profile')} />
+              <span><strong>Keep my profile</strong><br /><span style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)' }}>Reset the story and activity, but keep profile creation, avatar, and saved avatar presets.</span></span>
+            </label>
+
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)' }}>
+              Type <strong>RESTART</strong> to confirm
+              <input className="input" value={restartConfirmation} onChange={(event) => setRestartConfirmation(event.target.value)} autoComplete="off" />
+            </label>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
+              <button className="btn btn-secondary" onClick={() => { setRestartOpen(false); setRestartConfirmation(''); }}>Cancel</button>
+              <button className="btn btn-primary" disabled={restartConfirmation.trim().toUpperCase() !== 'RESTART'} onClick={handleFullRestart} style={{ background: 'var(--color-danger)' }}>
+                Restart Everfold
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
