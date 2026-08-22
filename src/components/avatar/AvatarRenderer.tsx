@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { AvatarConfig } from '../../types';
 import { useSettingsStore } from '../../store/settingsStore';
 
@@ -53,6 +53,7 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
   const config = { ...defaultAvatarConfig, ...userConfig };
   const mode = overrideRenderMode || config.renderMode || 'normal';
   const { avatarIdleAnimation, reducedMotion } = useSettingsStore();
+  const reactId = useId().replace(/:/g, '');
 
   const [isBlinking, setIsBlinking] = useState(false);
 
@@ -78,10 +79,17 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
 
   // Skin tone palette
   const skin = config.skinTone || '#e0b59b';
-  const shadowSkin = '#c29278';
+  const shadeColor = (hex: string, amount: number) => {
+    const value = hex.replace('#', '');
+    if (!/^[0-9a-f]{6}$/i.test(value)) return '#b98570';
+    const channels = [0, 2, 4].map((offset) => Math.max(0, Math.min(255, parseInt(value.slice(offset, offset + 2), 16) + amount)));
+    return `#${channels.map((channel) => channel.toString(16).padStart(2, '0')).join('')}`;
+  };
+  const shadowSkin = shadeColor(skin, -24);
+  const highlightSkin = shadeColor(skin, 16);
 
   // Unique filter IDs to prevent SVG DOM collisions
-  const filterId = `avatar-dither-${Math.random().toString(36).substring(2, 7)}`;
+  const filterId = `avatar-${reactId}`;
 
   // Determine effective mouth & eye styling based on mood/reaction
   const effectiveMood = reaction === 'celebrate' ? 'joyful' : reaction === 'soft_smile' ? 'warm' : reaction === 'curious' ? 'curious' : config.moodExpression || 'warm';
@@ -140,8 +148,16 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
           </linearGradient>
           <linearGradient id={`hair-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={config.hairColor || '#2b1d14'} />
-            <stop offset="100%" stopColor="#1a110a" />
+            <stop offset="100%" stopColor={shadeColor(config.hairColor || '#2b1d14', -28)} />
           </linearGradient>
+          <linearGradient id={`skin-${filterId}`} x1="20%" y1="5%" x2="80%" y2="100%">
+            <stop offset="0%" stopColor={highlightSkin} />
+            <stop offset="55%" stopColor={skin} />
+            <stop offset="100%" stopColor={shadowSkin} />
+          </linearGradient>
+          <filter id={`soft-shadow-${filterId}`} x="-30%" y="-30%" width="160%" height="170%">
+            <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#241923" floodOpacity="0.2" />
+          </filter>
         </defs>
 
         {/* Background Patterns */}
@@ -161,11 +177,14 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
         {(config.hairStyle === 'shoulder_waves' || config.hairStyle === 'long_curls') && (
           <path
             d="M50,70 C30,100 25,160 45,190 C65,190 70,160 70,140 C130,140 135,190 155,190 C175,160 170,100 150,70 Z"
-            fill={config.hairColor || '#2b1d14'}
+            fill={`url(#hair-${filterId})`}
           />
         )}
         {config.hairStyle === 'afro' && (
-          <circle cx="100" cy="90" r="68" fill={config.hairColor || '#1c1511'} />
+          <g fill={`url(#hair-${filterId})`}>
+            <circle cx="100" cy="82" r="63" />
+            <circle cx="52" cy="92" r="25" /><circle cx="148" cy="92" r="25" />
+          </g>
         )}
 
         {/* Clothing / Torso */}
@@ -173,7 +192,8 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
           {/* Base Torso */}
           <path
             d="M35,200 C35,150 70,140 100,140 C130,140 165,150 165,200 Z"
-            fill={config.top === 'hoodie' ? '#475569' : config.top === 'turtleneck' ? '#1e293b' : config.top === 'collared_shirt' ? '#0f766e' : '#6b2848'}
+            fill={config.top === 'hoodie' ? '#526177' : config.top === 'turtleneck' ? '#29354a' : config.top === 'collared_shirt' ? '#287f78' : '#7c3d59'}
+            filter={`url(#soft-shadow-${filterId})`}
           />
           {/* Neck */}
           <path d="M85,115 L115,115 L118,145 L82,145 Z" fill={shadowSkin} />
@@ -197,25 +217,27 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
         )}
 
         {/* Head / Jaw Layer */}
-        <g id="head">
+        <g id="head" filter={`url(#soft-shadow-${filterId})`}>
+          <ellipse cx="61" cy="91" rx="7" ry="12" fill={shadowSkin} />
+          <ellipse cx="139" cy="91" rx="7" ry="12" fill={shadowSkin} />
           {config.faceShape === 'square' ? (
             <path
               d="M62,60 C62,40 138,40 138,60 L138,98 C138,124 125,135 100,135 C75,135 62,124 62,98 Z"
-              fill={skin}
+              fill={`url(#skin-${filterId})`}
             />
           ) : config.faceShape === 'heart' ? (
             <path
               d="M60,60 C60,35 140,35 140,60 L138,95 C138,125 118,137 100,137 C82,137 62,125 62,95 Z"
-              fill={skin}
+              fill={`url(#skin-${filterId})`}
             />
           ) : (
             // Oval / Round standard
-            <ellipse cx="100" cy="88" rx="38" ry="46" fill={skin} />
+            <ellipse cx="100" cy="88" rx={config.faceShape === 'round' ? 41 : 38} ry={config.faceShape === 'round' ? 41 : 46} fill={`url(#skin-${filterId})`} />
           )}
 
           {/* Blush */}
-          <ellipse cx="73" cy="94" rx="7" ry="4" fill="rgba(219, 112, 147, 0.22)" />
-          <ellipse cx="127" cy="94" rx="7" ry="4" fill="rgba(219, 112, 147, 0.22)" />
+          <ellipse cx="75" cy="96" rx="9" ry="4" fill="rgba(190, 82, 107, 0.16)" />
+          <ellipse cx="125" cy="96" rx="9" ry="4" fill="rgba(190, 82, 107, 0.16)" />
 
           {/* Freckles */}
           {config.freckles && (
@@ -271,14 +293,14 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
             ) : (
               <>
                 {/* Left Eye */}
-                <ellipse cx="79" cy="84" rx="7" ry={config.eyeShape === 'round' ? '6' : '4.5'} fill="#ffffff" />
-                <circle cx="80" cy="84" r="3.2" fill={config.eyeColor || '#4a3728'} />
-                <circle cx="81.2" cy="82.8" r="1" fill="#ffffff" />
+                <path d={config.eyeShape === 'round' ? 'M70 84 Q79 76 88 84 Q79 93 70 84Z' : 'M69 84 Q79 78 89 84 Q79 90 69 84Z'} fill="#fffdfb" stroke={shadeColor(config.hairColor || '#2b1d14', 10)} strokeWidth="1.2" />
+                <circle cx="80" cy="84" r="4" fill={config.eyeColor || '#4a3728'} />
+                <circle cx="80" cy="84" r="1.8" fill="#17130f" /><circle cx="81.4" cy="82.5" r="1" fill="#ffffff" />
 
                 {/* Right Eye */}
-                <ellipse cx="121" cy="84" rx="7" ry={config.eyeShape === 'round' ? '6' : '4.5'} fill="#ffffff" />
-                <circle cx="120" cy="84" r="3.2" fill={config.eyeColor || '#4a3728'} />
-                <circle cx="121.2" cy="82.8" r="1" fill="#ffffff" />
+                <path d={config.eyeShape === 'round' ? 'M112 84 Q121 76 130 84 Q121 93 112 84Z' : 'M111 84 Q121 78 131 84 Q121 90 111 84Z'} fill="#fffdfb" stroke={shadeColor(config.hairColor || '#2b1d14', 10)} strokeWidth="1.2" />
+                <circle cx="120" cy="84" r="4" fill={config.eyeColor || '#4a3728'} />
+                <circle cx="120" cy="84" r="1.8" fill="#17130f" /><circle cx="121.4" cy="82.5" r="1" fill="#ffffff" />
               </>
             )}
           </g>
@@ -344,11 +366,20 @@ export const AvatarRenderer: React.FC<AvatarRendererProps> = ({
 
         {/* Hair - Front Layer */}
         <g id="hair-front">
+          {(config.hairStyle === 'shoulder_waves' || config.hairStyle === 'long_curls') && (
+            <g fill={`url(#hair-${filterId})`}>
+              <path d="M55,76 C54,42 79,31 103,35 C132,31 148,49 145,78 C136,61 122,55 105,58 C92,57 80,51 65,69 C63,85 58,95 53,101 C52,91 52,83 55,76 Z" />
+              <path d="M61,59 C75,39 98,35 116,41 C100,43 91,52 86,66 C77,62 69,61 61,59 Z" opacity=".55" />
+            </g>
+          )}
+          {config.hairStyle === 'afro' && (
+            <path d="M48,83 C46,46 70,24 101,25 C134,24 155,49 151,84 C142,65 129,56 113,55 C91,50 69,57 48,83 Z" fill={`url(#hair-${filterId})`} />
+          )}
           {config.hairStyle === 'pixie' && (
-            <path d="M56,70 C56,40 144,40 144,70 C130,55 70,55 56,70 Z" fill={config.hairColor || '#2b1d14'} />
+            <path d="M56,70 C56,40 144,40 144,70 C130,55 70,55 56,70 Z" fill={`url(#hair-${filterId})`} />
           )}
           {config.hairStyle === 'crew' && (
-            <path d="M58,68 C62,45 138,45 142,68 C135,54 65,54 58,68 Z" fill={config.hairColor || '#2b1d14'} />
+            <path d="M58,68 C62,45 138,45 142,68 C135,54 65,54 58,68 Z" fill={`url(#hair-${filterId})`} />
           )}
           {config.hairStyle === 'curtain_bangs' && (
             <path

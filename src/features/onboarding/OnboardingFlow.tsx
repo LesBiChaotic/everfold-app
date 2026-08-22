@@ -843,10 +843,10 @@ export const OnboardingFlow: React.FC = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
                   <div>
                     <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-                      Craft your vector avatar
+                      Create your illustrated profile
                     </h2>
                     <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', marginTop: '2px' }}>
-                      Prioritizes intentional presence over photo swipe bias.
+                      A warm, expressive portrait without photo-swipe pressure.
                     </p>
                   </div>
 
@@ -861,7 +861,7 @@ export const OnboardingFlow: React.FC = () => {
                 </div>
 
                 {/* Avatar Preview Centerpiece */}
-                <div style={{ display: 'flex', justifyContent: 'center', margin: 'var(--space-2) 0' }}>
+                <div className="onboarding-avatar-stage" style={{ display: 'flex', justifyContent: 'center', margin: 'var(--space-2) 0' }}>
                   <div
                     style={{
                       padding: 'var(--space-3)',
@@ -872,7 +872,7 @@ export const OnboardingFlow: React.FC = () => {
                       display: 'inline-flex',
                     }}
                   >
-                    <AvatarRenderer config={formData.avatarConfig} size={130} enableIdle={true} />
+                    <AvatarRenderer config={formData.avatarConfig} size={180} enableIdle={true} />
                   </div>
                 </div>
 

@@ -562,6 +562,37 @@ button:disabled {
 :root[data-cosmetic-comment-flair-id="flair_archive_eye"] .equipped-comment-flair::before { content: "◉"; }
 :root[data-cosmetic-comment-flair-id="flair_moon"] .equipped-comment-flair::before { content: "☾"; }
 
+/* Illustrated profile creation */
+.avatar-studio-preview,
+.onboarding-avatar-stage {
+  background:
+    radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--accent-plum) 18%, transparent), transparent 34%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-info) 15%, transparent), transparent 38%),
+    var(--bg-surface) !important;
+}
+.avatar-studio-preview > div:first-of-type,
+.onboarding-avatar-stage > div {
+  position: relative;
+  isolation: isolate;
+}
+.avatar-studio-preview > div:first-of-type::before,
+.onboarding-avatar-stage > div::before {
+  content: "";
+  position: absolute;
+  inset: 10% -18% -8%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--accent-plum) 22%, transparent), transparent 70%);
+  filter: blur(16px);
+}
+.avatar-container svg { overflow: visible; }
+
+@media (max-width: 767px) {
+  .avatar-studio-preview { position: relative !important; top: auto !important; }
+  .avatar-studio-preview .avatar-container { width: min(210px, 62vw) !important; height: min(210px, 62vw) !important; }
+  .onboarding-avatar-stage .avatar-container { width: min(180px, 58vw) !important; height: min(180px, 58vw) !important; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root:not([data-reduced-motion="true"]) .cosmetic-avatar-frame[data-frame="frame_constellation"] { animation: cosmeticGlow 4s ease-in-out infinite; }
 }

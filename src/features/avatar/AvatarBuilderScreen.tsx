@@ -124,10 +124,10 @@ export const AvatarBuilderScreen: React.FC = () => {
           </button>
           <div>
             <h1 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', margin: 0 }}>
-              Modular Avatar Studio
+              Illustrated Profile Studio
             </h1>
             <p style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)', margin: '2px 0 0 0' }}>
-              Vector-crafted intentional presence. Changes preserve your identity records.
+              Build a warm illustrated portrait without uploading a photograph.
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export const AvatarBuilderScreen: React.FC = () => {
       >
         {/* Left / Top Column: Live Avatar Preview Card & Quick Actions */}
         <div
-          className="ef-card-featured"
+          className="ef-card-featured avatar-studio-preview"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -170,7 +170,7 @@ export const AvatarBuilderScreen: React.FC = () => {
               transition: 'all 0.2s ease',
             }}
           >
-            <AvatarRenderer config={currentConfig} size={160} enableIdle={true} />
+            <AvatarRenderer config={currentConfig} size={210} enableIdle={true} />
           </div>
 
           <div style={{ width: '100%' }}>
