@@ -73,6 +73,26 @@ export const SEEDED_DATE_PLANS: DatePlan[] = [
     previouslyVisitedAnomaly: false,
     createdAt: '2026-08-16T11:30:00Z'
   },
+  {
+    id: 'dp_farah_books_buns', relationshipId: 'rel_farah_new', matchUserId: 'usr_farah_rahman', mood: 'Low-key',
+    activityType: 'Used Books, Cardamom Buns & Courtyard Reading', venueName: 'Lantern Books and Juniper Bakehouse', venueAddress: 'Quiet Arts District', venueCategory: 'bookstore',
+    scheduledDate: '2026-08-24', scheduledTime: '10:30 AM', scheduleFitScore: 96, comfortNotes: ['Courtyard seating', 'No music before noon', 'Step-free bookshop entrance'], safetyCheckInIntervalMinutes: 75, status: 'Confirmed', previouslyVisitedAnomaly: false, createdAt: '2026-08-16T12:10:00Z'
+  },
+  {
+    id: 'dp_rina_museum', relationshipId: 'rel_rina_visitor', matchUserId: 'usr_rina_matsuda', mood: 'Arts',
+    activityType: 'Print Gallery & Quiet Snack Intermission', venueName: 'Tokyo Metropolitan Art Museum', venueAddress: 'Ueno Park, Tokyo', venueCategory: 'museum',
+    scheduledDate: '2026-08-27', scheduledTime: '2:00 PM', scheduleFitScore: 93, comfortNotes: ['Quiet cloth snack pouch', 'Bench breaks every gallery', 'No timed-entry pressure'], safetyCheckInIntervalMinutes: 90, status: 'Sent', previouslyVisitedAnomaly: false, createdAt: '2026-08-16T12:25:00Z'
+  },
+  {
+    id: 'dp_amina_late_coffee', relationshipId: 'rel_amina_visitor', matchUserId: 'usr_amina_elsayed', mood: 'Curious',
+    activityType: 'Late Coffee & Communication Field Notes', venueName: 'North Window Coffee Room', venueAddress: 'Manchester Northern Quarter', venueCategory: 'coffee',
+    scheduledDate: '2026-08-29', scheduledTime: '9:15 PM', scheduleFitScore: 91, comfortNotes: ['Corner table reserved', 'No expectation to extend the evening', 'Text-friendly menu'], safetyCheckInIntervalMinutes: 60, status: 'Draft', previouslyVisitedAnomaly: false, createdAt: '2026-08-16T12:40:00Z'
+  },
+  {
+    id: 'dp_rafael_soundwalk', relationshipId: 'rel_rafael_paused', matchUserId: 'usr_rafael_costa', mood: 'Outdoors',
+    activityType: 'Twilight Sound Walk & Radio Archive Stop', venueName: 'Alfama Listening Route', venueAddress: 'Lisbon, Portugal', venueCategory: 'park',
+    scheduledDate: '2026-09-03', scheduledTime: '8:30 PM', scheduleFitScore: 89, comfortNotes: ['Frequent quiet stops', 'Route avoids steepest stairs', 'Recording is optional'], safetyCheckInIntervalMinutes: 60, status: 'Sent', previouslyVisitedAnomaly: false, createdAt: '2026-08-16T13:00:00Z'
+  },
 
   // Historic / ARG Stacked Date Cards (combines to reveal relationship ID 4417)
   {

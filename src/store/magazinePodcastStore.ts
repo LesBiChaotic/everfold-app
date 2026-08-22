@@ -66,6 +66,17 @@ export const useMagazinePodcastStore = create<MagazinePodcastState>()(
     }),
     {
       name: 'everfold.magazinePodcast.v2',
+      version: 2,
+      migrate: (persisted: any) => {
+        if (!persisted) return persisted;
+        const mergeById = <T extends { id: string }>(seeded: T[], saved: T[] = []) =>
+          Array.from(new Map([...seeded, ...saved].map((item) => [item.id, item])).values());
+        return {
+          ...persisted,
+          issues: mergeById(SEEDED_MAGAZINE_ISSUES, persisted.issues),
+          podcastEpisodes: mergeById(SEEDED_PODCAST_EPISODES, persisted.podcastEpisodes),
+        };
+      },
     }
   )
 );

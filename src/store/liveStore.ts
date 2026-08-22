@@ -35,6 +35,7 @@ export const useLiveStore = create<LiveState>()(
           if (!prereqsMet) return;
 
           // Schedule event delivery
+          get().consumeEvent(evt.id);
           setTimeout(() => {
             if (evt.type === 'typing_state') {
               get().setTypingState(evt.payload.threadId, evt.payload.isTyping);
@@ -45,7 +46,15 @@ export const useLiveStore = create<LiveState>()(
               }
             } else if (evt.type === 'message_arrival') {
               get().setTypingState(evt.payload.threadId, false);
-              useAppStore.getState().sendMessage(evt.payload.threadId, evt.payload.message.body, true);
+              useAppStore.setState((state) => ({
+                messages: {
+                  ...state.messages,
+                  [evt.payload.threadId]: [...(state.messages[evt.payload.threadId] || []), evt.payload.message],
+                },
+                threads: state.threads.map((thread) => thread.id === evt.payload.threadId
+                  ? { ...thread, unreadCount: thread.unreadCount + 1, lastMessage: evt.payload.message }
+                  : thread),
+              }));
               soundEngine.playCue('ui.messageReceived');
             } else if (evt.type === 'pulse_post') {
               useAppStore.setState((state) => ({
@@ -58,7 +67,6 @@ export const useLiveStore = create<LiveState>()(
               }));
               soundEngine.playCue(evt.payload.notification.isAnomaly ? 'arg.archivedNotification' : 'ui.notification');
             }
-            get().consumeEvent(evt.id);
           }, evt.delayMs);
         });
       },
@@ -80,7 +88,17 @@ export const useLiveStore = create<LiveState>()(
         })
     }),
     {
-      name: 'everfold_live_state_v1'
+      name: 'everfold_live_state_v1',
+      version: 2,
+      migrate: (persisted: any) => {
+        if (!persisted) return persisted;
+        const saved = persisted.events || [];
+        const byId = new Map(saved.map((event: LiveEvent) => [event.id, event]));
+        return {
+          ...persisted,
+          events: SEEDED_LIVE_EVENTS.map((event) => byId.get(event.id) || event),
+        };
+      }
     }
   )
 );

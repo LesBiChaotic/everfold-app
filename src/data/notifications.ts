@@ -74,6 +74,11 @@ export const SEEDED_NOTIFICATIONS: NotificationItem[] = [
     isRead: false,
     linkUrl: '/messages/th_morgan_visitor'
   },
+  { id: 'notif_09', category: 'Messages', title: 'New correspondence from Farah Rahman', body: '“I saw that you saved my illustrated-book profile...”', timestamp: '36 mins ago', isRead: false, linkUrl: '/messages/th_farah_visitor' },
+  { id: 'notif_10', category: 'Pulse', title: 'Your reply was quoted in Introverts & Quiet Spaces', body: 'Amina highlighted your test for sincere slow communication.', timestamp: '1 hour ago', isRead: false, linkUrl: '/pulse' },
+  { id: 'notif_11', category: 'Dates', title: 'Shared itinerary confirmed', body: 'Farah confirmed Used Books, Cardamom Buns & Courtyard Reading.', timestamp: '2 hours ago', isRead: true, linkUrl: '/date-planner' },
+  { id: 'notif_12', category: 'Pulse', title: 'Rina opened the museum snack tribunal', body: 'The community is ranking gallery snacks by wrapper volume.', timestamp: '3 hours ago', isRead: true, linkUrl: '/pulse' },
+  { id: 'notif_13', category: 'Messages', title: 'Amina El-Sayed sent a late note', body: '“When someone says no rush replying, what makes you believe them?”', timestamp: 'Last night', isRead: true, linkUrl: '/messages/th_amina_visitor' },
 
   // Late ARG Anomaly Notifications (Triggered on stage progression)
   {

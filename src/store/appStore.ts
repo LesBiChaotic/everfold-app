@@ -248,7 +248,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'everfold_app_state_v1',
-      version: 2,
+      version: 3,
       migrate: (persisted: any) => {
         if (!persisted) return persisted;
         const mergeById = <T extends { id: string }>(seeded: T[], saved: T[] = []) =>

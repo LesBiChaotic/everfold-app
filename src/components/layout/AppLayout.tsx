@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar } from '../navigation/Sidebar';
 import { MobileHeader } from '../navigation/MobileHeader';
 import { MobileBottomNav } from '../navigation/MobileBottomNav';
@@ -9,12 +9,22 @@ import { NotificationDrawer } from '../notifications/NotificationDrawer';
 import { DebugDrawer } from '../common/DebugDrawer';
 import { useProfileStore } from '../../store/profileStore';
 import { CosmeticEffectsSync } from '../rewards/CosmeticEffectsSync';
+import { useLiveStore } from '../../store/liveStore';
+import { useARGStore } from '../../store/argStore';
 
 export const AppLayout: React.FC = () => {
+  const location = useLocation();
   const { isOnboardingCompleted } = useProfileStore();
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = useState(false);
+  const triggerEligibleEvents = useLiveStore((state) => state.triggerEligibleEvents);
+  const visitCounts = useARGStore((state) => state.visitCounts);
+
+  useEffect(() => {
+    const totalVisits = Object.values(visitCounts).reduce((sum, count) => sum + count, 0);
+    triggerEligibleEvents(totalVisits);
+  }, [location.pathname, visitCounts, triggerEligibleEvents]);
 
   if (!isOnboardingCompleted) {
     return <Navigate to="/onboarding" replace />;

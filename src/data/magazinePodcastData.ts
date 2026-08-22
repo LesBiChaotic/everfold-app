@@ -307,4 +307,42 @@ export const SEEDED_PODCAST_EPISODES: PodcastEpisode[] = [
       },
     ],
   },
+  {
+    id: 'pod_ep_07', number: 7, title: 'Episode 07: Accidental Archives Inside Used Books',
+    subtitle: 'What receipts, tickets, and handwritten recipes reveal—and what privacy asks us to leave untouched.', guest: 'Farah Rahman & Camille Renaud', durationText: '31 min', publishedDate: '2025-12-18',
+    summary: 'A bookseller and digital archivist discuss found paper, contextual memory, and the ethics of sharing a stranger’s traces online.', discussionThreadId: 'thread_pod_07', storyTier: 0,
+    transcript: [
+      { speaker: 'Janelle Wu', timestamp: '00:01', text: 'Today we are opening books for what earlier readers left behind—not treasures, necessarily, but grocery lists, train tickets, and ordinary evidence of a life.' },
+      { speaker: 'Farah Rahman', timestamp: '02:14', text: 'The loveliest finds are mundane. A receipt tells you somebody bought soup before reading chapter twelve. It does not need to become content to matter.' },
+      { speaker: 'Camille Renaud', timestamp: '07:40', text: 'Preserve context first. Photograph the paper where it rested, redact names, and remember that discovery does not create ownership over somebody else’s intimacy.' },
+    ],
+  },
+  {
+    id: 'pod_ep_06', number: 6, title: 'Episode 06: The Acoustics of a Good First Date',
+    subtitle: 'Why chair scraping, espresso grinders, and table geometry shape emotional safety.', guest: 'Naomi Serrano & Rafael Costa', durationText: '36 min', publishedDate: '2025-11-06',
+    summary: 'An architect and sound recordist redesign the ordinary café date around nervous-system comfort.', discussionThreadId: 'thread_pod_06', storyTier: 0,
+    transcript: [
+      { speaker: 'Naomi Serrano', timestamp: '03:18', text: 'Warm lighting cannot rescue a room where every hard surface throws conversation back at you.' },
+      { speaker: 'Rafael Costa', timestamp: '08:02', text: 'The best test is whether you can hear the pause before someone answers. If the room erases pauses, it erases half the conversation.' },
+    ],
+  },
+  {
+    id: 'pod_ep_05', number: 5, title: 'Episode 05: No Rush Means No Invoice',
+    subtitle: 'Practicing low-pressure correspondence without strategic distance.', guest: 'Amina El-Sayed & Dev Malik', durationText: '29 min', publishedDate: '2025-09-28',
+    summary: 'Concrete behaviors that make asynchronous communication feel safe, warm, and genuinely unhurried.', discussionThreadId: 'thread_pod_05', storyTier: 0,
+    transcript: [
+      { speaker: 'Amina El-Sayed', timestamp: '01:46', text: 'If you say there is no rush and later demand an explanation for the gap, the original reassurance becomes an emotional invoice.' },
+      { speaker: 'Dev Malik', timestamp: '05:30', text: 'Resume with the subject you were discussing. That tells someone the connection remained intact while they were away.' },
+    ],
+  },
+  {
+    id: 'pod_ep_04', number: 4, title: 'Episode 04: Repair Dates and Shared Competence',
+    subtitle: 'What assembling a shelf reveals about frustration, humor, and asking for help.', guest: 'Hana Prasetyo, Grace Nguyen & Daniel Kim', durationText: '33 min', publishedDate: '2025-08-14',
+    summary: 'Three makers explain why a small practical task can reveal more compatibility than a polished dinner.', discussionThreadId: 'thread_pod_04', storyTier: 0,
+    transcript: [
+      { speaker: 'Hana Prasetyo', timestamp: '02:05', text: 'A repair gives silence somewhere useful to rest. You can talk, stop talking, hold a board steady, and begin again.' },
+      { speaker: 'Daniel Kim', timestamp: '06:42', text: 'Compatibility is being able to say “I installed this upside down” before the other person has to prove it in court.' },
+      { speaker: 'Grace Nguyen', timestamp: '09:10', text: 'And believing the plant label when it says the tiny vine will eventually eat the entire shelf.' },
+    ],
+  },
 ];
