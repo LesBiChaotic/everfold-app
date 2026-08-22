@@ -300,9 +300,12 @@ export const CosmeticInventoryScreen: React.FC = () => {
                 {/* Header Swatch & Badges */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-3)' }}>
                   <div
+                    className="cosmetic-catalog-preview"
+                    data-category={item.category}
+                    data-cosmetic={item.id}
                     style={{
-                      width: '44px',
-                      height: '44px',
+                      width: '68px',
+                      height: '52px',
                       borderRadius: 'var(--radius-md)',
                       backgroundColor: item.previewColor || 'var(--accent-plum)',
                       display: 'flex',
@@ -312,7 +315,17 @@ export const CosmeticInventoryScreen: React.FC = () => {
                       boxShadow: 'var(--shadow-sm)',
                     }}
                   >
-                    <Sparkles size={20} />
+                    {item.category === 'messageTheme' ? (
+                      <span className="cosmetic-preview-bubbles"><i /><i /></span>
+                    ) : item.category === 'journalCover' ? (
+                      <span className="cosmetic-preview-journal"><i /></span>
+                    ) : item.category === 'uiSoundTheme' || item.category === 'ambientTheme' ? (
+                      <span className="cosmetic-preview-wave"><i /><i /><i /><i /></span>
+                    ) : item.category === 'avatarFrame' || item.category === 'avatarBackground' ? (
+                      <span className="cosmetic-preview-avatar"><i /></span>
+                    ) : (
+                      <Sparkles size={20} />
+                    )}
                   </div>
 
                   <div style={{ display: 'flex', gap: '4px' }}>

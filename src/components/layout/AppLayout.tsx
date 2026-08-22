@@ -8,6 +8,7 @@ import { CommandPalette } from '../search/CommandPalette';
 import { NotificationDrawer } from '../notifications/NotificationDrawer';
 import { DebugDrawer } from '../common/DebugDrawer';
 import { useProfileStore } from '../../store/profileStore';
+import { CosmeticEffectsSync } from '../rewards/CosmeticEffectsSync';
 
 export const AppLayout: React.FC = () => {
   const { isOnboardingCompleted } = useProfileStore();
@@ -29,6 +30,7 @@ export const AppLayout: React.FC = () => {
         overflow: 'hidden',
       }}
     >
+      <CosmeticEffectsSync />
       {/* Accessible Skip Link */}
       <a href="#main-content" className="skip-link">
         Skip to main content

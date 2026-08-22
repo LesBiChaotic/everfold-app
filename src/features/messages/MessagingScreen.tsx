@@ -282,6 +282,7 @@ export const MessagingScreen: React.FC = () => {
                 }}
               >
                 <div
+                  className={`message-bubble ${isMe ? 'message-bubble--mine' : 'message-bubble--theirs'}`}
                   style={{
                     padding: 'var(--space-3) var(--space-4)',
                     borderRadius: 'var(--radius-lg)',

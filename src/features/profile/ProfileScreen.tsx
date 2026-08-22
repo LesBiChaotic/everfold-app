@@ -7,6 +7,7 @@ import { useRewardStore } from '../../store/rewardStore';
 import { AvatarRenderer } from '../../components/avatar/AvatarRenderer';
 import { ProfilePreviewModal } from '../../components/profile/ProfilePreviewModal';
 import { Foldmark } from '../../components/brand/Foldmark';
+import { CosmeticAvatarFrame } from '../../components/rewards/CosmeticAvatarFrame';
 
 export const ProfileScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -96,7 +97,9 @@ export const ProfileScreen: React.FC = () => {
                 flexShrink: 0,
               }}
             >
-              <AvatarRenderer config={visitorProfile.avatarConfig} size={92} enableIdle={true} />
+              <CosmeticAvatarFrame size={92}>
+                <AvatarRenderer config={visitorProfile.avatarConfig} size={92} enableIdle={true} />
+              </CosmeticAvatarFrame>
             </div>
 
             <div style={{ minWidth: 0 }}>
