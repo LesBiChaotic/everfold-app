@@ -1,0 +1,74 @@
+{
+  "name": "Everfold — Slow Dating & Relational Depth",
+  "short_name": "Everfold",
+  "description": "Everfold is a slow-dating and relational continuity platform using modular illustrated avatars and deep relational continuity analytics.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FBF7F4",
+  "theme_color": "#6B3248",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon-maskable-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Discover Matches",
+      "short_name": "Discover",
+      "description": "Explore curated relational matches",
+      "url": "./#/discover",
+      "icons": [{ "src": "./favicon.svg", "sizes": "32x32" }]
+    },
+    {
+      "name": "Messages & Letters",
+      "short_name": "Messages",
+      "description": "Open unhurried conversations",
+      "url": "./#/messages",
+      "icons": [{ "src": "./favicon.svg", "sizes": "32x32" }]
+    },
+    {
+      "name": "Daily Journal",
+      "short_name": "Journal",
+      "description": "Write private reflections",
+      "url": "./#/journal",
+      "icons": [{ "src": "./favicon.svg", "sizes": "32x32" }]
+    },
+    {
+      "name": "Milestones Hub",
+      "short_name": "Milestones",
+      "description": "View progression and cosmetics",
+      "url": "./#/profile/milestones",
+      "icons": [{ "src": "./favicon.svg", "sizes": "32x32" }]
+    }
+  ]
+}
