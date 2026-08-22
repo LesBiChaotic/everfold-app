@@ -120,7 +120,7 @@ export const MatchesScreen: React.FC = () => {
             return (
               <div
                 key={match.id}
-                className="ef-card-interactive flex flex-col justify-between"
+                className="ef-card-interactive relationship-cosmetic-card flex flex-col justify-between"
                 style={{
                   padding: 'var(--space-4)',
                   backgroundColor: isPrior ? 'var(--arg-anomaly-surface)' : 'var(--bg-card)',

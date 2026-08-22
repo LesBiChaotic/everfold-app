@@ -526,6 +526,42 @@ button:disabled {
 @keyframes cosmeticWave { to { transform: scaleY(.55); } }
 :root[data-reduced-motion="true"] .cosmetic-preview-wave i { animation: none; }
 
+/* Relationship card skins */
+:root[data-cosmetic-relationship-card-skin-id="rel_skin_museum_ticket"] .relationship-cosmetic-card { border: 1px dashed #b9915f !important; background: linear-gradient(105deg, var(--bg-card) 0 94%, #d6bd8f55 94%) !important; }
+:root[data-cosmetic-relationship-card-skin-id="rel_skin_night_train"] .relationship-cosmetic-card { --text-primary: #f5ead4; --text-secondary: #d1c5b1; --text-muted: #aba18f; --bg-surface-subtle: #28334f; --border-subtle: #9e794a; background: linear-gradient(145deg, #182036, #293552) !important; border: 1px solid #b58b50 !important; box-shadow: inset 0 0 0 3px #1a2238, inset 0 0 0 4px #b58b5066 !important; }
+:root[data-cosmetic-relationship-card-skin-id="rel_skin_reading_room"] .relationship-cosmetic-card { border-left: 7px solid #8a5a44 !important; background: linear-gradient(90deg, #8a5a4417, var(--bg-card) 18%) !important; }
+:root[data-cosmetic-relationship-card-skin-id="rel_skin_botanical"] .relationship-cosmetic-card { background: radial-gradient(ellipse at 98% 5%, #718b6530 0 13%, transparent 14%), radial-gradient(ellipse at 91% 14%, #94a78430 0 11%, transparent 12%), var(--bg-card) !important; border-color: #849378 !important; }
+
+/* Timeline themes */
+:root[data-cosmetic-timeline-theme-id="timeline_archive_thread"] .timeline-cosmetic-line { width: 3px !important; background: repeating-linear-gradient(0deg, #9b7653 0 7px, transparent 7px 12px) !important; }
+:root[data-cosmetic-timeline-theme-id="timeline_archive_thread"] .timeline-cosmetic-event { background: #f3eadb; color: #3f3228; border-radius: 4px 12px 5px 9px; }
+:root[data-theme="dark"][data-cosmetic-timeline-theme-id="timeline_archive_thread"] .timeline-cosmetic-event { background: #40362e; color: #f3eadb; }
+:root[data-cosmetic-timeline-theme-id="timeline_constellation"] .timeline-cosmetic-track { padding-top: var(--space-4); padding-bottom: var(--space-4); border-radius: var(--radius-xl); background: radial-gradient(circle at 15% 10%, #fff 0 1px, transparent 2px), radial-gradient(circle at 82% 31%, #fff 0 1px, transparent 2px), linear-gradient(145deg, #171c34, #333451); }
+:root[data-cosmetic-timeline-theme-id="timeline_constellation"] .timeline-cosmetic-line { background: linear-gradient(#8377b9, #d6c8ff, #8377b9) !important; box-shadow: 0 0 10px #b6a7ff; }
+:root[data-cosmetic-timeline-theme-id="timeline_constellation"] .timeline-cosmetic-event { --text-primary: #f5f1ff; --text-secondary: #d6cfee; --text-muted: #aaa1cb; background: #292b48e8; border-color: #706999 !important; }
+
+/* Date itinerary skins */
+:root[data-cosmetic-date-plan-skin-id="date_botanical"] .date-plan-cosmetic-card { background: radial-gradient(ellipse at 95% 8%, #78906c44 0 12%, transparent 13%), linear-gradient(145deg, #eef2e8, #dce7d5) !important; border: 1px solid #91a388 !important; }
+:root[data-theme="dark"][data-cosmetic-date-plan-skin-id="date_botanical"] .date-plan-cosmetic-card { background: radial-gradient(ellipse at 95% 8%, #9db28f30 0 12%, transparent 13%), linear-gradient(145deg, #293328, #354333) !important; }
+:root[data-cosmetic-date-plan-skin-id="date_night_train"] .date-plan-cosmetic-card { --text-primary: #fff3d8; --text-secondary: #d9cdb8; --text-muted: #afa590; --border-subtle: #9c7644; background: linear-gradient(135deg, #172038, #2b3552) !important; border: 1px dashed #c09555 !important; box-shadow: inset 0 0 0 4px #202a45 !important; }
+
+/* Journal stamps */
+.journal-cosmetic-entry { position: relative; overflow: hidden; }
+.journal-cosmetic-entry::after { position: absolute; right: 12px; bottom: 9px; font-size: 25px; opacity: .2; transform: rotate(-8deg); pointer-events: none; }
+:root[data-cosmetic-journal-stamp-id="stamp_tea"] .journal-cosmetic-entry::after { content: "☕"; }
+:root[data-cosmetic-journal-stamp-id="stamp_book"] .journal-cosmetic-entry::after { content: "▤"; }
+:root[data-cosmetic-journal-stamp-id="stamp_train"] .journal-cosmetic-entry::after { content: "✦"; }
+:root[data-cosmetic-journal-stamp-id="stamp_moon"] .journal-cosmetic-entry::after { content: "☾"; }
+:root[data-cosmetic-journal-stamp-id="stamp_plant"] .journal-cosmetic-entry::after { content: "❧"; }
+:root[data-cosmetic-journal-stamp-id="stamp_museum"] .journal-cosmetic-entry::after { content: "♜"; }
+:root[data-cosmetic-journal-stamp-id="stamp_foldmark"] .journal-cosmetic-entry::after { content: "◇"; }
+
+/* Community flair appears only on the visitor's own public activity. */
+.equipped-comment-flair { display: inline-grid; place-items: center; margin-left: 5px; width: 17px; height: 17px; border-radius: 50%; vertical-align: -4px; color: var(--accent-plum); background: var(--accent-surface); border: 1px solid var(--accent-border); font-size: 11px; font-weight: 800; }
+:root[data-cosmetic-comment-flair-id="flair_foldmark"] .equipped-comment-flair::before { content: "◇"; }
+:root[data-cosmetic-comment-flair-id="flair_archive_eye"] .equipped-comment-flair::before { content: "◉"; }
+:root[data-cosmetic-comment-flair-id="flair_moon"] .equipped-comment-flair::before { content: "☾"; }
+
 @media (prefers-reduced-motion: no-preference) {
   :root:not([data-reduced-motion="true"]) .cosmetic-avatar-frame[data-frame="frame_constellation"] { animation: cosmeticGlow 4s ease-in-out infinite; }
 }

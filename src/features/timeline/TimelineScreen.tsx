@@ -159,11 +159,11 @@ export const TimelineScreen: React.FC = () => {
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', position: 'relative', paddingLeft: 'var(--space-4)' }}>
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: '19px', width: '2px', backgroundColor: 'var(--border-subtle)', zIndex: 0 }} />
+      <div className="timeline-cosmetic-track" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', position: 'relative', paddingLeft: 'var(--space-4)' }}>
+        <div className="timeline-cosmetic-line" style={{ position: 'absolute', top: 0, bottom: 0, left: '19px', width: '2px', backgroundColor: 'var(--border-subtle)', zIndex: 0 }} />
 
         {filteredEvents.map((evt, idx) => (
-          <div key={idx} className="card" style={{ position: 'relative', zIndex: 1, marginLeft: 'var(--space-4)', borderLeft: evt.isAnomaly ? '3px solid var(--arg-anomaly-tag)' : '1px solid var(--border-subtle)' }}>
+          <div key={idx} className="card timeline-cosmetic-event" style={{ position: 'relative', zIndex: 1, marginLeft: 'var(--space-4)', borderLeft: evt.isAnomaly ? '3px solid var(--arg-anomaly-tag)' : '1px solid var(--border-subtle)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-1)' }}>
               <div>
                 <span className={`badge ${evt.isAnomaly ? 'badge-anomaly' : 'badge-subtle'}`} style={{ marginRight: 'var(--space-2)' }}>

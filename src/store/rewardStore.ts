@@ -27,12 +27,13 @@ export const defaultEquippedCosmetics: EquippedCosmetics = {
   profileAccentId: 'accent_museum_plum',
   journalCoverId: 'journal_paper_garden',
   messageThemeId: 'msg_theme_soft_plum',
-  commentFlairId: 'stamp_foldmark',
+  commentFlairId: 'flair_foldmark',
   relationshipCardSkinId: 'rel_skin_museum_ticket',
   timelineThemeId: 'timeline_default',
   datePlanSkinId: 'date_default',
   uiSoundThemeId: 'snd_soft_wood',
   ambientThemeId: 'amb_quiet_room',
+  journalStampId: 'stamp_foldmark',
 };
 
 const defaultPresets: CosmeticPreset[] = [
@@ -138,8 +139,13 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
         'frame_default',
         'accent_museum_plum',
         'msg_theme_soft_plum',
+        'journal_paper_garden',
+        'rel_skin_museum_ticket',
+        'timeline_default',
+        'date_default',
         'snd_soft_wood',
         'amb_quiet_room',
+        'flair_foldmark',
         'stamp_foldmark',
       ],
       cosmeticItemIdsSeen: [],
@@ -474,8 +480,13 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
             'frame_default',
             'accent_museum_plum',
             'msg_theme_soft_plum',
+            'journal_paper_garden',
+            'rel_skin_museum_ticket',
+            'timeline_default',
+            'date_default',
             'snd_soft_wood',
             'amb_quiet_room',
+            'flair_foldmark',
             'stamp_foldmark',
           ],
           wishlistCosmeticIds: [],
@@ -487,7 +498,29 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
     }),
     {
       name: 'everfold_rewards_v1',
-      version: 1,
+      version: 2,
+      migrate: (persisted: any) => {
+        if (!persisted) return persisted;
+        const baseItems = [
+          'frame_default', 'accent_museum_plum', 'msg_theme_soft_plum',
+          'journal_paper_garden', 'rel_skin_museum_ticket', 'timeline_default',
+          'date_default', 'snd_soft_wood', 'amb_quiet_room', 'flair_foldmark',
+          'stamp_foldmark',
+        ];
+        return {
+          ...persisted,
+          cosmeticItemIdsOwned: Array.from(new Set([...(persisted.cosmeticItemIdsOwned || []), ...baseItems])),
+          equippedCosmetics: {
+            ...defaultEquippedCosmetics,
+            ...(persisted.equippedCosmetics || {}),
+            commentFlairId: persisted.equippedCosmetics?.commentFlairId === 'stamp_foldmark'
+              ? 'flair_foldmark'
+              : (persisted.equippedCosmetics?.commentFlairId || 'flair_foldmark'),
+            journalStampId: persisted.equippedCosmetics?.journalStampId || 'stamp_foldmark',
+          },
+          schemaVersion: 2,
+        };
+      },
     }
   )
 );

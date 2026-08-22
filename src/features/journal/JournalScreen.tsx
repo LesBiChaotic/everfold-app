@@ -287,7 +287,7 @@ export const JournalScreen: React.FC = () => {
         {filteredEntries.map((entry) => (
           <div
             key={entry.id}
-            className="ef-card-interactive"
+            className="ef-card-interactive journal-cosmetic-entry"
             style={{
               padding: 'var(--space-4)',
               display: 'flex',

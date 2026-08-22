@@ -151,7 +151,7 @@ export const PulseScreen: React.FC = () => {
           return (
             <div
               key={post.id}
-              className="ef-card-interactive"
+              className={`ef-card-interactive ${post.authorId === 'visitor_user' ? 'visitor-comment-flair' : ''}`}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -175,6 +175,7 @@ export const PulseScreen: React.FC = () => {
                     </h3>
                     <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)' }}>
                       @{post.authorHandle} • {post.timestamp}
+                      {post.authorId === 'visitor_user' && <span className="equipped-comment-flair" aria-label="Equipped profile flair" />}
                     </div>
                   </div>
                 </div>

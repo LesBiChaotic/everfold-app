@@ -230,7 +230,7 @@ export const DatePlannerScreen: React.FC = () => {
             return (
               <div
                 key={plan.id}
-                className="ef-card-featured flex flex-col justify-between"
+                className="ef-card-featured date-plan-cosmetic-card flex flex-col justify-between"
                 style={{
                   padding: 'var(--space-4)',
                 }}
