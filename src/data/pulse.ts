@@ -277,5 +277,46 @@ export const SEEDED_PULSE_POSTS: PulsePost[] = [
     requiresStage: 7,
     anomaly: true,
     replies: []
+  },
+  {
+    id: 'pulse_13', authorId: 'usr_farah_rahman', authorName: 'Farah Rahman', authorHandle: 'farahfindsbooks', type: 'tiny_win',
+    title: 'A bookstore owner kept the old receipts inside donated books',
+    body: 'Not as provenance, exactly—more like tiny accidental bookmarks from strangers. Today I found a 2009 train ticket beside a recipe for orange cake. I left both where they were.', timestamp: '38 mins ago',
+    tags: ['Books', 'Memory', 'TinyWin'], reactions: { '❤️': 72, '✨': 41, '📚': 58 }, userReactions: [], replies: [{ id: 'rep_13_1', postId: 'pulse_13', authorId: 'usr_camille_renaud', authorName: 'Camille Renaud', authorHandle: 'camillekeepsnotes', body: 'An archive becomes intimate the moment someone decides the “irrelevant” paper belongs with the object.', timestamp: '19 mins ago', likes: 26 }]
+  },
+  {
+    id: 'pulse_14', authorId: 'usr_amina_elsayed', authorName: 'Amina El-Sayed', authorHandle: 'aminalatecoffee', type: 'text',
+    title: 'Patience that does not announce itself', body: 'Asked the Introverts room how people prove “no rush replying” is sincere. The best answer: they resume normally after a gap instead of making you explain your absence. Quiet consistency is louder than reassurance.', timestamp: '1 hour ago',
+    tags: ['Mindfulness', 'Communication', 'Boundaries'], reactions: { '❤️': 134, '💡': 96 }, userReactions: [], replies: [{ id: 'rep_14_1', postId: 'pulse_14', authorId: 'usr_dev_malik', authorName: 'Dev Malik', authorHandle: 'devmakesdinner', body: 'No performance of patience. Just patience. Saving this.', timestamp: '47 mins ago', likes: 44 }]
+  },
+  {
+    id: 'pulse_15', authorId: 'usr_rina_matsuda', authorName: 'Rina Matsuda', authorHandle: 'rinawithsnacks', type: 'poll',
+    title: 'Emergency museum snack tribunal', body: 'We must establish policy before anyone opens loud rice crackers beside a seventeenth-century screen.', timestamp: '2 hours ago', tags: ['Food', 'Museums', 'Safety'],
+    poll: { question: 'Acceptable quiet-gallery snack?', options: [{ id: 'p15_1', text: 'Soft cake in cloth wrap', votes: 188 }, { id: 'p15_2', text: 'Pre-peeled orange segments', votes: 92 }, { id: 'p15_3', text: 'Anything eaten outside', votes: 241 }] , totalVotes: 521 }, reactions: { '❤️': 61, '😂': 173 }, userReactions: [], replies: []
+  },
+  {
+    id: 'pulse_16', authorId: 'usr_hana_prasetyo', authorName: 'Hana Prasetyo', authorHandle: 'hanawandershome', type: 'tiny_win',
+    title: 'The leftover washer found its purpose', body: 'Yesterday’s repair-date discussion became a group call. Daniel identified the washer, Grace diagnosed the plant shelf tilt, and nobody pretended the first attempt had been correct. Ideal teamwork.', timestamp: '3 hours ago',
+    tags: ['TinyWin', 'Crafts', 'Community'], reactions: { '❤️': 151, '✨': 83 }, userReactions: [], replies: [{ id: 'rep_16_1', postId: 'pulse_16', authorId: 'usr_daniel_kim', authorName: 'Daniel Kim', authorHandle: 'danielbuildsshelves', body: 'For the record, the washer was innocent. The bracket had been installed upside down.', timestamp: '2 hours ago', likes: 67 }]
+  },
+  {
+    id: 'pulse_17', authorId: 'usr_rafael_costa', authorName: 'Rafael Costa', authorHandle: 'rafontheradio', type: 'text',
+    title: 'Twenty-six minutes without a narrator', body: 'Uploaded a night-walk recording to the sound room. No commentary, no lesson, no optimized emotional arc. Just tram wire, shoes on stone, and someone washing glasses behind an open window.', timestamp: '5 hours ago',
+    tags: ['Mindfulness', 'Sound', 'NightWalk'], reactions: { '❤️': 89, '✨': 112 }, userReactions: [], replies: []
+  },
+  {
+    id: 'pulse_18', authorId: 'usr_mina_okafor', authorName: 'Mina Okafor', authorHandle: 'minareadsmenus', type: 'poll',
+    title: 'The cardamom-bun route requires a final ruling', body: 'Farah prioritizes books, Dev prioritizes crumb structure, and I prioritize not shouting over machinery. Democracy must now fail one of us.', timestamp: '6 hours ago', tags: ['Food', 'Books', 'FirstDates'],
+    poll: { question: 'Route order?', options: [{ id: 'p18_1', text: 'Bookshop, buns, courtyard', votes: 216 }, { id: 'p18_2', text: 'Buns first, browse while sugared', votes: 179 }, { id: 'p18_3', text: 'Courtyard immediately', votes: 88 }], totalVotes: 483 }, reactions: { '❤️': 102, '😂': 94 }, userReactions: [], replies: []
+  },
+  {
+    id: 'pulse_19', authorId: 'usr_grace_nguyen', authorName: 'Grace Nguyen', authorHandle: 'gracehasplants', type: 'science',
+    title: 'Plant shopping is secretly a negotiation exercise', body: 'You discover budget, patience, transport planning, light conditions, and whether someone hears “this will become enormous” as information or a challenge.', timestamp: 'Yesterday',
+    tags: ['RelationshipScience', 'Plants', 'Design'], reactions: { '💡': 119, '❤️': 87 }, userReactions: [], replies: []
+  },
+  {
+    id: 'pulse_20', authorId: 'usr_camille_renaud', authorName: 'Camille Renaud', authorHandle: 'camillekeepsnotes', type: 'text',
+    title: 'A small request for people sharing found notes', body: 'Photograph the note beside the object before moving it. Context is part of the story: which page held it, how it was folded, what faded around its edges. Farah’s train ticket is a perfect example.', timestamp: 'Yesterday',
+    tags: ['Memory', 'Privacy', 'Archives'], reactions: { '💡': 145, '❤️': 66 }, userReactions: [], replies: []
   }
 ];

@@ -56,6 +56,42 @@ export const SEEDED_THREADS: MessageThread[] = [
     storyUnlocked: true
   },
   {
+    id: 'th_farah_visitor',
+    relationshipId: 'rel_farah_new',
+    participantIds: ['usr_farah_rahman', 'visitor_user'],
+    unreadCount: 1,
+    isArchived: false,
+    title: 'Farah Rahman',
+    storyUnlocked: true
+  },
+  {
+    id: 'th_rafael_visitor',
+    relationshipId: 'rel_rafael_paused',
+    participantIds: ['usr_rafael_costa', 'visitor_user'],
+    unreadCount: 0,
+    isArchived: false,
+    title: 'Rafael Costa',
+    storyUnlocked: true
+  },
+  {
+    id: 'th_amina_visitor',
+    relationshipId: 'rel_amina_visitor',
+    participantIds: ['usr_amina_elsayed', 'visitor_user'],
+    unreadCount: 1,
+    isArchived: false,
+    title: 'Amina El-Sayed',
+    storyUnlocked: true
+  },
+  {
+    id: 'th_rina_visitor',
+    relationshipId: 'rel_rina_visitor',
+    participantIds: ['usr_rina_matsuda', 'visitor_user'],
+    unreadCount: 0,
+    isArchived: false,
+    title: 'Rina Matsuda',
+    storyUnlocked: true
+  },
+  {
     id: 'th_leah_samuel_restored',
     relationshipId: 'rel_0712_leah',
     participantIds: ['usr_leah_morgan', 'usr_samuel_reed'],
@@ -244,7 +280,42 @@ export const SEEDED_MESSAGES: Record<string, Message[]> = {
       createdAt: '2026-08-15T20:10:00Z',
       displayTimestamp: 'Yesterday 8:10 PM',
       body: 'Hey! Hope your weekend is going well. I’m experimenting with a new sourdough focaccia recipe topped with roasted rosemary and garlic confit. Would love to send a slice your way.'
+    },
+    {
+      id: 'msg_d2', threadId: 'th_dev_visitor', senderId: 'visitor_user', createdAt: '2026-08-15T20:18:00Z', displayTimestamp: 'Yesterday 8:18 PM', body: 'Garlic confit is an extremely persuasive opening argument. What did you change from the last batch?'
+    },
+    {
+      id: 'msg_d3', threadId: 'th_dev_visitor', senderId: 'usr_dev_malik', createdAt: '2026-08-15T20:25:00Z', displayTimestamp: 'Yesterday 8:25 PM', body: 'Less oil, longer ferment, and rosemary crushed with salt instead of scattered on top. Mina is bringing preserved lemon to the Sunday table, assuming she does not eat it straight from the jar first.'
+    },
+    {
+      id: 'msg_d4', threadId: 'th_dev_visitor', senderId: 'usr_dev_malik', createdAt: '2026-08-16T07:42:00Z', displayTimestamp: '7:42 AM', body: 'Farah posted the bakery shortlist in Books & Print Culture. I added the one with the quiet courtyard—thought you might appreciate the lack of chair-scraping acoustics.'
     }
+  ],
+
+  th_farah_visitor: [
+    { id: 'msg_f1', threadId: 'th_farah_visitor', senderId: 'usr_farah_rahman', createdAt: '2026-08-16T09:05:00Z', displayTimestamp: '9:05 AM', body: 'I saw that you saved my illustrated-book profile. Important compatibility test: do you prefer beautiful editions you are afraid to touch, or battered copies that have survived three owners and a spilled drink?' },
+    { id: 'msg_f2', threadId: 'th_farah_visitor', senderId: 'visitor_user', createdAt: '2026-08-16T09:16:00Z', displayTimestamp: '9:16 AM', body: 'Battered copies. I want evidence that a book has had a life before it reached me.' },
+    { id: 'msg_f3', threadId: 'th_farah_visitor', senderId: 'usr_farah_rahman', createdAt: '2026-08-16T09:21:00Z', displayTimestamp: '9:21 AM', body: 'Correct. There is a shop near the bakery Dev mentioned where the owner leaves old receipts inside donated books instead of throwing them away. Tiny accidental archives everywhere.' },
+    { id: 'msg_f4', threadId: 'th_farah_visitor', senderId: 'usr_farah_rahman', createdAt: '2026-08-16T11:02:00Z', displayTimestamp: '11:02 AM', body: 'I made a community post with three quiet bakery-and-bookshop pairings. The courtyard one is winning, although Mina is campaigning aggressively for the place with cardamom buns.' }
+  ],
+
+  th_rafael_visitor: [
+    { id: 'msg_rf1', threadId: 'th_rafael_visitor', senderId: 'usr_rafael_costa', createdAt: '2026-08-12T22:30:00Z', displayTimestamp: 'Aug 12, 10:30 PM', body: 'Sending you the night-walk recording I mentioned: tram wire hum, one distant radio, absolutely no motivational podcast hosts.' },
+    { id: 'msg_rf2', threadId: 'th_rafael_visitor', senderId: 'visitor_user', createdAt: '2026-08-12T22:51:00Z', displayTimestamp: 'Aug 12, 10:51 PM', body: 'The absence of motivational podcast hosts is a premium feature.' },
+    { id: 'msg_rf3', threadId: 'th_rafael_visitor', senderId: 'usr_rafael_costa', createdAt: '2026-08-12T22:55:00Z', displayTimestamp: 'Aug 12, 10:55 PM', body: 'Exactly. I posted the route in City Wanderers. Sophie already corrected my estimate for the third hill, which is fair because my definition of “mostly flat” has caused diplomatic incidents.' }
+  ],
+
+  th_amina_visitor: [
+    { id: 'msg_a1', threadId: 'th_amina_visitor', senderId: 'usr_amina_elsayed', createdAt: '2026-08-16T00:14:00Z', displayTimestamp: '12:14 AM', body: 'You are awake during the civilized coffee hour, so I am asking you: when someone says “no rush replying,” what makes you believe they actually mean it?' },
+    { id: 'msg_a2', threadId: 'th_amina_visitor', senderId: 'visitor_user', createdAt: '2026-08-16T00:25:00Z', displayTimestamp: '12:25 AM', body: 'They continue the conversation normally after a long gap instead of making the gap itself the subject.' },
+    { id: 'msg_a3', threadId: 'th_amina_visitor', senderId: 'usr_amina_elsayed', createdAt: '2026-08-16T00:31:00Z', displayTimestamp: '12:31 AM', body: 'Yes. No performance of patience, just patience. I am collecting answers for the Introverts room because the phrase has become so common that it sometimes means its opposite.' },
+    { id: 'msg_a4', threadId: 'th_amina_visitor', senderId: 'usr_amina_elsayed', createdAt: '2026-08-16T10:48:00Z', displayTimestamp: '10:48 AM', body: 'Your answer is now the most quoted reply in the thread. Dev called it “the cleanest possible test,” which is annoyingly accurate.' }
+  ],
+
+  th_rina_visitor: [
+    { id: 'msg_r1', threadId: 'th_rina_visitor', senderId: 'usr_rina_matsuda', createdAt: '2026-08-11T16:40:00Z', displayTimestamp: 'Aug 11, 4:40 PM', body: 'I need a neutral ruling. Is bringing three snacks to a museum date thoughtful planning, or evidence that I do not trust public infrastructure?' },
+    { id: 'msg_r2', threadId: 'th_rina_visitor', senderId: 'visitor_user', createdAt: '2026-08-11T17:02:00Z', displayTimestamp: 'Aug 11, 5:02 PM', body: 'Thoughtful planning until you reveal that all three snacks require loud packaging.' },
+    { id: 'msg_r3', threadId: 'th_rina_visitor', senderId: 'usr_rina_matsuda', createdAt: '2026-08-11T17:06:00Z', displayTimestamp: 'Aug 11, 5:06 PM', body: 'Devastating but fair. I will transfer the rice crackers into a quiet container. The Tokyo room has an entire thread rating museum snacks by wrapper volume, which may be the best use of social media yet.' }
   ],
 
   th_leah_samuel_restored: [

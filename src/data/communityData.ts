@@ -184,6 +184,48 @@ export const SEEDED_COMMUNITY_POSTS: CommunityPost[] = [
     commentsCount: 16,
     storyTier: 0,
   },
+  {
+    id: 'post_06', roomId: 'room_food_ferment', authorId: 'usr_mina_okafor', authorName: 'Mina Okafor', authorHandle: 'minareadsmenus',
+    title: 'Cardamom bun field report: three bakeries, one quiet courtyard',
+    body: 'Farah supplied the bookshops; Dev judged crumb structure; I measured whether conversation survives the espresso grinder. The courtyard bakery wins for seating and warmth. Full route begins at the used-book shop two doors east.',
+    publishedAt: '2026-08-16T08:20:00Z', reactions: { helpful: 88, relatable: 54, laugh: 31, thoughtful: 40 }, commentsCount: 27, storyTier: 0,
+  },
+  {
+    id: 'post_07', roomId: 'room_crafts', authorId: 'usr_hana_prasetyo', authorName: 'Hana Prasetyo', authorHandle: 'hanawandershome',
+    title: 'Repairing a wobbly chair together is an underrated date',
+    body: 'You learn how someone handles instructions, small frustrations, silence, and being handed the wrong screwdriver. My only rule: no pretending you know what the mysterious leftover washer does.',
+    publishedAt: '2026-08-15T11:05:00Z', reactions: { helpful: 104, relatable: 76, laugh: 59, thoughtful: 42 }, commentsCount: 33, storyTier: 0,
+  },
+  {
+    id: 'post_08', roomId: 'room_music_sound', authorId: 'usr_rafael_costa', authorName: 'Rafael Costa', authorHandle: 'rafontheradio',
+    title: 'A night-walk recording with no narration attached',
+    body: 'Twenty-six minutes of Lisbon after the last crowded tram: wire hum, shoes on stone, one radio through an upstairs window. No voice explaining what you should feel. Headphones recommended; volume deliberately low.',
+    publishedAt: '2026-08-14T22:45:00Z', reactions: { helpful: 47, relatable: 91, laugh: 4, thoughtful: 116 }, commentsCount: 21, storyTier: 0,
+  },
+  {
+    id: 'post_09', roomId: 'room_local_boston', authorId: 'usr_lauren_pierce', authorName: 'Lauren Pierce', authorHandle: 'laurenweekends',
+    title: 'Rain plan for the Esplanade without surrendering the whole evening',
+    body: 'If the river walk gets rained out, meet under the Public Library courtyard arcade, cross to the map room, then take tea one block south. Same walking rhythm, dry shoes, and nobody has to improvise under pressure.',
+    publishedAt: '2026-08-14T15:10:00Z', reactions: { helpful: 132, relatable: 67, laugh: 3, thoughtful: 51 }, commentsCount: 18, storyTier: 0,
+  },
+  {
+    id: 'post_10', roomId: 'room_local_london', authorId: 'usr_amina_elsayed', authorName: 'Amina El-Sayed', authorHandle: 'aminalatecoffee',
+    title: 'Which “no rush replying” behaviors prove you mean it?',
+    body: 'My current favorite answer: continue normally after a long gap instead of turning the gap into an emotional invoice. What else makes slow communication feel genuinely safe rather than strategically distant?',
+    publishedAt: '2026-08-16T01:00:00Z', reactions: { helpful: 149, relatable: 203, laugh: 22, thoughtful: 188 }, commentsCount: 64, storyTier: 0,
+  },
+  {
+    id: 'post_11', roomId: 'room_local_tokyo', authorId: 'usr_rina_matsuda', authorName: 'Rina Matsuda', authorHandle: 'rinawithsnacks',
+    title: 'Museum snack wrappers ranked by acoustic aggression',
+    body: 'Soft cloth pouch: ideal. Paper bakery sleeve: acceptable. Convenience-store rice crackers in original packaging: an act of war inside a print gallery. Please submit further evidence; methodology is peer reviewed by embarrassed dates.',
+    publishedAt: '2026-08-13T09:30:00Z', reactions: { helpful: 71, relatable: 114, laugh: 240, thoughtful: 35 }, commentsCount: 49, storyTier: 0,
+  },
+  {
+    id: 'post_12', roomId: 'room_local_jakarta', authorId: 'usr_hana_prasetyo', authorName: 'Hana Prasetyo', authorHandle: 'hanawandershome',
+    title: 'Low-noise Sunday route: plants, tea, then street food after the rush',
+    body: 'Start with the nursery before eleven, take the shaded table behind the tea counter, and wait until the lunch crowd thins before walking for snacks. I added seating notes and rain cover because “we will figure it out” is not an accessibility plan.',
+    publishedAt: '2026-08-16T06:50:00Z', reactions: { helpful: 166, relatable: 88, laugh: 8, thoughtful: 104 }, commentsCount: 36, storyTier: 0,
+  },
 ];
 
 export const SEEDED_UNSENT_POSTS: AnonymousUnsentPost[] = [

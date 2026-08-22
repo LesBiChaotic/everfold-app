@@ -247,7 +247,30 @@ export const useAppStore = create<AppState>()(
         })
     }),
     {
-      name: 'everfold_app_state_v1'
+      name: 'everfold_app_state_v1',
+      version: 2,
+      migrate: (persisted: any) => {
+        if (!persisted) return persisted;
+        const mergeById = <T extends { id: string }>(seeded: T[], saved: T[] = []) =>
+          Array.from(new Map([...seeded, ...saved].map((item) => [item.id, item])).values());
+
+        const savedMessages = persisted.messages || {};
+        const mergedMessages = { ...SEEDED_MESSAGES } as Record<string, Message[]>;
+        Object.keys({ ...SEEDED_MESSAGES, ...savedMessages }).forEach((threadId) => {
+          mergedMessages[threadId] = mergeById(SEEDED_MESSAGES[threadId] || [], savedMessages[threadId] || []);
+        });
+
+        return {
+          ...persisted,
+          matches: mergeById(SEEDED_MATCHES, persisted.matches),
+          threads: mergeById(SEEDED_THREADS, persisted.threads),
+          messages: mergedMessages,
+          pulsePosts: mergeById(SEEDED_PULSE_POSTS, persisted.pulsePosts),
+          datePlans: mergeById(SEEDED_DATE_PLANS, persisted.datePlans),
+          journalEntries: mergeById(INITIAL_JOURNAL_ENTRIES, persisted.journalEntries),
+          notifications: mergeById(SEEDED_NOTIFICATIONS, persisted.notifications),
+        };
+      }
     }
   )
 );
