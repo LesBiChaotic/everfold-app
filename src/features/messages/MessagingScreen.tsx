@@ -27,7 +27,7 @@ export const MessagingScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showContextRail, setShowContextRail] = useState(false);
 
-  const { threads, messages, sendMessage, markThreadRead } = useAppStore();
+  const { threads, messages, sendMessage, receiveMessage, markThreadRead } = useAppStore();
   const { activeTypingThreads, setTypingState } = useLiveStore();
   const { stage, addStoryFlag, recordVisit } = useARGStore();
 
@@ -60,10 +60,10 @@ export const MessagingScreen: React.FC = () => {
         setTypingState(activeThread.id, true);
         setTimeout(() => {
           setTypingState(activeThread.id, false);
-          sendMessage(
+          receiveMessage(
             activeThread.id,
             `Thank you for taking the time to write. Finding someone who values unhurried dialogue is so refreshing.`,
-            false
+            partnerId
           );
           soundEngine.playCue('ui.messageReceived');
         }, 3000);
@@ -83,7 +83,7 @@ export const MessagingScreen: React.FC = () => {
     setTypingState(activeThread.id, true);
     setTimeout(() => {
       setTypingState(activeThread.id, false);
-      sendMessage(activeThread.id, choice.botReply);
+      receiveMessage(activeThread.id, choice.botReply, partnerId);
       soundEngine.playCue('ui.messageReceived');
     }, choice.responseDelayMs || 2500);
   };

@@ -23,6 +23,7 @@ interface AppState {
   addMatch: (match: Match) => void;
   updateMatchStatus: (matchId: string, status: Match['status']) => void;
   sendMessage: (threadId: string, body: string, isSystemGenerated?: boolean) => void;
+  receiveMessage: (threadId: string, body: string, senderId?: string) => void;
   addMessageReaction: (threadId: string, messageId: string, emoji: string) => void;
   markThreadRead: (threadId: string) => void;
   votePulsePoll: (postId: string, optionId: string) => void;
@@ -90,6 +91,31 @@ export const useAppStore = create<AppState>()(
           return {
             messages: { ...state.messages, [threadId]: [...currentMsgs, newMsg] },
             threads: updatedThreads
+          };
+        }),
+
+      receiveMessage: (threadId, body, senderId) =>
+        set((state) => {
+          const thread = state.threads.find((item) => item.id === threadId);
+          const resolvedSenderId = senderId
+            || thread?.participantIds.find((participantId) => participantId !== 'visitor_user')
+            || 'system_resolver';
+          const currentMsgs = state.messages[threadId] || [];
+          const newMsg: Message = {
+            id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+            threadId,
+            senderId: resolvedSenderId,
+            createdAt: new Date().toISOString(),
+            displayTimestamp: 'Just now',
+            body,
+            isSystemGenerated: resolvedSenderId === 'system_resolver'
+          };
+
+          return {
+            messages: { ...state.messages, [threadId]: [...currentMsgs, newMsg] },
+            threads: state.threads.map((item) =>
+              item.id === threadId ? { ...item, lastMessage: newMsg } : item
+            )
           };
         }),
 
