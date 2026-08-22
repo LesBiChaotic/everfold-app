@@ -260,6 +260,8 @@ button:disabled {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--space-3);
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 /* Interactive Card with 2–4px Hover Lift */
@@ -293,6 +295,8 @@ button:disabled {
   border-radius: var(--radius-xl); /* 20px */
   padding: var(--space-6);
   box-shadow: var(--shadow-md);
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .card-hero, .ef-card-hero {
@@ -301,6 +305,8 @@ button:disabled {
   border-radius: var(--radius-hero); /* 24px */
   padding: var(--space-8);
   box-shadow: var(--shadow-lg);
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 /* Split Panel */
@@ -345,6 +351,9 @@ button:disabled {
   border: 1px solid var(--border-subtle);
   white-space: nowrap;
   max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .badge-plum {
@@ -678,6 +687,38 @@ button:disabled {
 /* Phone layouts are composed for the available content column, not the full
    viewport.  At 320px that column is only 288px after the shell padding. */
 @media (max-width: 767px) {
+  /* Inline layouts make up most of Everfold's screens. Allow their children
+     to shrink inside the available phone column instead of using their text's
+     intrinsic width and escaping a card. */
+  .app-layout [style*="display: flex"] > *,
+  .app-layout [style*="display: grid"] > *,
+  .app-layout :where(.card, .ef-card, .card-subtle, .ef-card-subtle, .card-featured, .ef-card-featured, .card-hero, .ef-card-hero) > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* User-facing copy can contain handles, generated labels, URLs, archive
+     identifiers and localisation strings that have no natural break point. */
+  .app-layout :where(p, li, dd, dt, blockquote, figcaption, label, code, pre, td, th, h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  .app-layout pre {
+    white-space: pre-wrap;
+  }
+
+  /* Pills should remain pills for short labels, but long tags must wrap
+     inside themselves rather than protruding through the box edge. */
+  .badge,
+  .ef-badge {
+    white-space: normal !important;
+    flex: 0 1 auto;
+    min-height: 28px;
+    padding: 0.35rem 0.65rem;
+  }
+
   .mobile-header {
     height: calc(var(--header-height) + env(safe-area-inset-top)) !important;
     padding-top: env(safe-area-inset-top) !important;
@@ -697,7 +738,27 @@ button:disabled {
 
   .btn,
   .btn-sm {
-    height: var(--min-touch-target) !important;
+    height: auto !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.25;
+    padding-block: var(--space-2);
+  }
+
+  /* Space remains deliberately modest on small screens, but text should
+     never visually touch a card border even in nested compact panels. */
+  .card,
+  .ef-card,
+  .card-interactive,
+  .ef-card-interactive {
+    padding: max(var(--space-4), 14px);
+  }
+
+  .card-featured,
+  .ef-card-featured,
+  .card-hero,
+  .ef-card-hero {
+    padding: var(--space-5);
   }
 
   /* These layouts were authored inline, so regular media queries cannot
