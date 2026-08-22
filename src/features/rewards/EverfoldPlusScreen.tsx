@@ -12,7 +12,7 @@ import {
   AlertCircle,
   Eye,
 } from 'lucide-react';
-import { useRewardStore } from '../../store/rewardStore';
+import { isPlusGiftAvailable, useRewardStore } from '../../store/rewardStore';
 import { PLUS_GIFT_DROPS } from '../../data/giftDropsCatalog';
 import { COSMETICS_CATALOG } from '../../data/cosmeticsCatalog';
 import { GiftDrop } from '../../types/rewards';
@@ -190,6 +190,7 @@ export const EverfoldPlusScreen: React.FC = () => {
         >
           {PLUS_GIFT_DROPS.map((drop) => {
             const isClaimed = claimedGiftDropIds.includes(drop.id);
+            const isAvailable = isPlusGiftAvailable(membershipState, drop);
             const cosmetic = COSMETICS_CATALOG.find((c) => c.id === drop.cosmeticItemId);
 
             return (
@@ -247,7 +248,7 @@ export const EverfoldPlusScreen: React.FC = () => {
                     <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--accent-plum)', display: 'flex', alignItems: 'center', gap: '3px' }}>
                       <Check size={12} /> Claimed
                     </span>
-                  ) : (
+                  ) : isAvailable ? (
                     <button
                       type="button"
                       className="btn btn-primary btn-xs"
@@ -255,6 +256,10 @@ export const EverfoldPlusScreen: React.FC = () => {
                     >
                       <Gift size={12} /> Open Drop
                     </button>
+                  ) : (
+                    <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 700 }}>
+                      {membershipState.isActive ? 'Upcoming' : 'Membership paused'}
+                    </span>
                   )}
                 </div>
               </div>
@@ -266,10 +271,8 @@ export const EverfoldPlusScreen: React.FC = () => {
       {activeGiftModal && (
         <GiftOpeningModal
           gift={activeGiftModal}
-          onClose={() => {
-            claimPlusGift(activeGiftModal.id);
-            setActiveGiftModal(null);
-          }}
+          onReveal={() => claimPlusGift(activeGiftModal.id)}
+          onClose={() => setActiveGiftModal(null)}
         />
       )}
     </div>

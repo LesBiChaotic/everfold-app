@@ -12,6 +12,19 @@ import { COSMETICS_CATALOG } from '../data/cosmeticsCatalog';
 import { PLUS_GIFT_DROPS } from '../data/giftDropsCatalog';
 import { soundEngine } from '../audio/soundEngine';
 
+export const isPlusGiftAvailable = (
+  membership: PlayerRewardState['membershipState'],
+  gift: (typeof PLUS_GIFT_DROPS)[number],
+  now = new Date(),
+) => {
+  if (!membership.isActive) return false;
+  const startedAt = new Date(membership.startedAt);
+  if (Number.isNaN(startedAt.getTime())) return false;
+  const unlockAt = new Date(startedAt);
+  unlockAt.setMonth(unlockAt.getMonth() + gift.monthIndex - 1);
+  return now.getTime() >= unlockAt.getTime();
+};
+
 export const calculateTier = (score: number): RewardTier => {
   if (score >= 1000) return 'Archive';
   if (score >= 600) return 'Constellation';
@@ -110,7 +123,7 @@ interface RewardStoreActions {
 
   // Fictional Everfold Plus
   toggleFictionalPlus: (active: boolean) => void;
-  claimPlusGift: (giftId: string) => void;
+  claimPlusGift: (giftId: string) => boolean;
 
   // Idempotent Migration & Reset
   runRetroactiveMigration: (canonicalCounts: {
@@ -147,6 +160,8 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
         'amb_quiet_room',
         'flair_foldmark',
         'stamp_foldmark',
+        'bg_moonlit_museum',
+        'journal_rain_margin',
       ],
       cosmeticItemIdsSeen: [],
       wishlistCosmeticIds: [],
@@ -361,10 +376,10 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
 
       claimPlusGift: (giftId: string) => {
         const state = get();
-        if (state.claimedGiftDropIds.includes(giftId)) return;
+        if (state.claimedGiftDropIds.includes(giftId)) return true;
 
         const gift = PLUS_GIFT_DROPS.find((g) => g.id === giftId);
-        if (!gift) return;
+        if (!gift || !isPlusGiftAvailable(state.membershipState, gift)) return false;
 
         soundEngine.playCue('gift.open');
 
@@ -376,7 +391,14 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
         set({
           claimedGiftDropIds: [...state.claimedGiftDropIds, giftId],
           cosmeticItemIdsOwned: newOwned,
+          membershipState: {
+            ...state.membershipState,
+            giftDropHistory: state.membershipState.giftDropHistory.includes(giftId)
+              ? state.membershipState.giftDropHistory
+              : [...state.membershipState.giftDropHistory, giftId],
+          },
         });
+        return true;
       },
 
       runRetroactiveMigration: (counts) => {
@@ -498,7 +520,7 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
     }),
     {
       name: 'everfold_rewards_v1',
-      version: 2,
+      version: 3,
       migrate: (persisted: any) => {
         if (!persisted) return persisted;
         const baseItems = [
@@ -507,9 +529,13 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
           'date_default', 'snd_soft_wood', 'amb_quiet_room', 'flair_foldmark',
           'stamp_foldmark',
         ];
+        const claimedGiftDropIds: string[] = persisted.claimedGiftDropIds || [];
+        const claimedCosmeticIds = PLUS_GIFT_DROPS
+          .filter((gift) => claimedGiftDropIds.includes(gift.id))
+          .map((gift) => gift.cosmeticItemId);
         return {
           ...persisted,
-          cosmeticItemIdsOwned: Array.from(new Set([...(persisted.cosmeticItemIdsOwned || []), ...baseItems])),
+          cosmeticItemIdsOwned: Array.from(new Set([...(persisted.cosmeticItemIdsOwned || []), ...baseItems, ...claimedCosmeticIds])),
           equippedCosmetics: {
             ...defaultEquippedCosmetics,
             ...(persisted.equippedCosmetics || {}),
@@ -518,7 +544,7 @@ export const useRewardStore = create<PlayerRewardState & RewardStoreActions>()(
               : (persisted.equippedCosmetics?.commentFlairId || 'flair_foldmark'),
             journalStampId: persisted.equippedCosmetics?.journalStampId || 'stamp_foldmark',
           },
-          schemaVersion: 2,
+          schemaVersion: 3,
         };
       },
     }

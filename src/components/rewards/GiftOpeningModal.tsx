@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { X, Sparkles, Check, Gift, ArrowRight } from 'lucide-react';
 import { GiftDrop, CosmeticItem } from '../../types/rewards';
 import { COSMETICS_CATALOG } from '../../data/cosmeticsCatalog';
@@ -9,20 +9,28 @@ import { useRewardStore } from '../../store/rewardStore';
 interface GiftOpeningModalProps {
   gift: GiftDrop;
   onClose: () => void;
+  onReveal?: () => void;
   onEquip?: (cosmetic: CosmeticItem) => void;
 }
 
-export const GiftOpeningModal: React.FC<GiftOpeningModalProps> = ({ gift, onClose, onEquip }) => {
+export const GiftOpeningModal: React.FC<GiftOpeningModalProps> = ({ gift, onClose, onReveal, onEquip }) => {
   const { equipCosmetic } = useRewardStore();
   const [stage, setStage] = useState<'closed' | 'tracing' | 'revealed'>('closed');
+  const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cosmetic = COSMETICS_CATALOG.find((c) => c.id === gift.cosmeticItemId);
+
+  useEffect(() => () => {
+    if (revealTimer.current) clearTimeout(revealTimer.current);
+  }, []);
 
   const handleOpenGift = () => {
     soundEngine.playCue('gift.ready');
     setStage('tracing');
-    setTimeout(() => {
+    revealTimer.current = setTimeout(() => {
+      onReveal?.();
       soundEngine.playCue('gift.open');
       setStage('revealed');
+      revealTimer.current = null;
     }, 700);
   };
 
@@ -139,6 +147,7 @@ export const GiftOpeningModal: React.FC<GiftOpeningModalProps> = ({ gift, onClos
               type="button"
               className="btn btn-primary"
               onClick={handleOpenGift}
+              disabled={stage === 'tracing'}
               style={{
                 width: '100%',
                 maxWidth: '280px',

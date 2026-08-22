@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Sparkles, Trophy, ChevronRight, Gift, Layers, Compass } from 'lucide-react';
-import { useRewardStore } from '../../store/rewardStore';
+import { isPlusGiftAvailable, useRewardStore } from '../../store/rewardStore';
 import { MILESTONES_CATALOG } from '../../data/milestonesCatalog';
 import { Foldmark } from '../brand/Foldmark';
 import { PLUS_GIFT_DROPS } from '../../data/giftDropsCatalog';
@@ -26,7 +26,7 @@ export const YourEverfoldHomeCard: React.FC = () => {
 
   // Find available unclaimed gift
   const availableGift = membershipState.isActive
-    ? PLUS_GIFT_DROPS.find((g) => !claimedGiftDropIds.includes(g.id))
+    ? PLUS_GIFT_DROPS.find((g) => !claimedGiftDropIds.includes(g.id) && isPlusGiftAvailable(membershipState, g))
     : null;
 
   return (
@@ -157,10 +157,8 @@ export const YourEverfoldHomeCard: React.FC = () => {
       {activeGiftModal && (
         <GiftOpeningModal
           gift={activeGiftModal}
-          onClose={() => {
-            claimPlusGift(activeGiftModal.id);
-            setActiveGiftModal(null);
-          }}
+          onReveal={() => claimPlusGift(activeGiftModal.id)}
+          onClose={() => setActiveGiftModal(null)}
         />
       )}
     </div>
